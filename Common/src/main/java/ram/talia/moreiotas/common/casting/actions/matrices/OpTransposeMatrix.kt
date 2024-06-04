@@ -10,7 +10,7 @@ import ram.talia.moreiotas.api.getNumOrVecOrMatrix
 object OpTransposeMatrix : ConstMediaAction {
     override val argc = 1
 
-    override fun execute(args: List<Iota>, ctx: CastingEnvironment): List<Iota> {
+    override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
         return args.getNumOrVecOrMatrix(0, argc).asMatrix.transpose().asActionResult
     }
 }

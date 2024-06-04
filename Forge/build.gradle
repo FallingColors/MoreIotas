@@ -320,6 +320,7 @@ shadowJar {
     archiveClassifier = ''
     configurations = [project.configurations.shade]
     relocate "org.jblas.jblas", "${project.group}.relocated.jblas"
+    dependsOn "reobfJar"
     finalizedBy 'reobfShadowJar'
 }
 
