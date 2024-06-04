@@ -45,7 +45,8 @@ repositories {
 
     maven { url "https://maven.shedaniel.me/" }
     maven {
-        url 'https://ladysnake.jfrog.io/artifactory/mods'
+        name = "Ladysnake Mods"
+        url = 'https://maven.ladysnake.org/releases'
     }
     maven {
         name "entity reach"
@@ -73,8 +74,8 @@ dependencies {
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
     compileOnly project(":Common")
 
-    modImplementation "$modID:paucal-fabric-$minecraftVersion:$paucalVersion"
-    modImplementation("$modID:hexcasting-fabric-$minecraftVersion:$hexcastingVersion") {
+    modImplementation "at.petra-k.paucal:paucal-fabric-$minecraftVersion:$paucalVersion"
+    modImplementation("at.petra-k.hexcasting:hexcasting-fabric-$minecraftVersion:$hexcastingVersion") {
         exclude module: "phosphor"
     }
     modImplementation "vazkii.patchouli:Patchouli:$minecraftVersion-$patchouliVersion-FABRIC-SNAPSHOT"
