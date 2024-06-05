@@ -16,6 +16,8 @@ loom {
         client {
             client()
             setConfigName("Fabric Client")
+
+            programArgs(["--username", "Talia0", "--uuid", "a4e152c9-3d75-4b1a-9d90-f1c1e2280a05"])
         }
         server {
             server()
