@@ -149,7 +149,10 @@ subprojects {
 
     sourceSets.main.kotlin.srcDirs += 'src/main/java'
 
-    java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+    java.toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+        vendor = null // TODO: Not sure why this works or whether it will work on anyone else's computer
+    }
     java.withSourcesJar()
     java.withJavadocJar()
 

@@ -1,6 +1,7 @@
 package ram.talia.moreiotas.common.casting.arithmetic.operator.string
 
 import at.petrak.hexcasting.api.casting.arithmetic.operator.Operator
+import at.petrak.hexcasting.api.casting.arithmetic.operator.OperatorBasic
 import at.petrak.hexcasting.api.casting.arithmetic.predicates.IotaMultiPredicate
 import at.petrak.hexcasting.api.casting.arithmetic.predicates.IotaPredicate
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
@@ -16,7 +17,7 @@ import kotlin.math.abs
 import kotlin.math.min
 import kotlin.math.roundToInt
 
-object OperatorStringReplace : Operator(3,
+object OperatorStringReplace : OperatorBasic(3,
         IotaMultiPredicate.triple(IotaPredicate.ofType(STRING),
         IotaPredicate.or(IotaPredicate.ofType(DOUBLE), IotaPredicate.ofType(STRING)),
         IotaPredicate.ofType(STRING))) {

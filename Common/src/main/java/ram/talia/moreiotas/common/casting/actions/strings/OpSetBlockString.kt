@@ -43,7 +43,7 @@ object OpSetBlockString : SpellAction {
                 val blockEntity = env.world.getBlockEntity(pos) ?: return@map
 
                 if (blockEntity is SignBlockEntity) {
-                    if (blockEntity.playerWhoMayEdit != null && blockEntity.playerWhoMayEdit != env.caster?.uuid)
+                    if (blockEntity.playerWhoMayEdit != null && blockEntity.playerWhoMayEdit != env.castingEntity?.uuid)
                         return@map
 
                     val lines = inputString.split("\n")

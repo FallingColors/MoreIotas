@@ -1,6 +1,7 @@
 package ram.talia.moreiotas.common.casting.arithmetic.operator.matrix
 
 import at.petrak.hexcasting.api.casting.arithmetic.operator.Operator
+import at.petrak.hexcasting.api.casting.arithmetic.operator.OperatorBasic
 import at.petrak.hexcasting.api.casting.arithmetic.predicates.IotaMultiPredicate.either
 import at.petrak.hexcasting.api.casting.arithmetic.predicates.IotaMultiPredicate.pair
 import at.petrak.hexcasting.api.casting.arithmetic.predicates.IotaPredicate.ofType
@@ -21,7 +22,7 @@ import ram.talia.moreiotas.common.casting.arithmetic.operator.nextNumOrVecOrMatr
 import ram.talia.moreiotas.common.lib.hex.MoreIotasIotaTypes.MATRIX
 import kotlin.math.*
 
-object OperatorMatrixPow : Operator(2, either(pair(ofType(MATRIX), ofType(DOUBLE)), pair(ofType(DOUBLE), ofType(MATRIX)))) {
+object OperatorMatrixPow : OperatorBasic(2, either(pair(ofType(MATRIX), ofType(DOUBLE)), pair(ofType(DOUBLE), ofType(MATRIX)))) {
     override fun apply(iotas: Iterable<Iota>, env: CastingEnvironment): Iterable<Iota> {
         val it = iotas.iterator().withIndex()
         val arg0 = it.nextNumOrVecOrMatrix(arity)

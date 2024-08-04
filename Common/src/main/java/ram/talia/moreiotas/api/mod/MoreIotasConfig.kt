@@ -12,8 +12,8 @@ object MoreIotasConfig {
         val maxMatrixSize: Int
         val maxStringLength: Int
 
-        val setBlockStringCost: Int
-        val nameCost: Int
+        val setBlockStringCost: Long
+        val nameCost: Long
 
         companion object {
             const val DEF_MIN_COST = 0.0001
@@ -56,9 +56,9 @@ object MoreIotasConfig {
             get() = throw IllegalStateException("Attempted to access property of Dummy Config Object")
         override val maxStringLength: Int
             get() = throw IllegalStateException("Attempted to access property of Dummy Config Object")
-        override val setBlockStringCost: Int
+        override val setBlockStringCost: Long
             get() = throw IllegalStateException("Attempted to access property of Dummy Config Object")
-        override val nameCost: Int
+        override val nameCost: Long
             get() = throw IllegalStateException("Attempted to access property of Dummy Config Object")
     }
 
