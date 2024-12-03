@@ -85,6 +85,12 @@ object MoreIotasActions {
 //	val STRING_SUB = make("string/sub", HexPattern.fromAngles("aqwwaqwaad", HexDir.EAST), OpSubString)
 	@JvmField
 	val STRING_CASE = make("string/case", fromAngles("dwwdwwdwdd", WEST), OpCaseString)
+	@JvmField
+	val STRING_GET_MAIN_HAND = make("string/mainhand", fromAngles("qwaqqqqq", SOUTH_EAST),
+		OpGetHeldItemName(InteractionHand.MAIN_HAND))
+	@JvmField
+	val STRING_GET_OFF_HAND = make("string/offhand", fromAngles("ewaqqqqq", NORTH_EAST),
+		OpGetHeldItemName(InteractionHand.OFF_HAND))
 
 	// ================================ Matrices =======================================
 	// Operator Actions
