@@ -150,7 +150,7 @@
   "moreiotas.page.types.zone_entity/not_type": "Remove an entity type, a position, and a radius from the stack, and returns a list of all entities not of that type within that radius of that position",
 
   "moreiotas.entry.items": "Items",
-  "moreiotas.page.items.item/prop/item": "Transforms the $(l:hexcasting:casting/item_iotas)Item Stack$() at the top of the stack into its Item.",
+  "moreiotas.page.items.item/prop/item": "Transforms the $(l:casting/item_iotas)Item Stack$() at the top of the stack into its Item.",
   "moreiotas.page.items.item/prop/size": "Transforms the Item Stack at the top of the stack into its size.",
   "moreiotas.page.items.item/prop/size/set": "Transforms the Item Stack at the top of the stack into its size.",
   "moreiotas.page.items.item/main_hand": "Transforms the entity at the top of the stack into the Item Stack in its main hand. Also works on Item Frames and dropped items.",
