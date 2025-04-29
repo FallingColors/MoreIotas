@@ -15,6 +15,7 @@ import net.minecraft.world.phys.Vec3
 import org.jblas.DoubleMatrix
 import ram.talia.moreiotas.api.casting.iota.*
 import ram.talia.moreiotas.api.util.Anyone
+import ram.talia.moreiotas.api.util.ChatEntry
 
 operator fun Double.times(vec: Vec3): Vec3 = vec.scale(this)
 operator fun Vec3.times(d: Double): Vec3 = this.scale(d)

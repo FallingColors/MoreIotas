@@ -14,7 +14,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.List;
+
 import org.jetbrains.annotations.Nullable;
+import ram.talia.moreiotas.api.util.ChatEntry;
 import ram.talia.moreiotas.fabric.cc.MoreIotasCardinalComponents;
 import ram.talia.moreiotas.fabric.eventhandlers.ChatEventHandler;
 import ram.talia.moreiotas.xplat.IXplatAbstractions;
@@ -80,13 +84,13 @@ public class FabricXplatImpl implements IXplatAbstractions {
     }
 
     @Override
-    public void resetMessage(Player player) {
-        ChatEventHandler.resetMessage(player);
+    public @Nullable long lastMessageTimestamp(@Nullable Player player) {
+        return ChatEventHandler.lastMessageTimestamp(player);
     }
 
     @Override
-    public @Nullable long lastMessageTimestamp(@Nullable Player player) {
-        return ChatEventHandler.lastMessageTimestamp(player);
+    public List<ChatEntry> chatLog(int count) {
+        return ChatEventHandler.chatLog(count);
     }
 
     @Override
