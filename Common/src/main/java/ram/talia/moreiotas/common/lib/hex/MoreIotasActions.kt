@@ -56,10 +56,19 @@ object MoreIotasActions {
 	val STRING_BLOCK_GET = make("string/block/get", fromAngles("awqwawqe", EAST), OpGetBlockString)
 	@JvmField
 	val STRING_BLOCK_SET = make("string/block/set", fromAngles("dwewdweq", WEST), OpSetBlockString)
+
 	@JvmField
 	val STRING_CHAT_CASTER = make("string/chat/caster", fromAngles("waqa", EAST), OpChatString(false))
 	@JvmField
 	val STRING_CHAT_ALL = make("string/chat/all", fromAngles("wded", EAST), OpChatString(true))
+
+	@JvmField
+	val STRING_CHAT_TIMESTAMP_CASTER = make("string/chat/timestamp/caster", fromAngles("waqawddw", EAST), OpChatTimestamp(true))
+	@JvmField
+	val STRING_CHAT_TIMESTAMP_ALL = make("string/chat/timestamp/all", fromAngles("wdedwaaw", EAST), OpChatTimestamp(false))
+	@JvmField
+	val STRING_CHAT_LOG = make("string/chat/log", fromAngles("wwwdwewdwwaawd", EAST), OpChatLog())
+
 	@JvmField
 	val STRING_CHAT_PREFIX_GET = make("string/chat/prefix/get", fromAngles("ewded", NORTH_EAST), OpGetChatPrefix)
 	@JvmField
