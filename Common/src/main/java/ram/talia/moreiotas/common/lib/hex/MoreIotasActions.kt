@@ -65,7 +65,7 @@ object MoreIotasActions {
 	@JvmField
 	val STRING_CHAT_TIMESTAMP_ALL = make("string/chat/timestamp/all", fromAngles("wdedwaaw", EAST), OpChatTimestamp(true))
 	@JvmField
-	val STRING_CHAT_LOG = make("string/chat/log", fromAngles("wwwdwewdwwaawd", EAST), OpChatLog())
+	val STRING_CHAT_LOG = make("string/chat/log/all", fromAngles("wawqwawww", SOUTH_WEST), OpChatLog())
 	@JvmField
 	val STRING_CHAT_PREFIX_GET = make("string/chat/prefix/get", fromAngles("ewded", NORTH_EAST), OpGetChatPrefix)
 	@JvmField

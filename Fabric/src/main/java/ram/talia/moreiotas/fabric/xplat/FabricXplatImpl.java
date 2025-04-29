@@ -84,8 +84,12 @@ public class FabricXplatImpl implements IXplatAbstractions {
     }
 
     @Override
-    public @Nullable long lastMessageTimestamp(@Nullable Player player) {
+    public long lastMessageTimestamp(@Nullable Player player) {
         return ChatEventHandler.lastMessageTimestamp(player);
+    }
+
+    public int lastMessageCount() {
+        return ChatEventHandler.lastMessageCount();
     }
 
     @Override

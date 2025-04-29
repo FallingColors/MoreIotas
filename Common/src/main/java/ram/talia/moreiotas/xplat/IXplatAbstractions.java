@@ -68,7 +68,9 @@ public interface IXplatAbstractions {
 
     @Nullable String lastMessage(@Nullable Player player);
 
-    @Nullable long lastMessageTimestamp(@Nullable Player player);
+    long lastMessageTimestamp(@Nullable Player player);
+
+    int lastMessageCount();
 
     List<ChatEntry> chatLog(int count);
 

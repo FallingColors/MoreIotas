@@ -4,6 +4,7 @@ import net.minecraft.network.chat.ChatType
 import net.minecraft.network.chat.PlayerChatMessage
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.player.Player
+import ram.talia.moreiotas.api.mod.MoreIotasConfig.server
 import ram.talia.moreiotas.api.util.ChatEntry
 import ram.talia.moreiotas.fabric.cc.MoreIotasCardinalComponents
 import java.util.UUID
@@ -12,7 +13,7 @@ import kotlin.collections.ArrayDeque
 object ChatEventHandler {
     private val lastMessages: MutableMap<UUID, String?> = mutableMapOf()
     private val messageLog: ArrayDeque<ChatEntry> = ArrayDeque<ChatEntry>()
-    private var lastMessageTimestamp: Long? = null;
+    private var lastMessageTimestamp: Long = 0;
     private var messagesHandled: Int = 0;
 
     private val lastMessageTimestamps: MutableMap<UUID, Long?> = mutableMapOf()
@@ -35,12 +36,17 @@ object ChatEventHandler {
             lastMessageTimestamps[player.uuid] = timestamp
         }
 
-        while (messageLog.size > 1023) {
+        while (messageLog.isNotEmpty() && messageLog.size > server.maxChatLog) {
             // Just in case somehow we end up putting two "at once" even though this is only place this is touched
             messageLog.removeFirst()
         }
 
-        messageLog.addLast(ChatEntry(text, timestamp, player.getName().getString()))
+        // Just in case! People configure stuff in the weirdest ways
+        if (server.maxChatLog == 0)
+            return true
+
+        messageLog.addLast(ChatEntry(text, timestamp, player.name.string))
+
         if (lastMessageTimestamp == timestamp) {
             messagesHandled++
         } else {
@@ -51,13 +57,16 @@ object ChatEventHandler {
     }
 
     @JvmStatic
-    fun lastMessage(player: Player?): String? = if (player != null) lastMessages[player.uuid] else messageLog.last().message
+    fun lastMessage(player: Player?): String? = if (player != null) lastMessages.getOrDefault(player.uuid, null) else if (lastMessageTimestamp != 0L) messageLog.last().message else null
 
     @JvmStatic
-    fun lastMessageTimestamp(player: Player?): Long? = if (player != null) lastMessageTimestamps[player.uuid] else lastMessageTimestamp
+    fun lastMessageTimestamp(player: Player?): Long = (if (player != null) lastMessageTimestamps.getOrDefault(player.uuid, 0) else lastMessageTimestamp) ?: 0
+
+    @JvmStatic
+    fun lastMessageCount(): Int = messagesHandled
 
     @JvmStatic
     fun chatLog(count: Int): List<ChatEntry> {
-        return messageLog.subList(messageLog.size - count, messageLog.size)
+        return messageLog.subList((messageLog.size - count).coerceAtLeast(0), messageLog.size)
     }
 }
