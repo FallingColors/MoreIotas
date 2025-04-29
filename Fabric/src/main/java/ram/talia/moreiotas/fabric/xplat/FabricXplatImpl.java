@@ -80,6 +80,16 @@ public class FabricXplatImpl implements IXplatAbstractions {
     }
 
     @Override
+    public void resetMessage(Player player) {
+        ChatEventHandler.resetMessage(player);
+    }
+
+    @Override
+    public @Nullable long lastMessageTimestamp(@Nullable Player player) {
+        return ChatEventHandler.lastMessageTimestamp(player);
+    }
+
+    @Override
     public void setChatPrefix(Player player, String prefix) {
         MoreIotasCardinalComponents.CHAT_PREFIX_HOLDER.get(player).setPrefix(prefix);
     }

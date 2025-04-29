@@ -66,6 +66,10 @@ public interface IXplatAbstractions {
 
     @Nullable String lastMessage(@Nullable Player player);
 
+    void resetMessage(Player player);
+
+    @Nullable long lastMessageTimestamp(@Nullable Player player);
+
     void setChatPrefix(Player player, @Nullable String prefix);
 
     @Nullable String getChatPrefix(Player player);
