@@ -1,0 +1,66 @@
+{
+  "name": "moreiotas.entry.items",
+  "category": "hexcasting:patterns",
+  "icon": "minecraft:barrel",
+  "sortnum": 6.5,
+  "advancement": "hexcasting:root",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:type/to_item",
+      "anchor": "moreiotas:item/prop/item",
+      "input": "item stack",
+      "output": "itemtype",
+      "text": "moreiotas.page.items.item/prop/item"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexcasting:abs",
+      "anchor": "moreiotas:item/prop/size",
+      "input": "item stack",
+      "output": "int",
+      "text": "moreiotas.page.items.item/prop/size"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:item/main_hand",
+      "anchor": "moreiotas:item/main_hand",
+      "input": "entity",
+      "output": "item stack",
+      "text": "moreiotas.page.items.item/main_hand"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:item/off_hand",
+      "anchor": "moreiotas:item/off_hand",
+      "input": "entity",
+      "output": "item stack",
+      "text": "moreiotas.page.items.item/off_hand"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:item/inventory/stacks",
+      "anchor": "moreiotas:item/inventory/stacks",
+      "input": "vector, vector",
+      "output": "list",
+      "text": "moreiotas.page.items.item/inventory/stacks"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:item/inventory/items",
+      "anchor": "moreiotas:item/inventory/items",
+      "input": "vector, vector",
+      "output": "list",
+      "text": "moreiotas.page.items.item/inventory/items"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:item/prop/size/set",
+      "anchor": "moreiotas:item/prop/size/set",
+      "input": "item stack, int",
+      "output": "list",
+      "text": "moreiotas.page.items.item/prop/size/set"
+    }
+  ]
+}

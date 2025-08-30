@@ -1,0 +1,188 @@
+{
+  "name": "moreiotas.entry.matrices",
+  "category": "hexcasting:patterns",
+  "icon": "minecraft:daylight_detector",
+  "sortnum": 11.5,
+  "advancement": "hexcasting:root",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "moreiotas.page.matrices.0"
+    },    {
+      "type": "patchouli:link",
+      "text": "moreiotas.page.matrices.1",
+      "link_text": "moreiotas.page.matrices.1.link_text",
+      "url": "https://www.youtube.com/watch?v=kYB8IZa5AuE&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab&index=3"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:matrix/make",
+      "anchor": "moreiotas:matrix/make",
+      "input": "num | vec | list",
+      "output": "mat",
+      "text": "moreiotas.page.matrices.matrix/make.0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "moreiotas.page.matrices.matrix/make.1"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:matrix/unmake",
+      "anchor": "moreiotas:matrix/unmake",
+      "input": "mat",
+      "output": "num | vec | list",
+      "text": "moreiotas.page.matrices.matrix/unmake.0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "moreiotas.page.matrices.matrix/unmake.1"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:matrix/unmake/direct",
+      "anchor": "moreiotas:matrix/unmake/direct",
+      "input": "mat",
+      "output": "[[num]]",
+      "text": "moreiotas.page.matrices.matrix/unmake/direct"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:matrix/identity",
+      "anchor": "moreiotas:matrix/identity",
+      "input": "int ≥ 0",
+      "output": "mat",
+      "text": "moreiotas.page.matrices.matrix/identity"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:matrix/zero",
+      "anchor": "moreiotas:matrix/zero",
+      "input": "int ≥ 0, int ≥ 0",
+      "output": "mat",
+      "text": "moreiotas.page.matrices.matrix/zero"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:matrix/rotation",
+      "anchor": "moreiotas:matrix/rotation",
+      "input": "vec, num",
+      "output": "mat",
+      "text": "moreiotas.page.matrices.matrix/rotation"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexcasting:add",
+      "anchor": "moreiotas:matrix/add",
+      "input": "mat, mat",
+      "output": "mat",
+      "text": "moreiotas.page.matrices.matrix/add"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexcasting:mul",
+      "anchor": "moreiotas:matrix/mul",
+      "input": "mat, mat",
+      "output": "mat",
+      "text": "moreiotas.page.matrices.matrix/mul"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexcasting:div",
+      "anchor": "moreiotas:matrix/div",
+      "input": "mat, mat",
+      "output": "mat",
+      "text": "moreiotas.page.matrices.matrix/div"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexcasting:pow",
+      "anchor": "moreiotas:matrix/pow",
+      "input": "mat, int",
+      "output": "mat",
+      "text": "moreiotas.page.matrices.matrix/pow"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:altmul",
+      "anchor": "moreiotas:matrix/mul/elem",
+      "input": "mat, mat",
+      "output": "mat",
+      "text": "moreiotas.page.matrices.matrix/mul/elem"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:altdiv",
+      "anchor": "moreiotas:matrix/div/elem",
+      "input": "mat, mat",
+      "output": "mat",
+      "text": "moreiotas.page.matrices.matrix/div/elem"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:altpow",
+      "anchor": "moreiotas:matrix/pow/elem",
+      "input": "mat, mat",
+      "output": "mat",
+      "text": "moreiotas.page.matrices.matrix/pow/elem"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "header": "hexcasting.action.moreiotas:matrix/transpose",
+      "op_id": "hexcasting:reverse",
+      "anchor": "moreiotas:matrix/transpose",
+      "input": "mat",
+      "output": "mat",
+      "text": "moreiotas.page.matrices.matrix/transpose"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:matrix/inverse",
+      "anchor": "moreiotas:matrix/inverse",
+      "input": "mat",
+      "output": "mat",
+      "text": "moreiotas.page.matrices.matrix/inverse"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:matrix/determinant",
+      "anchor": "moreiotas:matrix/determinant",
+      "input": "mat",
+      "output": "num",
+      "text": "moreiotas.page.matrices.matrix/determinant"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:matrix/concat/vert",
+      "anchor": "moreiotas:matrix/concat/vert",
+      "input": "mat, mat",
+      "output": "mat",
+      "text": "moreiotas.page.matrices.matrix/concat/vert"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:matrix/concat/hori",
+      "anchor": "moreiotas:matrix/concat/hori",
+      "input": "mat, mat",
+      "output": "mat",
+      "text": "moreiotas.page.matrices.matrix/concat/hori"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:matrix/split/vert",
+      "anchor": "moreiotas:matrix/split/vert",
+      "input": "mat, num",
+      "output": "mat, mat",
+      "text": "moreiotas.page.matrices.matrix/split/vert"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:matrix/split/hori",
+      "anchor": "moreiotas:matrix/split/hori",
+      "input": "mat, num",
+      "output": "mat, mat",
+      "text": "moreiotas.page.matrices.matrix/split/hori"
+    }
+  ]
+}

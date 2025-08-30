@@ -16,6 +16,8 @@ loom {
         client {
             client()
             setConfigName("Fabric Client")
+
+            programArgs(["--username", "Talia0", "--uuid", "a4e152c9-3d75-4b1a-9d90-f1c1e2280a05"])
         }
         server {
             server()
@@ -37,9 +39,16 @@ loom {
 
 repositories {
     mavenCentral()
+
+    // If you have mod jar dependencies in ./libs, you can declare them as a repository like so:
+    flatDir {
+        dir 'libs'
+    }
+
     maven { url "https://maven.shedaniel.me/" }
     maven {
-        url 'https://ladysnake.jfrog.io/artifactory/mods'
+        name = "Ladysnake Mods"
+        url = 'https://maven.ladysnake.org/releases'
     }
     maven {
         name "entity reach"
@@ -55,9 +64,9 @@ repositories {
 dependencies {
     minecraft "com.mojang:minecraft:${minecraftVersion}"
     mappings loom.officialMojangMappings()
-    modImplementation("net.fabricmc:fabric-language-kotlin:1.7.4+kotlin.1.6.21")
-    modImplementation "net.fabricmc:fabric-loader:${fabricLoaderVersion}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabricVersion}"
+    modImplementation("net.fabricmc:fabric-language-kotlin:$fabricLanguageKotlinVersion")
+    modImplementation "net.fabricmc:fabric-loader:$fabricLoaderVersion"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:$fabricVersion"
     implementation group: "org.jblas", name: "jblas", version: "1.2.5"
     include group: "org.jblas", name: "jblas", version: "1.2.5"
 
@@ -71,19 +80,19 @@ dependencies {
     modImplementation("at.petra-k.hexcasting:hexcasting-fabric-$minecraftVersion:$hexcastingVersion") {
         exclude module: "phosphor"
     }
-    modImplementation "vazkii.patchouli:Patchouli:$minecraftVersion-$patchouliVersion-FABRIC"
+    modImplementation "vazkii.patchouli:Patchouli:$minecraftVersion-$patchouliVersion-FABRIC-SNAPSHOT"
 
     modImplementation "me.zeroeightsix:fiber:$fiberVersion"
     include "me.zeroeightsix:fiber:$fiberVersion"
 
-    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-api:$cardinalComponentsVersion"
-    include "dev.onyxstudios.cardinal-components-api:cardinal-components-api:$cardinalComponentsVersion"
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:$cardinalComponentsVersion"
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:$cardinalComponentsVersion"
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-item:$cardinalComponentsVersion"
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-block:$cardinalComponentsVersion"
 
-    modImplementation "com.jamieswhiteshirt:reach-entity-attributes:2.1.1"
-    include "com.jamieswhiteshirt:reach-entity-attributes:2.1.1"
-
-    modImplementation "io.github.tropheusj:serialization-hooks:$serializationHooksVersion"
-    include "io.github.tropheusj:serialization-hooks:$serializationHooksVersion"
+    modImplementation "$modID:serialization-hooks:$serializationHooksVersion"
+    include "$modID:serialization-hooks:$serializationHooksVersion"
+    implementation(include("com.github.LlamaLad7:MixinExtras:0.1.1"))
 
     // Optional integrations
 
@@ -93,12 +102,13 @@ dependencies {
         exclude(group: "net.fabricmc.fabric-api")
     }
 
-    modImplementation "dev.emi:emi:${emiVersion}"
+    modImplementation "dev.emi:emi-fabric:${emiVersion}"
 
-    modImplementation "maven.modrinth:gravity-api:$gravityApiVersion"
     modApi("com.github.Virtuoel:Pehkui:${pehkuiVersion}", {
         exclude group: "net.fabricmc.fabric-api"
     })
+
+    modImplementation("com.terraformersmc:modmenu:$modmenuVersion")
 
     implementation 'org.jetbrains:annotations:23.0.0'
 

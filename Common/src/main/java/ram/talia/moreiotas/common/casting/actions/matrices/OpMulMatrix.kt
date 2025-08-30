@@ -1,16 +1,16 @@
 package ram.talia.moreiotas.common.casting.actions.matrices
 
-import at.petrak.hexcasting.api.spell.ConstMediaAction
-import at.petrak.hexcasting.api.spell.asActionResult
-import at.petrak.hexcasting.api.spell.casting.CastingContext
-import at.petrak.hexcasting.api.spell.iota.Iota
-import at.petrak.hexcasting.api.spell.mishaps.MishapInvalidIota
+import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
+import at.petrak.hexcasting.api.casting.asActionResult
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
+import at.petrak.hexcasting.api.casting.iota.Iota
+import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
 import ram.talia.moreiotas.api.*
 
 object OpMulMatrix : ConstMediaAction {
     override val argc = 2
 
-    override fun execute(args: List<Iota>, ctx: CastingContext): List<Iota> {
+    override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
         val arg0 = args.getNumOrVecOrMatrix(0, OpAddMatrix.argc)
         val arg1 = args.getNumOrVecOrMatrix(1, OpAddMatrix.argc)
 

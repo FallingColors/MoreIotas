@@ -1,11 +1,11 @@
 package ram.talia.moreiotas.api.nbt
 
-import at.petrak.hexcasting.api.spell.iota.Iota
-import at.petrak.hexcasting.api.spell.iota.PatternIota
-import at.petrak.hexcasting.api.spell.math.HexPattern
+import at.petrak.hexcasting.api.casting.iota.Iota
+import at.petrak.hexcasting.api.casting.iota.IotaType
+import at.petrak.hexcasting.api.casting.iota.PatternIota
+import at.petrak.hexcasting.api.casting.math.HexPattern
 import at.petrak.hexcasting.api.utils.asCompound
 import at.petrak.hexcasting.api.utils.asInt
-import at.petrak.hexcasting.common.lib.hex.HexIotaTypes
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.IntTag
 import net.minecraft.nbt.ListTag
@@ -22,7 +22,7 @@ fun ListTag.toIotaList(level: ServerLevel): MutableList<Iota> {
 		if (tag.size() != 1) {
 			out.add(PatternIota(HexPattern.fromNBT(tag)))
 		} else {
-			out.add(HexIotaTypes.deserialize(tag, level))
+			out.add(IotaType.deserialize(tag, level))
 		}
 	}
 	return out
@@ -32,7 +32,7 @@ fun ListTag.toIotaList(level: ServerLevel): MutableList<Iota> {
 fun List<Iota>.toNbtList(): ListTag {
 	val patsTag = ListTag()
 	for (pat in this) {
-		patsTag.add(HexIotaTypes.serialize(pat))
+		patsTag.add(IotaType.serialize(pat))
 	}
 	return patsTag
 }

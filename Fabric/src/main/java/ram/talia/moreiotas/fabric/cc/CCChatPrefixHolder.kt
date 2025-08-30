@@ -17,6 +17,6 @@ class CCChatPrefixHolder(private val player: Player, var prefix: String? = null)
     }
 
     companion object {
-        const val TAG_CHAT_PREFIX = "hexal:prefix"
+        const val TAG_CHAT_PREFIX = "moreiotas:prefix"
     }
 }

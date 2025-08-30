@@ -1,7 +1,6 @@
 package ram.talia.moreiotas.forge.xplat;
 
-import at.petrak.hexcasting.api.spell.math.HexPattern;
-import at.petrak.hexcasting.common.network.IMessage;
+import at.petrak.hexcasting.common.msgs.IMessage;
 import at.petrak.hexcasting.forge.network.ForgePacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleProvider;

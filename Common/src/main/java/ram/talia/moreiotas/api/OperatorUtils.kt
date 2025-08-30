@@ -1,15 +1,19 @@
 package ram.talia.moreiotas.api
 
-import at.petrak.hexcasting.api.spell.iota.*
-import at.petrak.hexcasting.api.spell.mishaps.MishapInvalidIota
-import at.petrak.hexcasting.api.spell.mishaps.MishapNotEnoughArgs
+import at.petrak.hexcasting.api.casting.asActionResult
+import at.petrak.hexcasting.api.casting.iota.*
+import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
+import at.petrak.hexcasting.api.casting.mishaps.MishapNotEnoughArgs
 import com.mojang.datafixers.util.Either
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Position
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.phys.Vec3
 import org.jblas.DoubleMatrix
-import ram.talia.moreiotas.api.spell.iota.MatrixIota
-import ram.talia.moreiotas.api.spell.iota.StringIota
+import ram.talia.moreiotas.api.casting.iota.*
 import ram.talia.moreiotas.api.util.Anyone
 
 operator fun Double.times(vec: Vec3): Vec3 = vec.scale(this)
@@ -103,8 +107,30 @@ fun List<Iota>.getNumOrVecOrMatrix(idx: Int, argc: Int = 0): Anyone<Double, Vec3
     }
 }
 
-inline val String.asActionResult get() = listOf(StringIota(this))
+fun List<Iota>.getEntityType(idx: Int, argc: Int = 0): EntityType<*> {
+    val x = this.getOrElse(idx) { throw MishapNotEnoughArgs(idx + 1, this.size) }
+    if (x is EntityTypeIota)
+        return x.entityType
+    if (x is EntityIota)
+        return x.entity.type
+    throw MishapInvalidIota.ofType(x, if (argc == 0) idx else argc - (idx + 1), "type.entity")
+}
+
+fun List<Iota>.getItemStack(index: Int, argc: Int = 0): ItemStack {
+    val x = this.getOrElse(index) { throw MishapNotEnoughArgs(index + 1, this.size) }
+
+    return (x as? ItemStackIota)?.itemStack
+        ?: throw MishapInvalidIota.of(x, if (argc == 0) index else argc - (index + 1), "item_stack")
+}
+
+inline val String.asActionResult get() = listOf(StringIota.make(this))
 inline val DoubleMatrix.asActionResult get() = listOf(MatrixIota(this))
+inline val IotaType<*>.asActionResult get() = listOf(IotaTypeIota(this))
+inline val Block.asActionResult get() = listOf(ItemTypeIota(this))
+inline val EntityType<*>.asActionResult get() = listOf(EntityTypeIota(this))
+inline val Item.asActionResult get() = listOf(ItemTypeIota(this))
+inline val List<Item>.asActionResult get() = this.map { ItemTypeIota(it) }.asActionResult
+inline val ItemStack.asActionResult get() = listOf(ItemStackIota.createFiltered(this))
 
 inline val Vec3.asMatrix get() = DoubleMatrix(3, 1, this.x, this.y, this.z)
 inline val BlockPos.asMatrix get() = DoubleMatrix(1, 3, this.x.toDouble(), this.y.toDouble(), this.z.toDouble())

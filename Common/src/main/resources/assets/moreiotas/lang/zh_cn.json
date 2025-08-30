@@ -2,7 +2,7 @@
   "hexcasting.iota.moreiotas:string": "字符串",
   "hexcasting.iota.moreiotas:matrix": "矩阵",
 
-  "hexal.tooltip.string": "\"%s\"",
+  "moreiotas.tooltip.string": "\"%s\"",
 
   "hexcasting.spell.moreiotas:string/empty": "空串之精思",
   "hexcasting.spell.moreiotas:string/space": "空格之精思",

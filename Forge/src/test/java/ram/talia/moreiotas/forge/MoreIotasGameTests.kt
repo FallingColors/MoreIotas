@@ -6,9 +6,9 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber
 import ram.talia.moreiotas.api.MoreIotasAPI
 
 @EventBusSubscriber(modid = MoreIotasAPI.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
-public object MoreIotasGameTests {
+object MoreIotasGameTests {
 	@SubscribeEvent
-	public fun registerTests(event: RegisterGameTestsEvent) {
+	fun registerTests(event: RegisterGameTestsEvent) {
 		MoreIotasAPI.LOGGER.debug("registering tests")
 //		event.register(WispTests::class.java)
 	}

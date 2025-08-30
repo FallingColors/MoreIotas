@@ -9,10 +9,10 @@ import java.util.*
 
 object ChatEventHandler {
     private val lastMessages: MutableMap<UUID, String?> = mutableMapOf()
-    var lastMessage: String? = null
+    private var lastMessage: String? = null
 
     fun receiveChat(message: PlayerChatMessage, player: ServerPlayer, params: ChatType.Bound): Boolean {
-        val text = message.signedBody.content.plain + message.unsignedContent.map { it.string }.orElse("")
+        val text = message.signedBody.content + (message.unsignedContent?.string ?: "")
 
         val prefix = MoreIotasCardinalComponents.CHAT_PREFIX_HOLDER.get(player).prefix
 

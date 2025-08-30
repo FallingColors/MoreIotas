@@ -198,7 +198,7 @@ pattern_pat = re.compile(
 	r'HexPattern\.fromAngles\("([qweasd]+)", HexDir\.(\w+)\),\s*modLoc\("([^"]+)"\),[^,]+?(?:makeConstantOp|Op\w+).*?(\btrue)?\)(?:[^\)]+?\bval\b|(?:(?!\bval\b)(?:.))+$)',
     re.S,
 )
-pattern_stubs = [(None, "ram/talia/moreiotas/common/casting/Patterns.kt")]
+pattern_stubs = [(None, "ram/talia/moreiotas/common/lib/hex/MoreIotasActions.kt")]
 def fetch_patterns(root_data):
 	registry = {}
 	for loader, stub in pattern_stubs:

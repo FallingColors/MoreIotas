@@ -1,17 +1,17 @@
 package ram.talia.moreiotas.common.casting.actions.matrices
 
-import at.petrak.hexcasting.api.spell.ConstMediaAction
-import at.petrak.hexcasting.api.spell.casting.CastingContext
-import at.petrak.hexcasting.api.spell.getPositiveIntUnderInclusive
-import at.petrak.hexcasting.api.spell.iota.Iota
+import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
+import at.petrak.hexcasting.api.casting.getPositiveIntUnderInclusive
+import at.petrak.hexcasting.api.casting.iota.Iota
 import org.jblas.ranges.IntervalRange
 import ram.talia.moreiotas.api.asMatrix
 import ram.talia.moreiotas.api.getNumOrVecOrMatrix
-import ram.talia.moreiotas.api.spell.iota.MatrixIota
+import ram.talia.moreiotas.api.casting.iota.MatrixIota
 
 class OpSplitMatrix(private val splitVertically: Boolean) : ConstMediaAction {
     override val argc = 2
-    override fun execute(args: List<Iota>, ctx: CastingContext): List<Iota> {
+    override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
         val mat = args.getNumOrVecOrMatrix(0, argc).asMatrix
         val split = args.getPositiveIntUnderInclusive(1, if (splitVertically) mat.rows else mat.columns, argc)
 

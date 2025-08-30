@@ -1,5 +1,6 @@
 package ram.talia.moreiotas.forge;
 
+import at.petrak.hexcasting.common.lib.HexRegistries;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -15,8 +16,9 @@ import net.minecraftforge.registries.RegisterEvent;
 import org.apache.commons.lang3.tuple.Pair;
 import ram.talia.moreiotas.api.MoreIotasAPI;
 import ram.talia.moreiotas.api.mod.MoreIotasConfig;
-import ram.talia.moreiotas.common.casting.Patterns;
-import ram.talia.moreiotas.common.lib.MoreIotasIotaTypes;
+import ram.talia.moreiotas.common.lib.hex.MoreIotasActions;
+import ram.talia.moreiotas.common.lib.hex.MoreIotasArithmetics;
+import ram.talia.moreiotas.common.lib.hex.MoreIotasIotaTypes;
 import ram.talia.moreiotas.forge.cap.CapSyncers;
 import ram.talia.moreiotas.forge.cap.ForgeCapabilityHandler;
 import ram.talia.moreiotas.forge.datagen.MoreIotasForgeDataGenerators;
@@ -51,7 +53,9 @@ public class ForgeMoreIotasInitializer {
 	}
 	
 	private static void initRegistry () {
-		MoreIotasIotaTypes.registerTypes();
+		bind(HexRegistries.IOTA_TYPE, MoreIotasIotaTypes::registerTypes);
+		bind(HexRegistries.ACTION, MoreIotasActions::register);
+		bind(HexRegistries.ARITHMETIC, MoreIotasArithmetics::register);
 	}
 	
 	private static void initListeners () {
@@ -65,8 +69,6 @@ public class ForgeMoreIotasInitializer {
 				 //noinspection Convert2MethodRef
 				 ForgePacketHandler.init();
 			 }));
-		
-		modBus.addListener((FMLCommonSetupEvent evt) -> evt.enqueueWork(Patterns::registerPatterns));
 		
 		// We have to do these at some point when the registries are still open
 //		modBus.addGenericListener(Item.class, (GenericEvent<Item> evt) -> HexalRecipeSerializers.registerTypes());

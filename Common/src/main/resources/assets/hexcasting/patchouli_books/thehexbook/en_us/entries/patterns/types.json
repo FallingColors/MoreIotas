@@ -1,0 +1,66 @@
+{
+  "name": "moreiotas.entry.types",
+  "category": "hexcasting:patterns",
+  "icon": "minecraft:lectern",
+  "sortnum": 5.5,
+  "advancement": "hexcasting:root",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:type/iota",
+      "anchor": "moreiotas:type/iota",
+      "input": "any",
+      "output": "iotatype",
+      "text": "moreiotas.page.types.type/iota"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:type/entity",
+      "anchor": "moreiotas:type/entity",
+      "input": "entity",
+      "output": "entitytype",
+      "text": "moreiotas.page.types.type/entity"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:type/to_item",
+      "anchor": "moreiotas:type/to_item",
+      "input": "itemtypable",
+      "output": "itemtype",
+      "text": "moreiotas.page.types.type/to_item"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:type/item_held",
+      "anchor": "moreiotas:type/item_held",
+      "input": "",
+      "output": "itemtype",
+      "text": "moreiotas.page.types.type/item_held"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:get_entity/type",
+      "anchor": "moreiotas:get_entity/type",
+      "input": "entitytype, pos",
+      "output": "entity | null",
+      "text": "moreiotas.page.types.get_entity/type"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:zone_entity/type",
+      "anchor": "moreiotas:zone_entity/type",
+      "input": "entitytype, pos, num",
+      "output": "[entity]",
+      "text": "moreiotas.page.types.zone_entity/type"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:zone_entity/not_type",
+      "anchor": "moreiotas:zone_entity/not_type",
+      "input": "entitytype, pos, num",
+      "output": "[entity]",
+      "text": "moreiotas.page.types.zone_entity/not_type"
+    }
+  ]
+}

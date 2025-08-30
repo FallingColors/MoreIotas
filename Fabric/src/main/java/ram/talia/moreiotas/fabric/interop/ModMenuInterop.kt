@@ -11,6 +11,6 @@ import ram.talia.moreiotas.fabric.FabricMoreIotasConfig
 @Environment(EnvType.CLIENT)
 class ModMenuInterop : ModMenuApi {
     override fun getModConfigScreenFactory(): ConfigScreenFactory<*> {
-        return ConfigScreenFactory { parent: Screen? -> AutoConfig.getConfigScreen(FabricMoreIotasConfig::class.java, parent).get() }
+        return ConfigScreenFactory { parent: Screen -> AutoConfig.getConfigScreen(FabricMoreIotasConfig::class.java, parent).get() }
     }
 }

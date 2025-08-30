@@ -1,19 +1,21 @@
 package ram.talia.moreiotas.common.casting.actions.strings
 
-import at.petrak.hexcasting.api.spell.ParticleSpray
-import at.petrak.hexcasting.api.spell.RenderedSpell
-import at.petrak.hexcasting.api.spell.SpellAction
-import at.petrak.hexcasting.api.spell.casting.CastingContext
-import at.petrak.hexcasting.api.spell.getBlockPos
-import at.petrak.hexcasting.api.spell.iota.Iota
+import at.petrak.hexcasting.api.casting.ParticleSpray
+import at.petrak.hexcasting.api.casting.RenderedSpell
+import at.petrak.hexcasting.api.casting.castables.SpellAction
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
+import at.petrak.hexcasting.api.casting.getBlockPos
+import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.utils.putList
 import com.mojang.datafixers.util.Either
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.StringTag
 import net.minecraft.network.chat.Component
+import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.block.entity.LecternBlockEntity
 import net.minecraft.world.level.block.entity.SignBlockEntity
+import net.minecraft.world.level.block.entity.SignText
 import net.minecraft.world.phys.Vec3
 import ram.talia.moreiotas.api.getStringOrList
 import ram.talia.moreiotas.api.mod.MoreIotasConfig
@@ -22,13 +24,13 @@ import ram.talia.moreiotas.api.nbt.toNbtList
 object OpSetBlockString : SpellAction {
     override val argc = 2
 
-    override fun execute(args: List<Iota>, ctx: CastingContext): Triple<RenderedSpell, Int, List<ParticleSpray>> {
+    override fun execute(args: List<Iota>, env: CastingEnvironment): SpellAction.Result {
         val pos = args.getBlockPos(0, argc)
         val string = args.getStringOrList(1, argc)
 
-        ctx.assertVecInRange(pos)
+        env.assertVecInRange(pos.center)
 
-        return Triple(
+        return SpellAction.Result(
                 Spell(pos, string),
                 MoreIotasConfig.server.setBlockStringCost,
                 listOf(ParticleSpray.burst(Vec3.atCenterOf(pos), 1.0))
@@ -36,46 +38,37 @@ object OpSetBlockString : SpellAction {
     }
 
     private data class Spell(val pos: BlockPos, val string: Either<String, List<String>>) : RenderedSpell {
-        override fun cast(ctx: CastingContext) {
-            string.map({
-                val blockEntity = ctx.world.getBlockEntity(pos) ?: return@map
+        override fun cast(env: CastingEnvironment) {
+            string.map({ inputString ->
+                val blockEntity = env.world.getBlockEntity(pos) ?: return@map
 
                 if (blockEntity is SignBlockEntity) {
-                    val lines = it.split("\n")
+                    if (blockEntity.playerWhoMayEdit != null && blockEntity.playerWhoMayEdit != env.castingEntity?.uuid)
+                        return@map
 
-                    for (i in 0 until SignBlockEntity.LINES)
-                        blockEntity.setMessage(i, Component.literal(""))
-                    for ((i, line) in lines.withIndex()) {
-                        if (i >= SignBlockEntity.LINES)
-                            break
-                        blockEntity.setMessage(i, Component.literal(line))
-                    }
+                    val lines = inputString.split("\n")
+
+                    blockEntity.setText(makeSignText(lines), true)
 
                 } else if (blockEntity is LecternBlockEntity) {
                     val book = blockEntity.book.copy()
 
                     if (book.`is`(Items.WRITABLE_BOOK)) {
-                        book.tag.putList("pages", listOf(StringTag.valueOf(it)).toNbtList())
+                        book.tag.putList("pages", listOf(StringTag.valueOf(inputString)).toNbtList())
                     }
 
                     blockEntity.book = book
                 }
 
                 blockEntity.setChanged()
-                ctx.world.sendBlockUpdated(pos, ctx.world.getBlockState(pos), ctx.world.getBlockState(pos), 3)
+                env.world.sendBlockUpdated(pos, env.world.getBlockState(pos), env.world.getBlockState(pos), 3)
             }, {list ->
-                val blockEntity = ctx.world.getBlockEntity(pos) ?: return@map
+                val blockEntity = env.world.getBlockEntity(pos) ?: return@map
 
                 if (blockEntity is SignBlockEntity) {
                     val lines = list.flatMap { it.split("\n") }
 
-                    for (i in 0 until SignBlockEntity.LINES)
-                        blockEntity.setMessage(i, Component.literal(""))
-                    for ((i, line) in lines.withIndex()) {
-                        if (i >= SignBlockEntity.LINES)
-                            break
-                        blockEntity.setMessage(i, Component.literal(line))
-                    }
+                    blockEntity.setText(makeSignText(lines), true)
                 } else if (blockEntity is LecternBlockEntity) {
                     val book = blockEntity.book.copy()
 
@@ -86,8 +79,22 @@ object OpSetBlockString : SpellAction {
                     blockEntity.book = book
                 }
                 blockEntity.setChanged()
-                ctx.world.sendBlockUpdated(pos, ctx.world.getBlockState(pos), ctx.world.getBlockState(pos), 3)
+                env.world.sendBlockUpdated(pos, env.world.getBlockState(pos), env.world.getBlockState(pos), 3)
             })
         }
+
+        private fun makeSignText(lines: List<String>): SignText = SignText(
+            arrayOf(
+                Component.literal(lines[0]),
+                lines.getOrNull(1)?.let { Component.literal(it) } ?: Component.empty(),
+                lines.getOrNull(2)?.let { Component.literal(it) } ?: Component.empty(),
+                lines.getOrNull(3)?.let { Component.literal(it) } ?: Component.empty()),
+            arrayOf(
+                Component.literal(lines[0]),
+                lines.getOrNull(1)?.let { Component.literal(it) } ?: Component.empty(),
+                lines.getOrNull(2)?.let { Component.literal(it) } ?: Component.empty(),
+                lines.getOrNull(3)?.let { Component.literal(it) } ?: Component.empty()),
+            DyeColor.BLACK, false
+        )
     }
 }

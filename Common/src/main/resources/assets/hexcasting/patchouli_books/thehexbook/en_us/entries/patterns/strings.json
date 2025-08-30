@@ -1,0 +1,181 @@
+{
+  "name": "moreiotas.entry.strings",
+  "category": "hexcasting:patterns",
+  "icon": "minecraft:string",
+  "sortnum": 12.5,
+  "advancement": "hexcasting:root",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "hexcasting:pattern",
+      "header": "hexcasting.action.moreiotas:string/add",
+      "op_id": "hexcasting:add",
+      "anchor": "moreiotas:string/add",
+      "input": "str, str",
+      "output": "str",
+      "text": "moreiotas.page.strings.string/add"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:string/split",
+      "anchor": "moreiotas:string/split",
+      "input": "str, str",
+      "output": "[str]",
+      "text": "moreiotas.page.strings.string/split"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:string/parse",
+      "anchor": "moreiotas:string/parse",
+      "input": "str",
+      "output": "num | null",
+      "text": "moreiotas.page.strings.string/parse"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "header": "hexcasting.action.moreiotas:string/find",
+      "op_id": "hexcasting:index_of",
+      "anchor": "moreiotas:string/find",
+      "input": "str, str",
+      "output": "num",
+      "text": "moreiotas.page.strings.string/find"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "header": "hexcasting.action.moreiotas:string/sub",
+      "op_id": "hexcasting:slice",
+      "anchor": "moreiotas:string/sub",
+      "input": "str, num, num",
+      "output": "str",
+      "text": "moreiotas.page.strings.string/sub"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "hexcasting:abs",
+      "anchor": "moreiotas:string/len",
+      "input": "str",
+      "output": "num",
+      "text": "moreiotas.page.strings.string/len"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:string/empty",
+      "anchor": "moreiotas:string/empty",
+      "input": "",
+      "output": "str",
+      "text": "moreiotas.page.strings.string/empty"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:string/space",
+      "anchor": "moreiotas:string/space",
+      "input": "",
+      "output": "str",
+      "text": "moreiotas.page.strings.string/space"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:string/comma",
+      "anchor": "moreiotas:string/comma",
+      "input": "",
+      "output": "str",
+      "text": "moreiotas.page.strings.string/comma"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:string/newline",
+      "anchor": "moreiotas:string/newline",
+      "input": "",
+      "output": "str",
+      "text": "moreiotas.page.strings.string/newline"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:string/chat/caster",
+      "anchor": "moreiotas:string/chat/caster",
+      "input": "",
+      "output": "str",
+      "text": "moreiotas.page.strings.string/chat/caster"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:string/chat/all",
+      "anchor": "moreiotas:string/chat/all",
+      "input": "",
+      "output": "str",
+      "text": "moreiotas.page.strings.string/chat/all"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:string/chat/prefix/set",
+      "anchor": "moreiotas:string/chat/prefix/set",
+      "input": "str | null",
+      "output": "",
+      "text": "moreiotas.page.strings.string/chat/prefix/set"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:string/chat/prefix/get",
+      "anchor": "moreiotas:string/chat/prefix/get",
+      "input": "",
+      "output": "str | null",
+      "text": "moreiotas.page.strings.string/chat/prefix/get"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:string/block/get",
+      "anchor": "moreiotas:string/block/get",
+      "input": "vec",
+      "output": "str | [str]",
+      "text": "moreiotas.page.strings.string/block/get"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:string/block/set",
+      "anchor": "moreiotas:string/block/set",
+      "input": "vec, str | [str]",
+      "output": "",
+      "text": "moreiotas.page.strings.string/block/set"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:string/iota",
+      "anchor": "moreiotas:string/iota",
+      "input": "any",
+      "output": "str",
+      "text": "moreiotas.page.strings.string/iota"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:string/action",
+      "anchor": "moreiotas:string/action",
+      "input": "pattern",
+      "output": "str | null",
+      "text": "moreiotas.page.strings.string/action"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:string/name/get",
+      "anchor": "moreiotas:string/name/get",
+      "input": "entity",
+      "output": "str",
+      "text": "moreiotas.page.strings.string/name/get"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:string/name/set",
+      "anchor": "moreiotas:string/name/set",
+      "input": "str, entity",
+      "output": "",
+      "text": "moreiotas.page.strings.string/name/set"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:string/case",
+      "anchor": "moreiotas:string/case",
+      "input": "str, bool | null",
+      "output": "str",
+      "text": "moreiotas.page.strings.string/case"
+    }
+  ]
+}

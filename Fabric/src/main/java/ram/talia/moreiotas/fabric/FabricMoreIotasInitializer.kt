@@ -1,12 +1,14 @@
 package ram.talia.moreiotas.fabric
 
+import at.petrak.hexcasting.xplat.IXplatAbstractions
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.message.v1.ServerMessageEvents
 import net.minecraft.core.Registry
 import net.minecraft.resources.ResourceLocation
 import ram.talia.moreiotas.api.MoreIotasAPI
-import ram.talia.moreiotas.common.casting.Patterns
-import ram.talia.moreiotas.common.lib.MoreIotasIotaTypes
+import ram.talia.moreiotas.common.lib.hex.MoreIotasActions
+import ram.talia.moreiotas.common.lib.hex.MoreIotasArithmetics
+import ram.talia.moreiotas.common.lib.hex.MoreIotasIotaTypes
 import ram.talia.moreiotas.fabric.eventhandlers.ChatEventHandler
 import ram.talia.moreiotas.fabric.network.FabricPacketHandler
 import java.util.function.BiConsumer
@@ -22,8 +24,6 @@ object FabricMoreIotasInitializer : ModInitializer {
         initListeners()
 
         initRegistries()
-
-        Patterns.registerPatterns()
     }
 
     private fun initListeners() {
@@ -31,7 +31,9 @@ object FabricMoreIotasInitializer : ModInitializer {
     }
 
     private fun initRegistries() {
-        MoreIotasIotaTypes.registerTypes()
+        MoreIotasIotaTypes.registerTypes(bind(IXplatAbstractions.INSTANCE.iotaTypeRegistry))
+        MoreIotasActions.register(bind(IXplatAbstractions.INSTANCE.actionRegistry))
+        MoreIotasArithmetics.register(bind(IXplatAbstractions.INSTANCE.arithmeticRegistry))
     }
 
 

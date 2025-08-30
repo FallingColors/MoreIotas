@@ -1,0 +1,17 @@
+{
+  "name": "moreiotas.entry.item_iotas",
+  "category": "hexcasting:casting",
+  "icon": "minecraft:bundle",
+  "sortnum": 198,
+  "advancement": "hexcasting:root",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "moreiotas.page.item_iotas.0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "moreiotas.page.item_iotas.1"
+    }
+  ]
+}

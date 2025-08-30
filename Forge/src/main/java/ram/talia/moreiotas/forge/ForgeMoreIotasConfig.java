@@ -47,13 +47,13 @@ public class ForgeMoreIotasConfig implements MoreIotasConfig.CommonConfigAccess 
         }
 
         @Override
-        public int getSetBlockStringCost() {
-            return (int) (setBlockStringCost.get() * MediaConstants.DUST_UNIT);
+        public long getSetBlockStringCost() {
+            return (long) (setBlockStringCost.get() * MediaConstants.DUST_UNIT);
         }
 
         @Override
-        public int getNameCost() {
-            return (int) (nameCost.get() * MediaConstants.DUST_UNIT);
+        public long getNameCost() {
+            return (long) (nameCost.get() * MediaConstants.DUST_UNIT);
         }
     }
 }

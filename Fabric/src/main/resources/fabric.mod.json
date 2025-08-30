@@ -47,19 +47,21 @@
   "accessWidener": "moreiotas.accesswidener",
 
   "depends": {
-    "minecraft": "=1.19.2",
+    "minecraft": "=1.20.1",
     "java": ">=17",
     "fabricloader": ">=0.14",
-    "fabric": ">=0.64",
-    "fabric-language-kotlin": ">=1.7.4+kotlin.1.6.21",
-    "cardinal-components": ">=5.0.2",
-    "patchouli": ">=1.19.2-77",
-    "paucal": "0.5.x",
-    "hexcasting": ">=0.10.0"
+    "fabric": ">=0.84",
+    "fabric-language-kotlin": ">=1.9.5+kotlin.1.8.22",
+    "cardinal-components-base": "~5.2.2",
+    "cardinal-components-entity": "~5.2.2",
+    "cardinal-components-item": "~5.2.2",
+    "cardinal-components-block": "~5.2.2",
+    "patchouli": ">=1.20.1-80",
+    "cloth-config": "11.1.x",
+    "paucal": ">=0.6.0-pre-118",
+    "hexcasting": ">=0.11.1-7"
   },
   "suggests": {
-    "gravitychanger": "0.7.21+fabric",
-    "pehkui": "3.6.0+1.14.4-1.19"
   },
 
   "custom": {
