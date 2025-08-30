@@ -79,7 +79,7 @@ jobs:
             # NOTE: these must be quoted and formatted exactly like this, since they'll be used as a bash array
             dependencies: >-
               'https://cdn.modrinth.com/data/Ha28R6CL/versions/ADg3gvlr/fabric-language-kotlin-1.9.5%2Bkotlin.1.8.22.jar'
-              'https://cdn.modrinth.com/data/K01OU20C/versions/HykM2Qyv/cardinal-components-api-5.2.1.jar'
+              'https://cdn.modrinth.com/data/K01OU20C/versions/qW85eawp/cardinal-components-api-5.2.2.jar'
               'https://cdn.modrinth.com/data/nU0bVIaL/versions/PKvFvHeb/Patchouli-1.20.1-80-FABRIC.jar'
               'https://cdn.modrinth.com/data/9s6osm5g/versions/s7VTKfLA/cloth-config-11.1.106-fabric.jar'
               'https://cdn.modrinth.com/data/TZo2wHFe/versions/dabyDTwJ/paucal-0.6.0%2B1.20.1-fabric.jar'
