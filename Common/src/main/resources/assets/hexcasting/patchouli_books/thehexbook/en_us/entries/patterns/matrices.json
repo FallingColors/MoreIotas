@@ -2,7 +2,7 @@
   "name": "moreiotas.entry.matrices",
   "category": "hexcasting:patterns",
   "icon": "minecraft:daylight_detector",
-  "sortnum": 11.5,
+  "sortnum": 11,
   "advancement": "hexcasting:root",
   "read_by_default": true,
   "pages": [
@@ -74,7 +74,7 @@
     {
       "type": "hexcasting:pattern",
       "op_id": "hexcasting:add",
-      "anchor": "moreiotas:matrix/add",
+      "anchor": "hexcasting:add",
       "input": "mat, mat",
       "output": "mat",
       "text": "moreiotas.page.matrices.matrix/add"
@@ -82,7 +82,7 @@
     {
       "type": "hexcasting:pattern",
       "op_id": "hexcasting:mul",
-      "anchor": "moreiotas:matrix/mul",
+      "anchor": "hexcasting:mul",
       "input": "mat, mat",
       "output": "mat",
       "text": "moreiotas.page.matrices.matrix/mul"
@@ -90,7 +90,7 @@
     {
       "type": "hexcasting:pattern",
       "op_id": "hexcasting:div",
-      "anchor": "moreiotas:matrix/div",
+      "anchor": "hexcasting:div",
       "input": "mat, mat",
       "output": "mat",
       "text": "moreiotas.page.matrices.matrix/div"
@@ -98,7 +98,7 @@
     {
       "type": "hexcasting:pattern",
       "op_id": "hexcasting:pow",
-      "anchor": "moreiotas:matrix/pow",
+      "anchor": "hexcasting:pow",
       "input": "mat, int",
       "output": "mat",
       "text": "moreiotas.page.matrices.matrix/pow"
@@ -106,7 +106,7 @@
     {
       "type": "hexcasting:pattern",
       "op_id": "moreiotas:altmul",
-      "anchor": "moreiotas:matrix/mul/elem",
+      "anchor": "moreiotas:altmul",
       "input": "mat, mat",
       "output": "mat",
       "text": "moreiotas.page.matrices.matrix/mul/elem"
@@ -114,7 +114,7 @@
     {
       "type": "hexcasting:pattern",
       "op_id": "moreiotas:altdiv",
-      "anchor": "moreiotas:matrix/div/elem",
+      "anchor": "moreiotas:altdiv",
       "input": "mat, mat",
       "output": "mat",
       "text": "moreiotas.page.matrices.matrix/div/elem"
@@ -122,7 +122,7 @@
     {
       "type": "hexcasting:pattern",
       "op_id": "moreiotas:altpow",
-      "anchor": "moreiotas:matrix/pow/elem",
+      "anchor": "moreiotas:altpow",
       "input": "mat, mat",
       "output": "mat",
       "text": "moreiotas.page.matrices.matrix/pow/elem"
@@ -131,7 +131,7 @@
       "type": "hexcasting:pattern",
       "header": "hexcasting.action.moreiotas:matrix/transpose",
       "op_id": "hexcasting:reverse",
-      "anchor": "moreiotas:matrix/transpose",
+      "anchor": "hexcasting:reverse",
       "input": "mat",
       "output": "mat",
       "text": "moreiotas.page.matrices.matrix/transpose"

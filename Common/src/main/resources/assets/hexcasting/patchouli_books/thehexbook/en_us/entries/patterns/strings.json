@@ -2,7 +2,7 @@
   "name": "moreiotas.entry.strings",
   "category": "hexcasting:patterns",
   "icon": "minecraft:string",
-  "sortnum": 12.5,
+  "sortnum": 12,
   "advancement": "hexcasting:root",
   "read_by_default": true,
   "pages": [
@@ -10,7 +10,7 @@
       "type": "hexcasting:pattern",
       "header": "hexcasting.action.moreiotas:string/add",
       "op_id": "hexcasting:add",
-      "anchor": "moreiotas:string/add",
+      "anchor": "hexcasting:add",
       "input": "str, str",
       "output": "str",
       "text": "moreiotas.page.strings.string/add"
@@ -35,7 +35,7 @@
       "type": "hexcasting:pattern",
       "header": "hexcasting.action.moreiotas:string/find",
       "op_id": "hexcasting:index_of",
-      "anchor": "moreiotas:string/find",
+      "anchor": "hexcasting:index_of",
       "input": "str, str",
       "output": "num",
       "text": "moreiotas.page.strings.string/find"
@@ -44,7 +44,7 @@
       "type": "hexcasting:pattern",
       "header": "hexcasting.action.moreiotas:string/sub",
       "op_id": "hexcasting:slice",
-      "anchor": "moreiotas:string/sub",
+      "anchor": "hexcasting:slice",
       "input": "str, num, num",
       "output": "str",
       "text": "moreiotas.page.strings.string/sub"
@@ -52,7 +52,7 @@
     {
       "type": "hexcasting:pattern",
       "op_id": "hexcasting:abs",
-      "anchor": "moreiotas:string/len",
+      "anchor": "hexcasting:abs",
       "input": "str",
       "output": "num",
       "text": "moreiotas.page.strings.string/len"

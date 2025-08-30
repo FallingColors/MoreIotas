@@ -1,0 +1,53 @@
+modid = "moreiotas"
+book = "hexcasting:thehexbook"
+default_lang = "en_us"
+default_branch = "1.20.1"
+
+resource_dirs = [  # top takes priority
+    "resources",
+    "{$_common.src}/main/resources",
+    "{$_fabric.src}/main/resources",
+    "{$_forge.src}/main/resources",
+    { modid="hexcasting" },
+    { modid="minecraft" },
+    { modid="hexdoc" },
+]
+export_dir = "src/hexdoc_moreiotas/_export/generated"
+
+[template]
+icon = "{$_common.src}/main/resources/logo.png"
+include = [
+    "moreiotas",
+    "hexcasting",
+    "hexdoc",
+]
+
+[template.args]
+mod_name = "MoreIotas"
+author = "Talia-12"
+show_landing_text = false
+
+[extra.hexcasting]
+# regexes for parsing pattern registry files
+# NOTE: "!Raw" means "don't apply variable interpolation to this value"
+_pattern_regex = { "!Raw"='(?m)^\s*val \S+ = make\(\s*"(?P<name>[a-zA-Z0-9_\/]+)",\s*(?:HexPattern\.)?(?:OperationAction\()?fromAngles\(\s*"(?P<signature>[aqweds]+)",\s*(?:HexDir.)?(?P<startdir>\w+)\)' }
+_per_world_value = "true" # unused
+
+[[extra.hexcasting.pattern_stubs]]
+path = "{$_common.package}/common/lib/hex/MoreIotasActions.kt"
+regex = "{^_pattern_regex}"
+per_world_value = "{^_per_world_value}"
+
+# platforms
+
+[_common]
+src = "../Common/src"
+package = "{src}/main/java/ram/talia/moreiotas"
+
+[_fabric]
+src = "../Fabric/src"
+package = "{src}/main/java/ram/talia/moreiotas/fabric"
+
+[_forge]
+src = "../Forge/src"
+package = "{src}/main/java/ram/talia/moreiotas/forge"
