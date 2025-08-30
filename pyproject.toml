@@ -12,6 +12,7 @@ name = "hexdoc-moreiotas"
 description = "Python web book docgen and hexdoc plugin for MoreIotas."
 readme = "doc/README.md"
 authors = [
+    { name="Falling Colors" },
     { name="Talia-12" },
 ]
 keywords = ["hexdoc"]
@@ -19,8 +20,8 @@ requires-python = ">=3.11"
 dynamic = ["version", "dependencies", "optional-dependencies"]
 
 [project.urls]
-Homepage = "https://talia-12.github.io/MoreIotas/"
-Source = "https://github.com/Talia-12/MoreIotas"
+Homepage = "https://moreiotas.hexxy.media"
+Source = "https://github.com/FallingColors/MoreIotas"
 
 # Gradle version/deps
 

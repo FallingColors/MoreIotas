@@ -191,6 +191,11 @@ dependencies {
 
     implementation fg.deobf("vazkii.patchouli:Patchouli:$minecraftVersion-$patchouliVersion-FORGE-SNAPSHOT")
 
+    implementation fg.deobf("com.samsthenerd.inline:inline-forge:$minecraftVersion-$inlineVersion")
+    implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:$clothConfigVersion")
+
+    implementation fg.deobf("top.theillusivec4.caelus:caelus-forge:$caelusVersion")
+
     // Testing dependencies:
     testCompileOnly project(":Common")
 
@@ -242,6 +247,11 @@ task printSourceSetInformation(){
     }
 }
 
+tasks.register("ciArtifacts", Copy) {
+    dependsOn shadowJar
+    from jar
+    into rootProject.file("build/ciArtifacts")
+}
 
 // https://discord.com/channels/313125603924639766/733055378371117127/980968358658838540
 // > It won't generate a refmap if there are no changes source files
@@ -257,6 +267,7 @@ build {
     compileKotlin {
         outputs.upToDateWhen { false }
     }
+    dependsOn ciArtifacts
 }
 
 sourceSets {
@@ -284,23 +295,15 @@ processTestResources {
     }
 }
 
-def loadProperties = { filename ->
-    def properties = new Properties()
-    rootProject.file(filename).withInputStream {
-        properties.load(it)
-    }
-    return properties
-}
-
 modrinth {
-    token = loadProperties("keys.properties").MODRINTH_TOKEN
+    token = System.env.MODRINTH_TOKEN
     projectId = "moreiotas" // This can be the project ID or the slug. Either will work!
     versionNumber = "$modVersion" // You don't need to set this manually. Will fail if Modrinth has this version already
     versionName = "$modVersion-forge"
-    changelog = rootProject.file("changelog.md").text
+    changelog = getLatestChangelog()
     versionType = "release" // This is the default -- can also be `beta` or `alpha`
     uploadFile = jar // With Loom, this MUST be set to `remapJar` instead of `jar`!
-    gameVersions = ["1.19.2"] // Must be an array, even with only one version
+    gameVersions = ["1.20.1"] // Must be an array, even with only one version
     loaders = ["forge"] // Must also be an array - no need to specify this if you're using Loom or ForgeGradle
     dependencies { // A special DSL for creating dependencies
         // scope.type
