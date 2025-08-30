@@ -135,9 +135,7 @@ jobs:
           path: build/ciArtifacts/
 
       - name: Prepare mod jars
-        run: |
-          cp build/ciArtifacts/*${{ matrix.modloader }}*.jar run/mods
-          cp ${{ matrix.path }}/libs/moreiotas-${{ matrix.modloader }}-1.20.1-0.1.0-3.jar run/mods
+        run: cp build/ciArtifacts/*${{ matrix.modloader }}*.jar run/mods
 
       - name: Run MC test client
         if: matrix.env == 'client'
