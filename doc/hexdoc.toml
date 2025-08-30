@@ -24,7 +24,7 @@ include = [
 
 [template.args]
 mod_name = "MoreIotas"
-author = "Talia-12"
+author = "Falling Colors"
 show_landing_text = false
 
 [extra.hexcasting]

@@ -32,9 +32,9 @@ pip install -e .[dev]
 
 For local testing, create a file called `.env` in the repo root following this template:
 ```sh
-GITHUB_REPOSITORY=Talia-12/MoreIotas
+GITHUB_REPOSITORY=FallingColors/MoreIotas
 GITHUB_SHA=1.20.1
-GITHUB_PAGES_URL=https://talia-12.github.io/MoreIotas/
+GITHUB_PAGES_URL=https://moreiotas.hexxy.media
 ```
 
 Useful commands:
