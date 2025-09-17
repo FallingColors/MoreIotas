@@ -73,16 +73,10 @@ object MoreIotasActions {
 	@JvmField
 	val STRING_NAME_SET = make("string/name/set", fromAngles("aqeeqaaeweeewe", SOUTH_WEST), OpNameSet)
 
-//	@JvmField
-//	val STRING_ADD = make("string/add", HexPattern.fromAngles("waawaqwawqq", HexDir.NORTH_EAST), OpAddStrings)
 	@JvmField
 	val STRING_SPLIT = make("string/split", fromAngles("aqwaqa", EAST), OpSplitString)
 	@JvmField
 	val STRING_PARSE = make("string/parse", fromAngles("aqwaq", EAST), OpParseString)
-//	@JvmField
-//	val STRING_FIND = make("string/find", HexPattern.fromAngles("waqwwaqa", HexDir.EAST), OpFindString)
-//	@JvmField
-//	val STRING_SUB = make("string/sub", HexPattern.fromAngles("aqwwaqwaad", HexDir.EAST), OpSubString)
 	@JvmField
 	val STRING_CASE = make("string/case", fromAngles("dwwdwwdwdd", WEST), OpCaseString)
 
@@ -109,8 +103,6 @@ object MoreIotasActions {
 	val MATRIX_ZERO = make("matrix/zero", fromAngles("awwaeawwa", SOUTH_WEST), OpZeroMatrix)
 	@JvmField
 	val MATRIX_ROTATION = make("matrix/rotation", fromAngles("awwaeawwawawddw", SOUTH_WEST), OpRotationMatrix)
-//	@JvmField
-//	val MATRIX_TRANSPOSE = make("matrix/transpose", HexPattern.fromAngles("wwaeawwaede", HexDir.EAST), OpTransposeMatrix)
 	@JvmField
 	val MATRIX_INVERSE = make("matrix/inverse", fromAngles("wwdqdwwdqaq", WEST), OpInverseMatrix)
 	@JvmField
