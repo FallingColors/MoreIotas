@@ -1,9 +1,9 @@
 package ram.talia.moreiotas.common.casting.arithmetic.operator.type
 
-import at.petrak.hexcasting.api.casting.arithmetic.operator.Operator
 import at.petrak.hexcasting.api.casting.arithmetic.operator.OperatorBasic
 import at.petrak.hexcasting.api.casting.arithmetic.predicates.IotaMultiPredicate
-import at.petrak.hexcasting.api.casting.arithmetic.predicates.IotaPredicate.*
+import at.petrak.hexcasting.api.casting.arithmetic.predicates.IotaPredicate.any
+import at.petrak.hexcasting.api.casting.arithmetic.predicates.IotaPredicate.ofType
 import at.petrak.hexcasting.api.casting.asActionResult
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.iota.EntityIota
