@@ -5,17 +5,6 @@ on:
     branches:
       - '*'
   pull_request:
-  workflow_call:
-    inputs:
-      mod_release:
-        type: boolean
-        required: true
-      hexdoc_release:
-        type: boolean
-        required: true
-      dry_run:
-        type: boolean
-        required: true
   workflow_dispatch:
 
 permissions:
@@ -40,8 +29,6 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
 
       - name: Build mod
-        env:
-          RELEASE: ${{ inputs.mod_release == true }}
         run: ./gradlew build
 
       # if this step fails, you need to run your datagen and commit the updated files
@@ -168,7 +155,7 @@ jobs:
       pages: read
     outputs:
       pages-url: ${{ steps.build.outputs.pages-url }}
-      deploy: ${{ github.event_name != 'pull_request' && contains(fromJson(env.HEXDOC_BRANCHES), github.ref_name) && !inputs.dry_run }}
+      deploy: ${{ github.event_name != 'pull_request' && contains(fromJson(env.HEXDOC_BRANCHES), github.ref_name) }}
     steps:
       - uses: actions/checkout@v4
 
@@ -181,7 +168,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          release: ${{ inputs.hexdoc_release == true }}
+          release: false
 
   deploy-pages:
     needs:
@@ -203,13 +190,14 @@ jobs:
       - name: Merge new hexdoc build into existing book
         uses: hexdoc-dev/actions/merge@v1
         with:
-          release: ${{ inputs.hexdoc_release == true }}
+          release: false
           site-url: ${{ needs.build-hexdoc.outputs.pages-url }}
 
       # if you want to add extra things to your website (eg. Javadoc/Dokka), add it to _site/dst/docs here
+      # NOTE: also update release.yml!
 
       - name: Deploy to Pages
         uses: hexdoc-dev/actions/deploy-pages@v1
         with:
           merge: false
-          release: ${{ inputs.hexdoc_release == true }}
+          release: false

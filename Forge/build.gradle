@@ -15,9 +15,7 @@ buildscript {
 
 plugins {
     id 'com.github.johnrengelman.shadow' version '7.1.2'
-    id "com.modrinth.minotaur" version "2.+"
-    // It's safest to have this on 2.+ to get the latest features and
-    // bug fixes without having to worry about breaking changes.
+    id 'moreiotas.platform'
 }
 
 apply plugin: 'com.github.johnrengelman.shadow'
@@ -295,25 +293,15 @@ processTestResources {
     }
 }
 
-modrinth {
-    token = System.env.MODRINTH_TOKEN
-    projectId = "moreiotas" // This can be the project ID or the slug. Either will work!
-    versionNumber = "$modVersion" // You don't need to set this manually. Will fail if Modrinth has this version already
-    versionName = "$modVersion-forge"
-    changelog = getLatestChangelog()
-    versionType = "release" // This is the default -- can also be `beta` or `alpha`
-    uploadFile = jar // With Loom, this MUST be set to `remapJar` instead of `jar`!
-    gameVersions = ["1.20.1"] // Must be an array, even with only one version
-    loaders = ["forge"] // Must also be an array - no need to specify this if you're using Loom or ForgeGradle
-    dependencies { // A special DSL for creating dependencies
-        // scope.type
-        // The scope can be `required`, `optional`, `incompatible`, or `embedded`
-        // The type can either be `project` or `version`
-        required.project "hex-casting" // Creates a new required dependency on Hex Casting
-        required.project "paucal"
-        required.project "patchouli"
-        required.project "kotlin-for-forge"
-    }
+moreiotasModDependencies {
+    requires("kotlin-for-forge")
+    requires("paucal")
+    requires("patchouli")
+    requires(curseforge: "hexcasting", modrinth: "hex-casting")
+}
+
+publishMods {
+    file = jar.archiveFile
 }
 
 setupJar(this)

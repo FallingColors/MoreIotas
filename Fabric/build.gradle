@@ -1,8 +1,6 @@
 plugins {
     id 'fabric-loom' version "$loomVersion"
-    id "com.modrinth.minotaur" version "2.+"
-    // It's safest to have this on 2.+ to get the latest features and
-    // bug fixes without having to worry about breaking changes.
+    id 'moreiotas.platform'
 }
 
 archivesBaseName = getArtifactID("fabric")
@@ -153,27 +151,19 @@ build {
     dependsOn ciArtifacts
 }
 
-modrinth {
-    token = System.env.MODRINTH_TOKEN
-    projectId = "moreiotas" // This can be the project ID or the slug. Either will work!
-    versionNumber = "$modVersion" // You don't need to set this manually. Will fail if Modrinth has this version already
-    versionName = "$modVersion-fabric"
-    changelog = getLatestChangelog()
+moreiotasModDependencies {
+    requires("fabric-api")
+    requires("fabric-language-kotlin")
+    requires("cardinal-components-api")
+    requires("patchouli")
+    requires("cloth-config")
+    requires("paucal")
+    requires(curseforge: "hexcasting", modrinth: "hex-casting")
+    optional("modmenu")
+}
 
-    versionType = "release" // This is the default -- can also be `beta` or `alpha`
-    uploadFile = remapJar // With Loom, this MUST be set to `remapJar` instead of `jar`!
-    gameVersions = ["1.20.1"] // Must be an array, even with only one version
-    loaders = ["fabric"] // Must also be an array - no need to specify this if you're using Loom or ForgeGradle
-    dependencies { // A special DSL for creating dependencies
-        // scope.type
-        // The scope can be `required`, `optional`, `incompatible`, or `embedded`
-        // The type can either be `project` or `version`
-        required.project "hex-casting" // Creates a new required dependency on Hex Casting
-        required.project "paucal"
-        required.project "patchouli"
-        required.project "fabric-language-kotlin"
-        required.project "cardinal-components-api"
-    }
+publishMods {
+    file = remapJar.archiveFile
 }
 
 setupJar(this)
