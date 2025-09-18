@@ -50,6 +50,13 @@ jobs:
       - name: Build mod
         run: ./gradlew build
 
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: mod-build
+          path: build/ciArtifacts/
+          if-no-files-found: error
+
       # do this first so we fail if we've already published this version
       - name: Publish to GitHub
         if: inputs.publish_github
