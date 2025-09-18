@@ -21,8 +21,8 @@ object OperatorMatrixMul : OperatorBasic(2, any(ofType(MATRIX), or(ofType(DOUBLE
         val arg0 = it.nextNumOrVecOrMatrix(arity)
         val arg1 = it.nextNumOrVecOrMatrix(arity)
 
-        arg0.a?.let { return (arg1.asMatrix.muli(it)).asActionResult }
-        arg1.a?.let { return (arg0.asMatrix.muli(it)).asActionResult }
+        arg0.a?.let { return (arg1.asMatrix.mul(it)).asActionResult }
+        arg1.a?.let { return (arg0.asMatrix.mul(it)).asActionResult }
 
         val mat0 = arg0.asMatrix
         val mat1 = arg1.asMatrix

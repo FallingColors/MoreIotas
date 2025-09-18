@@ -22,8 +22,8 @@ object OperatorMatrixDiv : OperatorBasic(2, any(ofType(MATRIX), or(ofType(DOUBLE
         val arg0 = it.nextNumOrVecOrMatrix(arity)
         val arg1 = it.nextNumOrVecOrMatrix(arity)
 
-        arg0.a?.let { return (arg1.asMatrix.divi(it)).asActionResult }
-        arg1.a?.let { return (arg0.asMatrix.rdivi(it)).asActionResult }
+        arg0.a?.let { return (arg1.asMatrix.div(it)).asActionResult }
+        arg1.a?.let { return (arg0.asMatrix.rdiv(it)).asActionResult }
 
         val mat0 = arg0.asMatrix
         val mat1 = arg1.asMatrix
