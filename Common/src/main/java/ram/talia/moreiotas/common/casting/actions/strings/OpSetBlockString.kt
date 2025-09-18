@@ -26,61 +26,56 @@ object OpSetBlockString : SpellAction {
 
     override fun execute(args: List<Iota>, env: CastingEnvironment): SpellAction.Result {
         val pos = args.getBlockPos(0, argc)
-        val string = args.getStringOrList(1, argc)
+        val stringOrList = args.getStringOrList(1, argc)
 
         env.assertVecInRange(pos.center)
 
         return SpellAction.Result(
-                Spell(pos, string),
+                Spell(pos, stringOrList),
                 MoreIotasConfig.server.setBlockStringCost,
                 listOf(ParticleSpray.burst(Vec3.atCenterOf(pos), 1.0))
         )
     }
 
-    private data class Spell(val pos: BlockPos, val string: Either<String, List<String>>) : RenderedSpell {
+    private data class Spell(val pos: BlockPos, val stringOrList: Either<String, List<String>>) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
-            string.map({ inputString ->
-                val blockEntity = env.world.getBlockEntity(pos) ?: return@map
+            val blockEntity = env.world.getBlockEntity(pos)
 
-                if (blockEntity is SignBlockEntity) {
+            when (blockEntity) {
+                is SignBlockEntity -> {
                     if (blockEntity.playerWhoMayEdit != null && blockEntity.playerWhoMayEdit != env.castingEntity?.uuid)
-                        return@map
+                        return
 
-                    val lines = inputString.split("\n")
+                    val lines = stringOrList.map(
+                        { string -> string.split("\n") },
+                        { list -> list.flatMap { it.split("\n") } },
+                    )
 
                     blockEntity.setText(makeSignText(lines), true)
+                }
 
-                } else if (blockEntity is LecternBlockEntity) {
+                is LecternBlockEntity -> {
+                    if (!blockEntity.book.`is`(Items.WRITABLE_BOOK))
+                        return
+
                     val book = blockEntity.book.copy()
 
-                    if (book.`is`(Items.WRITABLE_BOOK)) {
-                        book.tag.putList("pages", listOf(StringTag.valueOf(inputString)).toNbtList())
-                    }
+                    val pages = stringOrList.map(
+                        { string -> listOf(StringTag.valueOf(string)) },
+                        { list -> list.map(StringTag::valueOf) },
+                    )
+
+                    book.orCreateTag.putList("pages", pages.toNbtList())
 
                     blockEntity.book = book
                 }
 
-                blockEntity.setChanged()
-                env.world.sendBlockUpdated(pos, env.world.getBlockState(pos), env.world.getBlockState(pos), 3)
-            }, {list ->
-                val blockEntity = env.world.getBlockEntity(pos) ?: return@map
+                else -> return
+            }
 
-                if (blockEntity is SignBlockEntity) {
-                    val lines = list.flatMap { it.split("\n") }
-
-                    blockEntity.setText(makeSignText(lines), true)
-                } else if (blockEntity is LecternBlockEntity) {
-                    val book = blockEntity.book.copy()
-
-                    if (book.`is`(Items.WRITABLE_BOOK)) {
-                        book.tag.putList("pages", list.map { StringTag.valueOf(it) }.toNbtList())
-                    }
-
-                    blockEntity.book = book
-                }
-                blockEntity.setChanged()
-                env.world.sendBlockUpdated(pos, env.world.getBlockState(pos), env.world.getBlockState(pos), 3)
-            })
+            blockEntity.setChanged()
+            val blockState = env.world.getBlockState(pos)
+            env.world.sendBlockUpdated(pos, blockState, blockState, 3)
         }
 
         private fun makeSignText(lines: List<String>): SignText = SignText(
