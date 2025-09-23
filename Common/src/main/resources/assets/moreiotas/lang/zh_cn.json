@@ -113,7 +113,7 @@
 
   "moreiotas.entry.matrices": "矩阵",
   "moreiotas.page.matrices.0": "矩阵是操纵向量的好帮手，它们能表示任何可作用于向量的线性变换。需注明的是，本条目里的图案能接受许多种 iota，矩阵参数能接受可直接映射为矩阵的任何 iota，如数和向量。",
-  "moreiotas.page.matrices.1": "例如，将 3×3 矩阵与向量相乘不会产生事故，而是会返回一个新向量。更多有关发掘矩阵潜能的信息可参见下方链接（译注：B 站官方账号同视频见$(l:https://www.bilibili.com/video/BV1ns41167b9)此/$和$(l:https://www.bilibili.com/video/BV1ys411472E?p=5)此/$）。",
+  "moreiotas.page.matrices.1": "例如，将 3×3 矩阵与向量相乘不会产生事故，而是会返回一个新向量。更多有关发掘矩阵潜能的信息可参见下方链接（译注：B 站官方账号同视频见$(l:https://www.bilibili.com/video/BV1ns41167b9)此/$和$(l:https://www.bilibili.com/video/BV1ys411472E?p=4)此/$）。",
   "moreiotas.page.matrices.1.link_text": "3blue1brown",
   "moreiotas.page.matrices.matrix/make.0": "将栈顶元素转换为矩阵。接受数、向量和列表。",
   "moreiotas.page.matrices.matrix/make.1": "若该 iota 为数，其将变为 1×1 的矩阵。若该 iota 为向量，其将变为 3×1 的矩阵。若该 iota 为列表，则其需为一完全由数组成，或完全由向量组成，或完全由仅含数的列表（所有列表需等长）组成的列表。若组成元素为数，其将变为 1×n 的矩阵；若组成元素为向量，其将变为 3×n 的矩阵；若组成元素为列表，则变为 n×m 的矩阵，其中 n 为内层列表长度，m 为外层列表长度。",
