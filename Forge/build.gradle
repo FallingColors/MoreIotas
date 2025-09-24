@@ -246,8 +246,7 @@ task printSourceSetInformation(){
 }
 
 tasks.register("ciArtifacts", Copy) {
-    dependsOn shadowJar
-    from jar
+    from shadowJar
     into rootProject.file("build/ciArtifacts")
 }
 
@@ -301,7 +300,7 @@ moreiotasModDependencies {
 }
 
 publishMods {
-    file = jar.archiveFile
+    file = shadowJar.archiveFile
 }
 
 setupJar(this)
