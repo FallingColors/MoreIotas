@@ -6,9 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## `0.1.1` - 2025-09-23
 
+### Changed
+
+- Updated zh_cn translations, by ChuijkYahus in [#43](https://github.com/FallingColors/MoreIotas/pull/43).
+
 ### Fixed
 
-- Fixed a missing required bundled dependency on Forge.
+- Fixed an issue where a required bundled dependency was missing from the Forge jar.
 
 ## `0.1.0` - 2025-09-22
 
