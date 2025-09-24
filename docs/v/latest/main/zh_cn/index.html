@@ -77,7 +77,7 @@
       <ul class="nav navbar-nav navbar-right">
             <li>
     <a
-      href="https://github.com/FallingColors/MoreIotas/tree/c315079ac1c71587a7b1f154a48268c68f15c764"
+      href="https://github.com/FallingColors/MoreIotas/tree/aa6ebe196965a326eaa9325edd10365812db1671"
         target="_blank"
       class="navbar-link"
       role="button"
@@ -152,7 +152,7 @@
       src="https://raw.githubusercontent.com/PrismarineJS/minecraft-assets/a14c64362abe4a12c2dfd87f8d1673af9d1b09f4/data/1.20.2/items/bundle.png"
       loading="lazy"
       class="item-texture  texture pixelated"
-    > Item Iotas</a></li>
+    > 物品 Iota</a></li>
       </ul>
     </details>
     <details class="toc-category">
@@ -170,14 +170,14 @@
       src="https://hexdoc-dev.github.io/hexdoc-minecraft/v/1.20.1/1.0.dev1/assets/minecraft/textures/block/lectern.png"
       loading="lazy"
       class="item-texture  texture "
-    > Types</a></li>
+    > 类型</a></li>
           <li><a href="#patterns/items" class="toc-elem "><img
       title="木桶"
       alt="木桶"
       src="https://hexdoc-dev.github.io/hexdoc-minecraft/v/1.20.1/1.0.dev1/assets/minecraft/textures/block/barrel.png"
       loading="lazy"
       class="item-texture  texture "
-    > Items</a></li>
+    > 物品</a></li>
           <li><a href="#patterns/matrices" class="toc-elem "><img
       title="阳光探测器"
       alt="阳光探测器"
@@ -222,7 +222,7 @@
       src="https://raw.githubusercontent.com/PrismarineJS/minecraft-assets/a14c64362abe4a12c2dfd87f8d1673af9d1b09f4/data/1.20.2/items/bundle.png"
       loading="lazy"
       class="item-texture  texture pixelated"
-    >Item Iotas<a
+    >物品 Iota<a
     href="#table-of-contents"
     class="permalink small"
     title="Jump to top"
@@ -231,9 +231,9 @@
     class="permalink small"
     title="Permalink"
   ><i class="bi bi-link-45deg"></i></a></h3>
-    <p>I have discovered two additional types of iotas I can manipulate.</p><p> Item Type Iotas describe a singular item stripped of its properties, such as damage or enchantments.</p><p> Item Stack Iotas describe a stack of items as they might appear in my inventory, amount, custom names, enchantments, and all.</p>
+    <p>我发现了可供操控的两种全新 iota 类型。</p><p>物品类型 iota 代表一个不包含额外属性的物品，如耐久度和魔咒就不包含在内。</p><p>物品组 iota 代表任意个物品的物品组，包含物品数量、名称、魔咒等，并以其在物品栏时的格式表现。</p>
 <br />
-    <p>It would also seem Item Stack iotas referring to Foci containing other Item Stack iotas are somewhat faulty. A limit to the depth of my thought perhaps.</p>
+    <p>但似乎代表着存有物品组 iota 的核心的物品组 iota 会出些错误。看来我自己的意识和思维深度也有些限制。</p>
 <br />
 </div>
 </section>
@@ -263,7 +263,7 @@
       src="https://hexdoc-dev.github.io/hexdoc-minecraft/v/1.20.1/1.0.dev1/assets/minecraft/textures/block/lectern.png"
       loading="lazy"
       class="item-texture  texture "
-    >Types<a
+    >类型<a
     href="#table-of-contents"
     class="permalink small"
     title="Jump to top"
@@ -273,7 +273,7 @@
     title="Permalink"
   ><i class="bi bi-link-45deg"></i></a></h3>
   <div id="patterns/types@moreiotas:type/iota" class="">
-<h4 class="pattern-title">Classifier&#39;s Purification (any → iotatype)<a
+<h4 class="pattern-title">分类学家之纯化 (any → iotatype)<a
     href="#patterns/types@moreiotas:type/iota"
     class="permalink small"
     title="Permalink"
@@ -325,11 +325,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：awd</canvas>
   </details>
-      <p>Remove an iota from the stack, and adds the type of that iota to the stack.</p>
+      <p>移除栈顶元素，并返回该 iota 的类型。</p>
   </div>
 <br />
   <div id="patterns/types@moreiotas:type/entity" class="">
-<h4 class="pattern-title">Physician&#39;s Purification (entity → entitytype)<a
+<h4 class="pattern-title">内科医师之纯化 (entity → entitytype)<a
     href="#patterns/types@moreiotas:type/entity"
     class="permalink small"
     title="Permalink"
@@ -381,11 +381,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：qawde</canvas>
   </details>
-      <p>Remove an entity from the stack, and adds the type of the entity at that location to the stack.</p>
+      <p>移除栈顶实体，并返回该实体的类型。</p>
   </div>
 <br />
   <div id="patterns/types@moreiotas:type/to_item" class="">
-<h4 class="pattern-title">Sorter&#39;s Purification (itemtypable → itemtype)<a
+<h4 class="pattern-title">分拣员之纯化 (itemtypable → itemtype)<a
     href="#patterns/types@moreiotas:type/to_item"
     class="permalink small"
     title="Permalink"
@@ -437,11 +437,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：qaqqaea</canvas>
   </details>
-      <p>Remove an iota with an associated item type (for example a location and the type of the block at that location, an item entity, or an item frame) from the stack and returns the item type to the stack (e.g. Grass, Stone, Stick, etc.).</p>
+      <p>移除栈顶位置向量，物品实体或物品展示框。并返回该处方块的类型或对应物品类型。（如草方块、石头、木棍等。）</p>
   </div>
 <br />
   <div id="patterns/types@moreiotas:type/item_held" class="">
-<h4 class="pattern-title">Sorter&#39;s Reflection (→ itemtype)<a
+<h4 class="pattern-title">分拣员之精思 (→ itemtype)<a
     href="#patterns/types@moreiotas:type/item_held"
     class="permalink small"
     title="Permalink"
@@ -493,11 +493,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：edeedqd</canvas>
   </details>
-      <p>Adds the type of the item in the caster&#39;s offhand to the stack if there is one present, or the type of the casting hand otherwise.</p>
+      <p>若施法者副手中有物品，则将其类型压入栈顶；若无，则压入施法用手中物品的类型。</p>
   </div>
 <br />
   <div id="patterns/types@moreiotas:get_entity/type" class="">
-<h4 class="pattern-title">Entity Distillation: Type (entitytype, pos → entity | null)<a
+<h4 class="pattern-title">实体之馏化：类型 (entitytype, pos → entity | null)<a
     href="#patterns/types@moreiotas:get_entity/type"
     class="permalink small"
     title="Permalink"
@@ -549,11 +549,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：dadqqqqqdad</canvas>
   </details>
-      <p>Remove an entity type and a position from the stack, and returns an entity of that type at that position if one exists.</p>
+      <p>从栈顶获取实体类型和位置向量，返回该位置符合该类型的实体（若有）。</p>
   </div>
 <br />
   <div id="patterns/types@moreiotas:zone_entity/type" class="">
-<h4 class="pattern-title">Zone Exaltation: Type (entitytype, pos, num → [entity])<a
+<h4 class="pattern-title">区域之提整：类型 (entitytype, pos, num → [entity])<a
     href="#patterns/types@moreiotas:zone_entity/type"
     class="permalink small"
     title="Permalink"
@@ -605,11 +605,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：waweeeeewaw</canvas>
   </details>
-      <p>Remove an entity type, a position, and a radius from the stack, and returns a list of all entities of that type within that radius of that position.</p>
+      <p>从栈顶获取实体类型、位置向量及最大距离，返回该位置给定距离范围内所有符合给定类型的实体的列表。</p>
   </div>
 <br />
   <div id="patterns/types@moreiotas:zone_entity/not_type" class="">
-<h4 class="pattern-title">Zone Exaltation: Not-Type (entitytype, pos, num → [entity])<a
+<h4 class="pattern-title">区域之提整：非类型 (entitytype, pos, num → [entity])<a
     href="#patterns/types@moreiotas:zone_entity/not_type"
     class="permalink small"
     title="Permalink"
@@ -661,7 +661,7 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：wdwqqqqqwdw</canvas>
   </details>
-      <p>Remove an entity type, a position, and a radius from the stack, and returns a list of all entities not of that type within that radius of that position</p>
+      <p>从栈顶获取实体类型、位置向量及最大距离，返回该位置给定距离范围内所有不符合给定类型的实体的列表。</p>
   </div>
 <br />
 </div>
@@ -673,7 +673,7 @@
       src="https://hexdoc-dev.github.io/hexdoc-minecraft/v/1.20.1/1.0.dev1/assets/minecraft/textures/block/barrel.png"
       loading="lazy"
       class="item-texture  texture "
-    >Items<a
+    >物品<a
     href="#table-of-contents"
     class="permalink small"
     title="Jump to top"
@@ -683,7 +683,7 @@
     title="Permalink"
   ><i class="bi bi-link-45deg"></i></a></h3>
   <div id="patterns/items@moreiotas:type/to_item" class="">
-<h4 class="pattern-title">Sorter&#39;s Purification (item stack → itemtype)<a
+<h4 class="pattern-title">分拣员之纯化 (item stack → itemtype)<a
     href="#patterns/items@moreiotas:type/to_item"
     class="permalink small"
     title="Permalink"
@@ -735,7 +735,7 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：qaqqaea</canvas>
   </details>
-      <p>Transforms the <a href="#casting/item_iotas">Item Stack</a> at the top of the stack into its Item.</p>
+      <p>接受栈顶<a href="#casting/item_iotas">物品组</a>，返回对应物品类型。</p>
   </div>
 <br />
   <div id="patterns/items@hexcasting:abs" class="">
@@ -791,11 +791,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：wqaqw</canvas>
   </details>
-      <p>Transforms the Item Stack at the top of the stack into its size.</p>
+      <p>接受栈顶物品组，返回其中物品数量。</p>
   </div>
 <br />
   <div id="patterns/items@moreiotas:item/main_hand" class="">
-<h4 class="pattern-title">Duelist&#39;s Purification (entity → item stack)<a
+<h4 class="pattern-title">决斗士之纯化 (entity → item stack)<a
     href="#patterns/items@moreiotas:item/main_hand"
     class="permalink small"
     title="Permalink"
@@ -847,11 +847,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：adeq</canvas>
   </details>
-      <p>Transforms the entity at the top of the stack into the Item Stack in its main hand. Also works on Item Frames and dropped items.</p>
+      <p>接受栈顶实体，返回其主手中的物品组。对物品展示框和物品实体同样有效。</p>
   </div>
 <br />
   <div id="patterns/items@moreiotas:item/off_hand" class="">
-<h4 class="pattern-title">Shieldbearer&#39;s Purification (entity → item stack)<a
+<h4 class="pattern-title">持盾士之纯化 (entity → item stack)<a
     href="#patterns/items@moreiotas:item/off_hand"
     class="permalink small"
     title="Permalink"
@@ -903,11 +903,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：qeda</canvas>
   </details>
-      <p>Transforms the entity at the top of the stack into the Item Stack in its off hand.</p>
+      <p>接受栈顶实体，返回其副手中的物品组。</p>
   </div>
 <br />
   <div id="patterns/items@moreiotas:item/inventory/stacks" class="">
-<h4 class="pattern-title">Hoarder&#39;s Distillation (vector, vector → list)<a
+<h4 class="pattern-title">囤积者之馏化 (vector, vector → list)<a
     href="#patterns/items@moreiotas:item/inventory/stacks"
     class="permalink small"
     title="Permalink"
@@ -959,11 +959,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：aqwed</canvas>
   </details>
-      <p>Removes two vectors from the stack representing position and side. Returns a list of Item Stacks in the block at the given position accessible from the given side (or all if second vector is zero).</p>
+      <p>移除栈顶位置向量和面向量，并返回与该位置处方块对应面交互时可获得的物品组列表（若面向量为零向量则检索所有面）。</p>
   </div>
 <br />
   <div id="patterns/items@moreiotas:item/inventory/items" class="">
-<h4 class="pattern-title">Collector&#39;s Distillation (vector, vector → list)<a
+<h4 class="pattern-title">收集者之馏化 (vector, vector → list)<a
     href="#patterns/items@moreiotas:item/inventory/items"
     class="permalink small"
     title="Permalink"
@@ -1015,11 +1015,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：dewqa</canvas>
   </details>
-      <p>Removes two vectors from the stack representing position and side. Returns a list of Items in the block at the given position accessible from the given side (or all if second vector is zero).</p>
+      <p>移除栈顶位置向量和面向量，并返回与该位置处方块对应面交互时可获得的物品类型列表（若面向量为零向量则检索所有面）。</p>
   </div>
 <br />
   <div id="patterns/items@moreiotas:item/prop/size/set" class="">
-<h4 class="pattern-title">Treasurer&#39;s Distillation (item stack, int → list)<a
+<h4 class="pattern-title">司库之馏化 (item stack, int → list)<a
     href="#patterns/items@moreiotas:item/prop/size/set"
     class="permalink small"
     title="Permalink"
@@ -1071,7 +1071,7 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：adeeedew</canvas>
   </details>
-      <p>Transforms the Item Stack at the top of the stack into its size.</p>
+      <p>接受栈顶物品组，返回其中物品数量。</p>
   </div>
 <br />
 </div>
@@ -1092,15 +1092,15 @@
     class="permalink small"
     title="Permalink"
   ><i class="bi bi-link-45deg"></i></a></h3>
-    <p>矩阵是操纵向量的好帮手，它们能表示任何可作用于向量的线性变换。需注明的是，本条目里的图案在所接受 iota 的类型方面十分随和，它们会接受任何可直接映射为矩阵的 iota，如数和向量。</p>
+    <p>矩阵是操纵向量的好帮手，它们能表示任何可作用于向量的线性变换。需注明的是，本条目里的图案能接受许多种 iota，矩阵参数能接受可直接映射为矩阵的任何 iota，如数和向量。</p>
 <br />
-      <p>例如，将一 3x3 矩阵与一向量相乘不会产生事故，而是会返回一个新向量。更多有关发掘矩阵潜能的信息可参见下方链接（译注：B 站官方账号同视频见<a href="https://www.bilibili.com/video/BV1ns41167b9" target="_blank">此</a>和<a href="https://www.bilibili.com/video/BV1ys411472E?p=4" target="_blank">此</a>）。</p>
+      <p>例如，将 3×3 矩阵与向量相乘不会产生事故，而是会返回一个新向量。更多有关发掘矩阵潜能的信息可参见下方链接（译注：B 站官方账号同视频见<a href="https://www.bilibili.com/video/BV1ns41167b9" target="_blank">此</a>和<a href="https://www.bilibili.com/video/BV1ys411472E?p=4" target="_blank">此</a>）。</p>
   <h4 class="linkout">
     <a href="https://www.youtube.com/watch?v=kYB8IZa5AuE&amp;list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab&amp;index=3" target="_blank">3blue1brown</a>
   </h4>
 <br />
   <div id="patterns/matrices@moreiotas:matrix/make" class="">
-<h4 class="pattern-title">Transformation Prfct. (num | vec | list → mat)<a
+<h4 class="pattern-title">组阵之纯化 (num | vec | list → mat)<a
     href="#patterns/matrices@moreiotas:matrix/make"
     class="permalink small"
     title="Permalink"
@@ -1155,10 +1155,10 @@
       <p>将栈顶元素转换为矩阵。接受数、向量和列表。</p>
   </div>
 <br />
-    <p>若该 iota 为数，其将变为 1x1 的矩阵。若该 iota 为向量，其将变为 3x1 的矩阵。若该 iota 为列表，则其需为一完全由数组成，或完全由向量组成，或完全由仅含数的列表（所有列表需等长）组成的列表。若组成元素为数，其将变为 1xn 的矩阵；若组成元素为向量，其将变为 3xn 的矩阵；若组成元素为列表，则变为 nxm 的矩阵，其中 n 为内层列表长度，m 为外层列表长度。</p>
+    <p>若该 iota 为数，其将变为 1×1 的矩阵。若该 iota 为向量，其将变为 3×1 的矩阵。若该 iota 为列表，则其需为一完全由数组成，或完全由向量组成，或完全由仅含数的列表（所有列表需等长）组成的列表。若组成元素为数，其将变为 1×n 的矩阵；若组成元素为向量，其将变为 3×n 的矩阵；若组成元素为列表，则变为 n×m 的矩阵，其中 n 为内层列表长度，m 为外层列表长度。</p>
 <br />
   <div id="patterns/matrices@moreiotas:matrix/unmake" class="">
-<h4 class="pattern-title">Restoration Prfct. (mat → num | vec | list)<a
+<h4 class="pattern-title">解阵之纯化 (mat → num | vec | list)<a
     href="#patterns/matrices@moreiotas:matrix/unmake"
     class="permalink small"
     title="Permalink"
@@ -1213,10 +1213,10 @@
       <p>将栈顶矩阵依其长宽转换为数、向量或列表。</p>
   </div>
 <br />
-    <p>1x1 矩阵会变成数。1x3 或 3x1 矩阵会变成向量。3xn 或 nx3 矩阵会变成由向量组成的列表。所有其余矩阵会变成由仅含数的列表组成的列表，内层列表长度为矩阵列数。</p>
+    <p>1×1 矩阵会变成数。1×3 或 3×1 矩阵会变成向量。3×n 或 n×3 矩阵会变成由向量组成的列表。所有其余矩阵会变成由仅含数的列表组成的列表，内层列表长度为矩阵列数。</p>
 <br />
   <div id="patterns/matrices@moreiotas:matrix/unmake/direct" class="">
-<h4 class="pattern-title">Restoration Prfct. II (mat → [[num]])<a
+<h4 class="pattern-title">解阵之纯化，第二型 (mat → [[num]])<a
     href="#patterns/matrices@moreiotas:matrix/unmake/direct"
     class="permalink small"
     title="Permalink"
@@ -1268,11 +1268,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：dwwdqdwwdwdwa</canvas>
   </details>
-      <p>As <a href="#patterns/matrices@moreiotas:matrix/unmake"><span style="color: #fc77be">Restoration Purification</span></a>, except it always returns a list of lists of numbers.</p>
+      <p>与<a href="#patterns/matrices@moreiotas:matrix/unmake"><span style="color: #fc77be">解阵之纯化</span></a>类似，但此图案只会返回由仅含数的列表组成的列表。</p>
   </div>
 <br />
   <div id="patterns/matrices@moreiotas:matrix/identity" class="">
-<h4 class="pattern-title">Identity Purification (int ≥ 0 → mat)<a
+<h4 class="pattern-title">单位阵之纯化 (int ≥ 0 → mat)<a
     href="#patterns/matrices@moreiotas:matrix/identity"
     class="permalink small"
     title="Permalink"
@@ -1324,11 +1324,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：awwaeawwaqw</canvas>
   </details>
-      <p>接受一个正整数 n，返回一 n 阶单位矩阵（即主对角线处为 1，其余各处为 0 的方阵）。</p>
+      <p>接受一个正整数 n，返回 n 阶单位矩阵（即主对角线处为 1，其余各处为 0 的方阵）。</p>
   </div>
 <br />
   <div id="patterns/matrices@moreiotas:matrix/zero" class="">
-<h4 class="pattern-title">Zero Distillation (int ≥ 0, int ≥ 0 → mat)<a
+<h4 class="pattern-title">零阵之馏化 (int ≥ 0, int ≥ 0 → mat)<a
     href="#patterns/matrices@moreiotas:matrix/zero"
     class="permalink small"
     title="Permalink"
@@ -1380,11 +1380,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：awwaeawwa</canvas>
   </details>
-      <p>接受两个正整数，返回一 nxm 的零矩阵（即处处为 0 的矩阵）。</p>
+      <p>接受两个正整数 n 和 m，返回 n×m 的零矩阵（即处处为 0 的矩阵）。</p>
   </div>
 <br />
   <div id="patterns/matrices@moreiotas:matrix/rotation" class="">
-<h4 class="pattern-title">Rotation Distillation (vec, num → mat)<a
+<h4 class="pattern-title">旋转阵之馏化 (vec, num → mat)<a
     href="#patterns/matrices@moreiotas:matrix/rotation"
     class="permalink small"
     title="Permalink"
@@ -1436,7 +1436,7 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：awwaeawwawawddw</canvas>
   </details>
-      <p>接受一向量 v 与一数 θ，返回对应以 v 为轴正向旋转 θ 弧度的旋转矩阵。</p>
+      <p>接受向量 v 与数 θ，返回对应以 v 为轴正向旋转 θ 弧度的旋转矩阵。</p>
   </div>
 <br />
   <div id="patterns/matrices@hexcasting:add" class="">
@@ -1548,7 +1548,7 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：waqaw</canvas>
   </details>
-      <p>将一 nxm 矩阵与一 mxp 矩阵相乘。</p>
+      <p>将第一个 n×m 矩阵与 m×p 矩阵相乘，所得为 n×p 矩阵。</p>
   </div>
 <br />
   <div id="patterns/matrices@hexcasting:div" class="">
@@ -1604,7 +1604,7 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：wdedw</canvas>
   </details>
-      <p>Divides the first n by m matrix with an m by m matrix to get an n by m matrix.</p>
+      <p>将第一个 n×m 矩阵与 m×m 矩阵的逆相乘，所得为 n×m 矩阵。</p>
   </div>
 <br />
   <div id="patterns/matrices@hexcasting:pow" class="">
@@ -1660,11 +1660,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：wedew</canvas>
   </details>
-      <p>Accepts a square matrix and an integer, and raises the matrix to the power of the integer.</p>
+      <p>接受方阵和整数，并计算指数为所给数的方阵幂。</p>
   </div>
 <br />
   <div id="patterns/matrices@moreiotas:altmul" class="">
-<h4 class="pattern-title">Multiplicative Dstl. II (mat, mat → mat)<a
+<h4 class="pattern-title">乘法之馏化，第二型 (mat, mat → mat)<a
     href="#patterns/matrices@moreiotas:altmul"
     class="permalink small"
     title="Permalink"
@@ -1716,11 +1716,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：waqawawwaeaww</canvas>
   </details>
-      <p>Multiplies the first n by m matrix elementwise with another n by m matrix.</p>
+      <p>将第一个 n×m 矩阵中各元素与另一个 n×m 矩阵中相应元素相乘。</p>
   </div>
 <br />
   <div id="patterns/matrices@moreiotas:altdiv" class="">
-<h4 class="pattern-title">Division Dstl. II (mat, mat → mat)<a
+<h4 class="pattern-title">除法之馏化，第二型 (mat, mat → mat)<a
     href="#patterns/matrices@moreiotas:altdiv"
     class="permalink small"
     title="Permalink"
@@ -1772,11 +1772,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：wdedwdwwdqdww</canvas>
   </details>
-      <p>Divides the first n by m matrix elementwise by another n by m matrix.</p>
+      <p>将第一个 n×m 矩阵中各元素与另一个 n×m 矩阵中相应元素相除。</p>
   </div>
 <br />
   <div id="patterns/matrices@moreiotas:altpow" class="">
-<h4 class="pattern-title">Power Distillation II (mat, mat → mat)<a
+<h4 class="pattern-title">乘方之馏化，第二型 (mat, mat → mat)<a
     href="#patterns/matrices@moreiotas:altpow"
     class="permalink small"
     title="Permalink"
@@ -1828,7 +1828,7 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：wedewqawwawqwa</canvas>
   </details>
-      <p>Raises the first n by m matrix elementwise to the power of another n by m matrix.</p>
+      <p>计算第一个 n×m 矩阵中各元素为底数，另一个 n×m 矩阵中相应元素为指数的幂矩阵。</p>
   </div>
 <br />
   <div id="patterns/matrices@hexcasting:reverse" class="">
@@ -1884,11 +1884,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：qqqaede</canvas>
   </details>
-      <p>接受一 nxm 矩阵并返回一 mxn 矩阵，其中所有元素按主对角线对称翻转。</p>
+      <p>接受一个 n×m 矩阵并返回一个 m×n 矩阵，其中所有元素按主对角线对称翻转。</p>
   </div>
 <br />
   <div id="patterns/matrices@moreiotas:matrix/inverse" class="">
-<h4 class="pattern-title">Inverse Purification (mat → mat)<a
+<h4 class="pattern-title">逆阵之纯化 (mat → mat)<a
     href="#patterns/matrices@moreiotas:matrix/inverse"
     class="permalink small"
     title="Permalink"
@@ -1940,11 +1940,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：wwdqdwwdqaq</canvas>
   </details>
-      <p>接受一 nxn 矩阵并返回一 nxn 矩阵，使得原矩阵和返回矩阵相乘得单位矩阵。</p>
+      <p>接受一个 n×n 矩阵并返回一个 n×n 矩阵，使得原矩阵和返回矩阵相乘得单位矩阵。</p>
   </div>
 <br />
   <div id="patterns/matrices@moreiotas:matrix/determinant" class="">
-<h4 class="pattern-title">Determinant Purification (mat → num)<a
+<h4 class="pattern-title">行列式之纯化 (mat → num)<a
     href="#patterns/matrices@moreiotas:matrix/determinant"
     class="permalink small"
     title="Permalink"
@@ -1996,11 +1996,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：aeawwaeawaw</canvas>
   </details>
-      <p>接受一方阵并返回其行列式。若对 4x4 以上方阵使用，则会产生事故。</p>
+      <p>接受一方阵并返回其行列式。若对 4×4 以上方阵使用，则会产生事故。</p>
   </div>
 <br />
   <div id="patterns/matrices@moreiotas:matrix/concat/vert" class="">
-<h4 class="pattern-title">Tower Distillation (mat, mat → mat)<a
+<h4 class="pattern-title">纵接之馏化 (mat, mat → mat)<a
     href="#patterns/matrices@moreiotas:matrix/concat/vert"
     class="permalink small"
     title="Permalink"
@@ -2052,11 +2052,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：awwaeawwawawdedwa</canvas>
   </details>
-      <p>接受一 mxn 矩阵与一 pxn 矩阵，返回一 (m+p)xn 矩阵，其中第一个矩阵位于第二个矩阵上方。</p>
+      <p>接受一个 m×n 矩阵与一个 p×n 矩阵，返回一个 (m+p)×n 矩阵，其中第一个矩阵位于第二个矩阵上方。</p>
   </div>
 <br />
   <div id="patterns/matrices@moreiotas:matrix/concat/hori" class="">
-<h4 class="pattern-title">Sprawling Distillation (mat, mat → mat)<a
+<h4 class="pattern-title">横拼之馏化 (mat, mat → mat)<a
     href="#patterns/matrices@moreiotas:matrix/concat/hori"
     class="permalink small"
     title="Permalink"
@@ -2108,11 +2108,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：dwwdqdwwdwdwaqawd</canvas>
   </details>
-      <p>接受一 nxm 矩阵与一 nxp 矩阵，返回一 nx(m+p) 矩阵，其中第一个矩阵位于第二个矩阵左方。</p>
+      <p>接受一个 n×m 矩阵与一个 n×p 矩阵，返回一个 n×(m+p) 矩阵，其中第一个矩阵位于第二个矩阵左方。</p>
   </div>
 <br />
   <div id="patterns/matrices@moreiotas:matrix/split/vert" class="">
-<h4 class="pattern-title">Toppling Gambit (mat, num → mat, mat)<a
+<h4 class="pattern-title">倒坠之策略 (mat, num → mat, mat)<a
     href="#patterns/matrices@moreiotas:matrix/split/vert"
     class="permalink small"
     title="Permalink"
@@ -2164,11 +2164,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：awdedwawawwaeawwa</canvas>
   </details>
-      <p>接受一 nxm 矩阵与一 0 到 n 间的整数，返回由原矩阵在所给整数行处上下分割所得的两个矩阵。</p>
+      <p>接受一个 n×m 矩阵与一个 0 到 n 间的整数，返回由原矩阵在所给整数行处上下分割所得的两个矩阵。</p>
   </div>
 <br />
   <div id="patterns/matrices@moreiotas:matrix/split/hori" class="">
-<h4 class="pattern-title">Mitosis Gambit (mat, num → mat, mat)<a
+<h4 class="pattern-title">有丝分裂之策略 (mat, num → mat, mat)<a
     href="#patterns/matrices@moreiotas:matrix/split/hori"
     class="permalink small"
     title="Permalink"
@@ -2220,7 +2220,7 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：dwaqawdwdwwdqdwwd</canvas>
   </details>
-      <p>接受一 nxm 矩阵与一 0 到 m 间的整数，返回由原矩阵在所给整数列处左右分割所得的两个矩阵。</p>
+      <p>接受一个 n×m 矩阵与一个 0 到 m 间的整数，返回由原矩阵在所给整数列处左右分割所得的两个矩阵。</p>
   </div>
 <br />
 </div>
@@ -2298,7 +2298,7 @@
   </div>
 <br />
   <div id="patterns/strings@moreiotas:string/split" class="">
-<h4 class="pattern-title">Separation Distillation (str, str → [str])<a
+<h4 class="pattern-title">分串之馏化 (str, str → [str])<a
     href="#patterns/strings@moreiotas:string/split"
     class="permalink small"
     title="Permalink"
@@ -2354,7 +2354,7 @@
   </div>
 <br />
   <div id="patterns/strings@moreiotas:string/parse" class="">
-<h4 class="pattern-title">Input Purification (str → num | null)<a
+<h4 class="pattern-title">输入之纯化 (str → num | null)<a
     href="#patterns/strings@moreiotas:string/parse"
     class="permalink small"
     title="Permalink"
@@ -2578,7 +2578,7 @@
   </div>
 <br />
   <div id="patterns/strings@moreiotas:string/empty" class="">
-<h4 class="pattern-title">Blank Reflection (→ str)<a
+<h4 class="pattern-title">空串之精思 (→ str)<a
     href="#patterns/strings@moreiotas:string/empty"
     class="permalink small"
     title="Permalink"
@@ -2630,11 +2630,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：awdwa</canvas>
   </details>
-      <p>压入一个空字符串。其在与其他字符串连接方面十分有用。</p>
+      <p>压入一个空字符串。其在连接其他字符串方面十分有用。</p>
   </div>
 <br />
   <div id="patterns/strings@moreiotas:string/space" class="">
-<h4 class="pattern-title">Spacing Reflection (→ str)<a
+<h4 class="pattern-title">空格之精思 (→ str)<a
     href="#patterns/strings@moreiotas:string/space"
     class="permalink small"
     title="Permalink"
@@ -2686,11 +2686,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：awdwaaww</canvas>
   </details>
-      <p>压入一个由单个空格组成的字符串。其在与其他字符串连接方面十分有用。</p>
+      <p>压入一个仅含单个空格的字符串。其在连接其他字符串方面十分有用。</p>
   </div>
 <br />
   <div id="patterns/strings@moreiotas:string/comma" class="">
-<h4 class="pattern-title">Comma Reflection (→ str)<a
+<h4 class="pattern-title">逗点之精思 (→ str)<a
     href="#patterns/strings@moreiotas:string/comma"
     class="permalink small"
     title="Permalink"
@@ -2742,11 +2742,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：qa</canvas>
   </details>
-      <p>压入一个由单个半角逗号组成的字符串。其在与其他字符串连接方面十分有用。</p>
+      <p>压入一个仅含单个半角逗号的字符串。其在连接其他字符串方面十分有用。</p>
   </div>
 <br />
   <div id="patterns/strings@moreiotas:string/newline" class="">
-<h4 class="pattern-title">Breaking Reflection (→ str)<a
+<h4 class="pattern-title">断句之精思 (→ str)<a
     href="#patterns/strings@moreiotas:string/newline"
     class="permalink small"
     title="Permalink"
@@ -2798,11 +2798,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：waawaw</canvas>
   </details>
-      <p>压入一个由单个换行符组成的字符串。其在与其他字符串连接方面十分有用。</p>
+      <p>压入一个仅含单个换行符的字符串。其在连接其他字符串方面十分有用。</p>
   </div>
 <br />
   <div id="patterns/strings@moreiotas:string/chat/caster" class="">
-<h4 class="pattern-title">Whisper Reflection (→ str)<a
+<h4 class="pattern-title">耳语之精思 (→ str)<a
     href="#patterns/strings@moreiotas:string/chat/caster"
     class="permalink small"
     title="Permalink"
@@ -2858,7 +2858,7 @@
   </div>
 <br />
   <div id="patterns/strings@moreiotas:string/chat/all" class="">
-<h4 class="pattern-title">Listener&#39;s Reflection (→ str)<a
+<h4 class="pattern-title">听者之精思 (→ str)<a
     href="#patterns/strings@moreiotas:string/chat/all"
     class="permalink small"
     title="Permalink"
@@ -2914,7 +2914,7 @@
   </div>
 <br />
   <div id="patterns/strings@moreiotas:string/chat/prefix/set" class="">
-<h4 class="pattern-title">Sifter&#39;s Gambit (str | null →)<a
+<h4 class="pattern-title">筛具之策略 (str | null →)<a
     href="#patterns/strings@moreiotas:string/chat/prefix/set"
     class="permalink small"
     title="Permalink"
@@ -2966,11 +2966,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：qwaqa</canvas>
   </details>
-      <p>接受一个字符串。所有此后发出的以此字符串起始的消息将不再可见。同时，<a href="#patterns/strings@moreiotas:string/chat/caster"><span style="color: #fc77be">耳语之精思</span></a>也将只能读取上述不再可见的消息。</p>
+      <p>接受一个字符串。所有此后发出的以此字符串起始的消息将不再对他人可见。同时，<a href="#patterns/strings@moreiotas:string/chat/caster"><span style="color: #fc77be">耳语之精思</span></a>也将只能读取上述消息。</p>
   </div>
 <br />
   <div id="patterns/strings@moreiotas:string/chat/prefix/get" class="">
-<h4 class="pattern-title">Sifter&#39;s Reflection (→ str | null)<a
+<h4 class="pattern-title">筛具之精思 (→ str | null)<a
     href="#patterns/strings@moreiotas:string/chat/prefix/get"
     class="permalink small"
     title="Permalink"
@@ -3026,7 +3026,7 @@
   </div>
 <br />
   <div id="patterns/strings@moreiotas:string/block/get" class="">
-<h4 class="pattern-title">Reader&#39;s Purification (vec → str | [str])<a
+<h4 class="pattern-title">读者之纯化 (vec → str | [str])<a
     href="#patterns/strings@moreiotas:string/block/get"
     class="permalink small"
     title="Permalink"
@@ -3082,7 +3082,7 @@
   </div>
 <br />
   <div id="patterns/strings@moreiotas:string/block/set" class="">
-<h4 class="pattern-title">Write (vec, str | [str] →)<a
+<h4 class="pattern-title">书写 (vec, str | [str] →)<a
     href="#patterns/strings@moreiotas:string/block/set"
     class="permalink small"
     title="Permalink"
@@ -3138,7 +3138,7 @@
   </div>
 <br />
   <div id="patterns/strings@moreiotas:string/iota" class="">
-<h4 class="pattern-title">Scrivener&#39;s Purification (any → str)<a
+<h4 class="pattern-title">代笔人之纯化 (any → str)<a
     href="#patterns/strings@moreiotas:string/iota"
     class="permalink small"
     title="Permalink"
@@ -3194,7 +3194,7 @@
   </div>
 <br />
   <div id="patterns/strings@moreiotas:string/action" class="">
-<h4 class="pattern-title">Patternmaster&#39;s Prfct. (pattern → str | null)<a
+<h4 class="pattern-title">图案师之纯化 (pattern → str | null)<a
     href="#patterns/strings@moreiotas:string/action"
     class="permalink small"
     title="Permalink"
@@ -3246,11 +3246,11 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：wdwewdwdw</canvas>
   </details>
-      <p>将栈顶图案转换为其名称。如果该图案不对应任何操作，或对应的操作是卓越法术，则返回 Null。</p>
+      <p>将栈顶图案转换为其名字。如果该图案不对应任何操作，或对应的操作是卓越法术，则返回 Null。</p>
   </div>
 <br />
   <div id="patterns/strings@moreiotas:string/name/get" class="">
-<h4 class="pattern-title">Moniker Purification (entity → str)<a
+<h4 class="pattern-title">名号之纯化 (entity → str)<a
     href="#patterns/strings@moreiotas:string/name/get"
     class="permalink small"
     title="Permalink"
@@ -3306,7 +3306,7 @@
   </div>
 <br />
   <div id="patterns/strings@moreiotas:string/name/set" class="">
-<h4 class="pattern-title">Name (str, entity →)<a
+<h4 class="pattern-title">命名 (str, entity →)<a
     href="#patterns/strings@moreiotas:string/name/set"
     class="permalink small"
     title="Permalink"
@@ -3362,7 +3362,7 @@
   </div>
 <br />
   <div id="patterns/strings@moreiotas:string/case" class="">
-<h4 class="pattern-title">Case Distillation (str, bool | null → str)<a
+<h4 class="pattern-title">大小写之馏化 (str, bool | null → str)<a
     href="#patterns/strings@moreiotas:string/case"
     class="permalink small"
     title="Permalink"
@@ -3414,7 +3414,7 @@
         data-per-world="False"
       >浏览器不支持图案的可视化。图案代码见此：dwwdwwdwdd</canvas>
   </details>
-      <p>移除栈顶字符串和布尔值（Null 也可）。若为 True，将字符串改为全大写并返回；若为 False，则改为全小写；若为 Null，则更改所有字符的大小写。</p>
+      <p>移除栈顶字符串和布尔值（Null 也可）。若为 True，将字符串改为全大写并返回；若为 False，则改为全小写；若为 Null，则切换所有字符的大小写。</p>
   </div>
 <br />
 </div>
