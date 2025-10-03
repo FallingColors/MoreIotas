@@ -67,6 +67,7 @@ public class FabricMoreIotasConfig extends PartitioningSerializer.GlobalData {
         public void validatePostLoad() throws ValidationException {
             this.maxMatrixSize = bound(this.maxMatrixSize, MIN_MAX_MATRIX_SIZE, MAX_MAX_MATRIX_SIZE);
             this.maxStringLength = bound(this.maxStringLength, MIN_MAX_STRING_LENGTH, MAX_MAX_STRING_LENGTH);
+            this.maxChatLog = bound(this.maxChatLog, MIN_MAX_CHAT_LOG, MAX_MAX_CHAT_LOG);
 
             this.setBlockStringCost = bound(this.setBlockStringCost, DEF_MIN_COST, DEF_MAX_COST);
             this.nameCost = bound(this.nameCost, DEF_MIN_COST, DEF_MAX_COST);

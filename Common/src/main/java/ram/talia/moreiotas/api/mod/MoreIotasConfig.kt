@@ -32,7 +32,9 @@ object MoreIotasConfig {
             const val DEFAULT_SET_BLOCK_STRING_COST = 0.01
             const val DEFAULT_NAME_COST = 0.01
 
-            const val DEFAULT_MAX_CHAT_LOG = 341
+            const val DEFAULT_MAX_CHAT_LOG = 341 // 3 within 1024
+            const val MIN_MAX_CHAT_LOG: Int = 0
+            const val MAX_MAX_CHAT_LOG: Int = 341 // TODO: take into account the stack size config...
         }
     }
 

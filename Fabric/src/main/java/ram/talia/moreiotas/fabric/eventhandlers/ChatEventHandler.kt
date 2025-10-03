@@ -36,14 +36,14 @@ object ChatEventHandler {
             lastMessageTimestamps[player.uuid] = timestamp
         }
 
+        // Just in case! People configure stuff in the weirdest ways
+        if (server.maxChatLog == 0)
+            return true
+
         while (messageLog.isNotEmpty() && messageLog.size > server.maxChatLog) {
             // Just in case somehow we end up putting two "at once" even though this is only place this is touched
             messageLog.removeFirst()
         }
-
-        // Just in case! People configure stuff in the weirdest ways
-        if (server.maxChatLog == 0)
-            return true
 
         messageLog.addLast(ChatEntry(text, timestamp, player.name.string))
 
