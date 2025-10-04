@@ -52,7 +52,14 @@ void setupJar(Object project) {
 
         repositories {
             maven {
-                url "file://" + System.getenv("local_maven")
+                url = 'https://maven.hexxy.media'
+                credentials {
+                    username = 'hexxy-media'
+                    password = System.getenv('MAVEN_PASSWORD')
+                }
+                authentication {
+                    create("basic", BasicAuthentication)
+                }
             }
         }
     }

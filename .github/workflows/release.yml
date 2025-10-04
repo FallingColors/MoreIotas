@@ -15,6 +15,10 @@ on:
         description: Publish to Modrinth
         type: boolean
         default: true
+      publish_maven:
+        description: Publish to Maven
+        type: boolean
+        default: true
       publish_hexdoc:
         description: Publish hexdoc book
         type: boolean
@@ -80,8 +84,56 @@ jobs:
         if: inputs.dry_run
         uses: actions/upload-artifact@v4
         with:
-          name: dry-run
+          name: mod-dry-run
           path: '*/build/publishMods'
+          if-no-files-found: error
+
+  publish-maven:
+    if: inputs.publish_maven
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ !inputs.dry_run && 'azure' || '' }}
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Login to Azure
+        if: inputs.dry_run == false
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      # https://learn.microsoft.com/en-us/azure/devops/artifacts/quickstarts/github-actions
+      - name: Get Azure access token
+        if: inputs.dry_run == false
+        run: |
+            accessToken=$(az account get-access-token --query accessToken --resource 499b84ac-1321-427f-aa17-267ca6975798 --output tsv)
+            echo "::add-mask::$accessToken"
+            echo "MAVEN_PASSWORD=$accessToken" >> $GITHUB_ENV
+
+      - name: Build mod
+        run: ./gradlew build
+
+      - name: Publish to ${{ inputs.dry_run && 'Maven Local' || 'Maven' }}
+        run: ./gradlew ${{ inputs.dry_run && 'publishToMavenLocal' || 'publish' }}
+
+      - name: Upload dry run artifact
+        if: inputs.dry_run
+        uses: actions/upload-artifact@v4
+        with:
+          name: maven-dry-run
+          path: ~/.m2/repository/ram/talia/moreiotas
           if-no-files-found: error
 
   publish-docs:
