@@ -119,13 +119,17 @@ jobs:
 
       # https://learn.microsoft.com/en-us/azure/devops/artifacts/quickstarts/github-actions
       - name: Get Azure access token
+        id: get-token
         if: inputs.dry_run == false
         run: |
             accessToken=$(az account get-access-token --query accessToken --resource 499b84ac-1321-427f-aa17-267ca6975798 --output tsv)
             echo "::add-mask::$accessToken"
-            echo "MAVEN_PASSWORD=$accessToken" >> $GITHUB_ENV
+            echo "token=$accessToken" >> "$GITHUB_OUTPUT"
 
       - name: Publish to ${{ inputs.dry_run && 'Maven Local' || 'Maven' }}
+        env:
+          MAVEN_USERNAME: ${{ vars.MAVEN_USERNAME }}
+          MAVEN_PASSWORD: ${{ steps.get-token.outputs.token }}
         run: ./gradlew ${{ inputs.dry_run && 'publishToMavenLocal' || 'publish' }}
 
       - name: Upload dry run artifact

@@ -54,7 +54,7 @@ void setupJar(Object project) {
             maven {
                 url = 'https://maven.hexxy.media'
                 credentials {
-                    username = 'hexxy-media'
+                    username = System.getenv("MAVEN_USERNAME")
                     password = System.getenv('MAVEN_PASSWORD')
                 }
                 authentication {
