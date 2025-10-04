@@ -114,6 +114,9 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+      - name: Build mod
+        run: ./gradlew build
+
       # https://learn.microsoft.com/en-us/azure/devops/artifacts/quickstarts/github-actions
       - name: Get Azure access token
         if: inputs.dry_run == false
@@ -121,9 +124,6 @@ jobs:
             accessToken=$(az account get-access-token --query accessToken --resource 499b84ac-1321-427f-aa17-267ca6975798 --output tsv)
             echo "::add-mask::$accessToken"
             echo "MAVEN_PASSWORD=$accessToken" >> $GITHUB_ENV
-
-      - name: Build mod
-        run: ./gradlew build
 
       - name: Publish to ${{ inputs.dry_run && 'Maven Local' || 'Maven' }}
         run: ./gradlew ${{ inputs.dry_run && 'publishToMavenLocal' || 'publish' }}
