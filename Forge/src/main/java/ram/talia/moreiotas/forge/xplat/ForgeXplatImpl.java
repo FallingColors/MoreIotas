@@ -16,9 +16,12 @@ import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
+import ram.talia.moreiotas.api.util.ChatEntry;
 import ram.talia.moreiotas.forge.eventhandlers.ChatEventHandler;
 import ram.talia.moreiotas.forge.network.ForgePacketHandler;
 import ram.talia.moreiotas.xplat.IXplatAbstractions;
+
+import java.util.List;
 
 public class ForgeXplatImpl implements IXplatAbstractions {
 

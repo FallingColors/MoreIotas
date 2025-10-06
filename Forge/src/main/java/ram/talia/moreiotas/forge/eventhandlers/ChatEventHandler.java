@@ -18,12 +18,12 @@ public class ChatEventHandler {
     private static final String TAG_CHAT_PREFIX = "moreiotas:prefix";
 
     private static final Map<UUID, @Nullable String> lastMessages = new HashMap<>();
-    private static final Map<UUID, @Nullable String> lastMessageTimestamps = new HashMap<>();
+    private static final Map<UUID, Long> lastMessageTimestamps = new HashMap<>();
 
     private static final ArrayDeque<ChatEntry> messageLog = new ArrayDeque<>();
 
-    private static Long lastMessageTimestamp = 0;
-    private static Int messagesHandled = 0;
+    private static long lastMessageTimestamp = 0;
+    private static int messagesHandled = 0;
 
     public static void setPrefix(Player player, @Nullable String prefix) {
         if (prefix == null)
@@ -39,15 +39,17 @@ public class ChatEventHandler {
     }
 
     public static @Nullable String getLastMessage(@Nullable Player player) {
-        if (player == null)
-            return lastMessage;
-        return lastMessages.get(player.getUUID());
+        if (player != null)
+            return lastMessages.get(player.getUUID());
+        if (!messageLog.isEmpty())
+            return messageLog.peekLast().message();
+        return null;
     }
 
 
 	public static long lastMessageTimestamp(@Nullable Player player) {
         if (player != null)
-            return lastMessageTimestamps.get(player.getUUID());
+            return lastMessageTimestamps.getOrDefault(player.getUUID(), 0l);
         return lastMessageTimestamp;
 	}
 
@@ -71,13 +73,15 @@ public class ChatEventHandler {
         if (event.isCanceled())
             return;
 
-        var uuid = event.getPlayer().getUUID();
+        var player = event.getPlayer();
+        var uuid = player.getUUID();
+        var timestamp = player.serverLevel().getGameTime(); // Dunno why it wants closeable try
         var text = event.getRawText();
-        var timestamp = event.getPlayer().serverLevel().gameTime;
 
         var prefix = ChatEventHandler.getPrefix(player);
 
         if (prefix != null && text.startsWith(prefix)) {
+            event.setCanceled(true);
             lastMessages.put(uuid, text.substring(prefix.length()));
             lastMessageTimestamps.put(uuid, timestamp);
             return;
@@ -88,14 +92,14 @@ public class ChatEventHandler {
             lastMessageTimestamps.put(uuid, timestamp);
         }
 
-        if (MoreIotasConfig.server.maxChatLog == 0)
-            return true;
+        if (MoreIotasConfig.getServer().getMaxChatLog() == 0)
+            return;
 
-        while (!messageLog.isEmpty() && messageLog.size() > MoreIotasConfig.server.maxChatLog) {
+        while (!messageLog.isEmpty() && messageLog.size() > MoreIotasConfig.getServer().getMaxChatLog()) {
             messageLog.removeFirst();
         }
 
-        messageLog.addLast(new ChatEntry(text, timestamp, event.getPlayer().name.string));
+        messageLog.addLast(new ChatEntry(text, timestamp, event.getPlayer().getName().getString()));
 
         if (lastMessageTimestamp == timestamp) {
             messagesHandled++;
@@ -103,7 +107,5 @@ public class ChatEventHandler {
             messagesHandled = 1;
             lastMessageTimestamp = timestamp;
         }
-
-        lastMessage = text;
     }
 }

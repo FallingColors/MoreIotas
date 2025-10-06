@@ -67,6 +67,6 @@ object ChatEventHandler {
 
     @JvmStatic
     fun chatLog(count: Int): List<ChatEntry> {
-        return messageLog.subList((messageLog.size - count).coerceAtLeast(0), messageLog.size)
+        return messageLog.subList((messageLog.size - count).coerceAtLeast(0), messageLog.size).reverse()
     }
 }
