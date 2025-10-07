@@ -320,3 +320,17 @@ reobf {
     shadowJar {}
 }
 
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            // ForgeGradle exports (broken) remapped dependencies, so just remove all of them
+            // https://github.com/VazkiiMods/Botania/blob/87ef25381381f06a1f0f106b896b420956d52bca/Forge/build.gradle#L179
+            pom.withXml {
+                def node = asNode()
+                if (node.dependencies.size() > 0) {
+                    node.remove(node.dependencies)
+                }
+            }
+        }
+    }
+}
