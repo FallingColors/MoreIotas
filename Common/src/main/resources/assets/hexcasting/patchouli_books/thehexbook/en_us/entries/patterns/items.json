@@ -59,7 +59,7 @@
       "op_id": "moreiotas:item/prop/size/set",
       "anchor": "moreiotas:item/prop/size/set",
       "input": "item stack, int",
-      "output": "list",
+      "output": "item stack",
       "text": "moreiotas.page.items.item/prop/size/set"
     }
   ]
