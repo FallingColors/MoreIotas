@@ -19,6 +19,7 @@ public class ForgeMoreIotasConfig implements MoreIotasConfig.CommonConfigAccess 
     public static class Server implements MoreIotasConfig.ServerConfigAccess {
         private static ForgeConfigSpec.IntValue maxMatrixSize;
         private static ForgeConfigSpec.IntValue maxStringLength;
+        private static ForgeConfigSpec.IntValue maxChatLog;
 
         private static ForgeConfigSpec.DoubleValue setBlockStringCost;
         private static ForgeConfigSpec.DoubleValue nameCost;
@@ -29,6 +30,9 @@ public class ForgeMoreIotasConfig implements MoreIotasConfig.CommonConfigAccess 
                     .defineInRange("maxMatrixSize", DEFAULT_MAX_MATRIX_SIZE, MIN_MAX_MATRIX_SIZE, MAX_MAX_MATRIX_SIZE);
             maxStringLength = builder.comment("How long can strings be")
                     .defineInRange("maxStringLength", DEFAULT_MAX_STRING_LENGTH, MIN_MAX_STRING_LENGTH, MAX_MAX_STRING_LENGTH);
+
+            maxChatLog = builder.comment("How many chat messages can be logged and returned at most?")
+                    .defineInRange("maxChatLog", DEFAULT_MAX_CHAT_LOG, MIN_MAX_CHAT_LOG, MAX_MAX_CHAT_LOG);
 
             setBlockStringCost = builder.comment("How much dust should string/block/set cost?")
                     .defineInRange("setBlockStringCost", DEFAULT_SET_BLOCK_STRING_COST, DEF_MIN_COST, DEF_MAX_COST);
@@ -54,6 +58,11 @@ public class ForgeMoreIotasConfig implements MoreIotasConfig.CommonConfigAccess 
         @Override
         public long getNameCost() {
             return (long) (nameCost.get() * MediaConstants.DUST_UNIT);
+        }
+
+        @Override
+        public int getMaxChatLog() {
+            return maxChatLog.get();
         }
     }
 }

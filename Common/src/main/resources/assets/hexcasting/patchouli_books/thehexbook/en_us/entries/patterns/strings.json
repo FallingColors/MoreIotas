@@ -107,6 +107,30 @@
     },
     {
       "type": "hexcasting:pattern",
+      "op_id": "moreiotas:string/chat/timestamp/caster",
+      "anchor": "moreiotas:string/chat/timestamp/caster",
+      "input": "",
+      "output": "str",
+      "text": "moreiotas.page.strings.string/chat/timestamp/caster"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:string/chat/timestamp/all",
+      "anchor": "moreiotas:string/chat/timestamp/all",
+      "input": "",
+      "output": "str",
+      "text": "moreiotas.page.strings.string/chat/timestamp/all"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "moreiotas:string/chat/log/all",
+      "anchor": "moreiotas:string/chat/log/all",
+      "input": "",
+      "output": "str",
+      "text": "moreiotas.page.strings.string/chat/log/all"
+    },
+    {
+      "type": "hexcasting:pattern",
       "op_id": "moreiotas:string/chat/prefix/set",
       "anchor": "moreiotas:string/chat/prefix/set",
       "input": "str | null",
