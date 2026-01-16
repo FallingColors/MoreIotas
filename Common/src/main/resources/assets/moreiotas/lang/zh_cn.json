@@ -165,6 +165,7 @@
   "hexcasting.mishap.invalid_value.matrix.wrong_size": "一个%s×%s的矩阵",
   "hexcasting.mishap.invalid_value.matrix.max_size": "一个小于%1$d×%1$d的矩阵，而实际为%2$d×%3$d",
   "hexcasting.mishap.invalid_value.string.max_size": "一个长度小于%d字符的字符串，而实际长度为%d",
+  "hexcasting.mishap.invalid_value.item_stack": "一个物品组",
   "hexcasting.mishap.bad_item.item.read.offhand": "一个拥有副手的实体",
   "hexcasting.mishap.bad_item.item.read.any": "一个能持有物品的实体"
 }

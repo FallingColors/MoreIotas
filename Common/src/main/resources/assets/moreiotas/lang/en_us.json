@@ -166,6 +166,7 @@
   "hexcasting.mishap.invalid_value.matrix.wrong_size": "a matrix %s by %s",
   "hexcasting.mishap.invalid_value.matrix.max_size": "a final matrix less than %1$d by %1$d, was %2$d by %3$d",
   "hexcasting.mishap.invalid_value.string.max_size": "a string less than %d chars long, was %d",
+  "hexcasting.mishap.invalid_value.item_stack": "an item stack",
   "hexcasting.mishap.bad_item.item.read.offhand": "an entity with an offhand",
   "hexcasting.mishap.bad_item.item.read.any": "an entity that can hold items"
 }
