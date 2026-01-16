@@ -2,11 +2,17 @@
   "hexcasting.mishap.invalid_value.matrix.nonsingular": "a non-singular matrix.",
 
   "hexcasting.iota.moreiotas:string": "String",
+  "hexcasting.iota.moreiotas:string.desc": "a string",
   "hexcasting.iota.moreiotas:matrix": "Matrix",
+  "hexcasting.iota.moreiotas:matrix.desc": "a matrix",
   "hexcasting.iota.moreiotas:iota_type": "Iota Type",
+  "hexcasting.iota.moreiotas:iota_type.dest": "an iota type",
   "hexcasting.iota.moreiotas:entity_type": "Entity Type",
+  "hexcasting.iota.moreiotas:entity_type.desc": "an entity type",
   "hexcasting.iota.moreiotas:item_type": "Item Type",
+  "hexcasting.iota.moreiotas:item_type.desc": "an item type",
   "hexcasting.iota.moreiotas:item_stack": "Item Stack",
+  "hexcasting.iota.moreiotas:item_stack.desc": "an item stack",
 
   "moreiotas.spelldata.entity_type": "Type",
 

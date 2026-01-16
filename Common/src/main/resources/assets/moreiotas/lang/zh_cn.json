@@ -2,11 +2,17 @@
   "hexcasting.mishap.invalid_value.matrix.nonsingular": "一个非奇异矩阵",
 
   "hexcasting.iota.moreiotas:string": "字符串",
+  "hexcasting.iota.moreiotas:string.desc": "一个字符串",
   "hexcasting.iota.moreiotas:matrix": "矩阵",
+  "hexcasting.iota.moreiotas:matrix.desc": "一个矩阵",
   "hexcasting.iota.moreiotas:iota_type": "Iota类型",
+  "hexcasting.iota.moreiotas:iota_type.desc": "一个Iota类型",
   "hexcasting.iota.moreiotas:entity_type": "实体类型",
+  "hexcasting.iota.moreiotas:entity_type.desc": "一个实体或实体类型",
   "hexcasting.iota.moreiotas:item_type": "物品类型",
+  "hexcasting.iota.moreiotas:item_type.desc": "一个物品类型",
   "hexcasting.iota.moreiotas:item_stack": "物品组",
+  "hexcasting.iota.moreiotas:item_stack.desc": "一个物品组",
 
   "moreiotas.spelldata.entity_type": "类型",
 
