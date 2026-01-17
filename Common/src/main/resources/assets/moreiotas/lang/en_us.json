@@ -164,6 +164,10 @@
   "moreiotas.page.items.item/inventory/stacks": "Removes two vectors from the stack representing position and side. Returns a list of Item Stacks in the block at the given position accessible from the given side (or all if second vector is zero).",
   "moreiotas.page.items.item/inventory/items": "Removes two vectors from the stack representing position and side. Returns a list of Items in the block at the given position accessible from the given side (or all if second vector is zero).",
 
+  "hexcasting.mishap.invalid_value.class.type.block": "a block type",
+  "hexcasting.mishap.invalid_value.class.type.item": "an item type",
+  "hexcasting.mishap.invalid_value.class.type.entity": "an entity or entity type",
+  "hexcasting.mishap.invalid_value.class.type.block.able": "an item type that has a block",
   "hexcasting.mishap.invalid_value.class.string": "a string",
   "hexcasting.mishap.invalid_value.class.matrix": "a matrix",
   "hexcasting.mishap.invalid_value.class.matrix.square": "a square matrix",

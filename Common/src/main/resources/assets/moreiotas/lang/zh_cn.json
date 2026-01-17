@@ -163,6 +163,10 @@
   "moreiotas.page.items.item/inventory/stacks": "移除栈顶位置向量和面向量，并返回与该位置处方块对应面交互时可获得的物品组列表（若面向量为零向量则检索所有面）。",
   "moreiotas.page.items.item/inventory/items": "移除栈顶位置向量和面向量，并返回与该位置处方块对应面交互时可获得的物品类型列表（若面向量为零向量则检索所有面）。",
 
+  "hexcasting.mishap.invalid_value.class.type.block": "一个方块类型",
+  "hexcasting.mishap.invalid_value.class.type.item": "一个物品类型",
+  "hexcasting.mishap.invalid_value.class.type.entity": "一个实体或实体类型",
+  "hexcasting.mishap.invalid_value.class.type.block.able": "一个可代表方块的物品类型",
   "hexcasting.mishap.invalid_value.class.string": "一个字符串",
   "hexcasting.mishap.invalid_value.class.matrix": "一个矩阵",
   "hexcasting.mishap.invalid_value.class.matrix.square": "一个方阵",
