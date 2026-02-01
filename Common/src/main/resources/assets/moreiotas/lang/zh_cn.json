@@ -6,9 +6,9 @@
   "hexcasting.iota.moreiotas:matrix": "矩阵",
   "hexcasting.iota.moreiotas:matrix.desc": "一个矩阵",
   "hexcasting.iota.moreiotas:iota_type": "Iota类型",
-  "hexcasting.iota.moreiotas:iota_type.desc": "一个Iota类型",
+  "hexcasting.iota.moreiotas:iota_type.dest": "一个iota类型",
   "hexcasting.iota.moreiotas:entity_type": "实体类型",
-  "hexcasting.iota.moreiotas:entity_type.desc": "一个实体或实体类型",
+  "hexcasting.iota.moreiotas:entity_type.desc": "一个实体类型",
   "hexcasting.iota.moreiotas:item_type": "物品类型",
   "hexcasting.iota.moreiotas:item_type.desc": "一个物品类型",
   "hexcasting.iota.moreiotas:item_stack": "物品组",
@@ -109,6 +109,7 @@
   "moreiotas.page.strings.string/sub": "移除栈顶字符串和两个数，并返回字符串中下标从第一个数（含）到第二个数（不含）间的子串。",
   "moreiotas.page.strings.string/len": "移除栈顶字符串，并返回其长度。",
   "moreiotas.page.strings.string/case": "移除栈顶字符串和布尔值（Null 也可）。若为 True，将字符串改为全大写并返回；若为 False，则改为全小写；若为 Null，则切换所有字符的大小写。",
+
 
 
 
