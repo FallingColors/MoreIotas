@@ -11,7 +11,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
+import ram.talia.moreiotas.api.util.ChatEntry;
 
+import java.util.List;
 import java.util.ServiceLoader;
 import java.util.stream.Collectors;
 
@@ -66,6 +68,12 @@ public interface IXplatAbstractions {
 
     @Nullable String lastMessage(@Nullable Player player);
 
+    long lastMessageTimestamp(@Nullable Player player);
+
+    int lastMessageCount();
+
+    List<ChatEntry> chatLog(int count);
+
     void setChatPrefix(Player player, @Nullable String prefix);
 
     @Nullable String getChatPrefix(Player player);
@@ -92,5 +100,4 @@ public interface IXplatAbstractions {
             return provider.get();
         }
     }
-
 }

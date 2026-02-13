@@ -15,6 +15,8 @@ object MoreIotasConfig {
         val setBlockStringCost: Long
         val nameCost: Long
 
+        val maxChatLog: Int
+
         companion object {
             const val DEF_MIN_COST = 0.0001
             const val DEF_MAX_COST = 10_000.0
@@ -29,6 +31,10 @@ object MoreIotasConfig {
 
             const val DEFAULT_SET_BLOCK_STRING_COST = 0.01
             const val DEFAULT_NAME_COST = 0.01
+
+            const val DEFAULT_MAX_CHAT_LOG = 341 // 3 within 1024
+            const val MIN_MAX_CHAT_LOG: Int = 0
+            const val MAX_MAX_CHAT_LOG: Int = 341 // TODO: take into account the stack size config...
         }
     }
 
@@ -59,6 +65,8 @@ object MoreIotasConfig {
         override val setBlockStringCost: Long
             get() = throw IllegalStateException("Attempted to access property of Dummy Config Object")
         override val nameCost: Long
+            get() = throw IllegalStateException("Attempted to access property of Dummy Config Object")
+        override val maxChatLog: Int
             get() = throw IllegalStateException("Attempted to access property of Dummy Config Object")
     }
 
