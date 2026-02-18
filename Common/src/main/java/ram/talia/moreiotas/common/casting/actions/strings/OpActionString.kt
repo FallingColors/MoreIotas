@@ -38,8 +38,8 @@ object OpActionString : ConstMediaAction {
         return when (action) {
             is PatternShapeMatch.Normal ->
                 HexAPI.instance().getActionI18n(action.key, isOfTag(IXplatAbstractions.INSTANCE.actionRegistry, action.key, HexTags.Actions.REQUIRES_ENLIGHTENMENT)).string.asActionResult
-            is PatternShapeMatch.PerWorld ->
-                HexAPI.instance().getActionI18n(action.key, isOfTag(IXplatAbstractions.INSTANCE.actionRegistry, action.key, HexTags.Actions.REQUIRES_ENLIGHTENMENT)).string.asActionResult
+            /*is PatternShapeMatch.PerWorld ->
+                HexAPI.instance().getActionI18n(action.key, isOfTag(IXplatAbstractions.INSTANCE.actionRegistry, action.key, HexTags.Actions.REQUIRES_ENLIGHTENMENT)).string.asActionResult*/
             is PatternShapeMatch.Special ->
                 action.handler.name.string.asActionResult
             else -> null.asActionResult
