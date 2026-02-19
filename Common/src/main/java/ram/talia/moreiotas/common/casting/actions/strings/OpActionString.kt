@@ -33,13 +33,13 @@ object OpActionString : ConstMediaAction {
         if (pattern.sigsEqual(EVANITION))
             return Component.translatable("hexcasting.action.rawhook.hexcasting:undo").string.asActionResult
 
-        val action = PatternRegistryManifest.matchPattern(pattern, env, true) ?: return null.asActionResult
+        val action = PatternRegistryManifest.matchPattern(pattern, env, false) ?: return null.asActionResult
 
         return when (action) {
             is PatternShapeMatch.Normal ->
                 HexAPI.instance().getActionI18n(action.key, isOfTag(IXplatAbstractions.INSTANCE.actionRegistry, action.key, HexTags.Actions.REQUIRES_ENLIGHTENMENT)).string.asActionResult
-            is PatternShapeMatch.PerWorld ->
-                HexAPI.instance().getActionI18n(action.key, isOfTag(IXplatAbstractions.INSTANCE.actionRegistry, action.key, HexTags.Actions.REQUIRES_ENLIGHTENMENT)).string.asActionResult
+            /*is PatternShapeMatch.PerWorld ->
+                HexAPI.instance().getActionI18n(action.key, isOfTag(IXplatAbstractions.INSTANCE.actionRegistry, action.key, HexTags.Actions.REQUIRES_ENLIGHTENMENT)).string.asActionResult*/
             is PatternShapeMatch.Special ->
                 action.handler.name.string.asActionResult
             else -> null.asActionResult
