@@ -16,9 +16,12 @@ import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
+import ram.talia.moreiotas.api.util.ChatEntry;
 import ram.talia.moreiotas.forge.eventhandlers.ChatEventHandler;
 import ram.talia.moreiotas.forge.network.ForgePacketHandler;
 import ram.talia.moreiotas.xplat.IXplatAbstractions;
+
+import java.util.List;
 
 public class ForgeXplatImpl implements IXplatAbstractions {
 
@@ -31,14 +34,14 @@ public class ForgeXplatImpl implements IXplatAbstractions {
 	public void sendPacketToPlayer(ServerPlayer target, IMessage packet) {
 		ForgePacketHandler.getNetwork().send(PacketDistributor.PLAYER.with(() -> target), packet);
 	}
-	
+
 	@Override
 	public void sendPacketNear(Vec3 pos, double radius, ServerLevel dimension, IMessage packet) {
 		ForgePacketHandler.getNetwork().send(PacketDistributor.NEAR.with(() -> new PacketDistributor.TargetPoint(
 						pos.x, pos.y, pos.z, radius * radius, dimension.dimension()
 		)), packet);
 	}
-	
+
 	@Override
 	public Packet<?> toVanillaClientboundPacket(IMessage message) {
 		return ForgePacketHandler.getNetwork().toVanillaPacket(message, NetworkDirection.PLAY_TO_CLIENT);
@@ -63,4 +66,19 @@ public class ForgeXplatImpl implements IXplatAbstractions {
 	public @Nullable String getChatPrefix(Player player) {
 		return ChatEventHandler.getPrefix(player);
 	}
+
+	@Override
+	public long lastMessageTimestamp(@Nullable Player player) {
+		return ChatEventHandler.lastMessageTimestamp(player);
+	}
+
+	@Override
+	public int lastMessageCount() {
+		return ChatEventHandler.lastMessageCount();
+	}
+
+	@Override
+	public List<ChatEntry> chatLog(int count) {
+        return ChatEventHandler.chatLog(count);
+    }
 }

@@ -61,10 +61,13 @@ public class FabricMoreIotasConfig extends PartitioningSerializer.GlobalData {
         private double setBlockStringCost = DEFAULT_SET_BLOCK_STRING_COST;
         private double nameCost = DEFAULT_NAME_COST;
 
+        private int maxChatLog = DEFAULT_MAX_CHAT_LOG;
+
         @Override
         public void validatePostLoad() throws ValidationException {
             this.maxMatrixSize = bound(this.maxMatrixSize, MIN_MAX_MATRIX_SIZE, MAX_MAX_MATRIX_SIZE);
             this.maxStringLength = bound(this.maxStringLength, MIN_MAX_STRING_LENGTH, MAX_MAX_STRING_LENGTH);
+            this.maxChatLog = bound(this.maxChatLog, MIN_MAX_CHAT_LOG, MAX_MAX_CHAT_LOG);
 
             this.setBlockStringCost = bound(this.setBlockStringCost, DEF_MIN_COST, DEF_MAX_COST);
             this.nameCost = bound(this.nameCost, DEF_MIN_COST, DEF_MAX_COST);
@@ -95,6 +98,11 @@ public class FabricMoreIotasConfig extends PartitioningSerializer.GlobalData {
         @Override
         public long getNameCost() {
             return (long) (this.nameCost * MediaConstants.DUST_UNIT);
+        }
+
+        @Override
+        public int getMaxChatLog() {
+            return this.maxChatLog;
         }
     }
 }
