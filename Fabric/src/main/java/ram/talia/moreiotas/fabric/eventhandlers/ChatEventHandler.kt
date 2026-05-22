@@ -22,8 +22,10 @@ object ChatEventHandler {
             return true
         }
 
-        if (!text.startsWith(prefix))
+        if (!text.startsWith(prefix)) {
+            lastMessage = text
             return true
+        }
 
         lastMessages[player.uuid] = text.substring(prefix.length)
 
