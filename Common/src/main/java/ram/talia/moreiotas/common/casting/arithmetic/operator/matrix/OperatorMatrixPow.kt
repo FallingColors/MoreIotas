@@ -9,10 +9,7 @@ import at.petrak.hexcasting.api.casting.iota.DoubleIota
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
 import at.petrak.hexcasting.common.lib.hex.HexIotaTypes.DOUBLE
-import org.jblas.DoubleMatrix
-import org.jblas.MatrixFunctions
-import org.jblas.Singular
-import org.jblas.Solve
+import org.ejml.dense.block.MatrixOps_DDRB
 import ram.talia.moreiotas.api.asActionResult
 import ram.talia.moreiotas.api.asMatrix
 import ram.talia.moreiotas.api.matrixWrongSize
@@ -20,6 +17,8 @@ import ram.talia.moreiotas.api.times
 import ram.talia.moreiotas.common.casting.arithmetic.operator.nextNumOrVecOrMatrix
 import ram.talia.moreiotas.common.lib.hex.MoreIotasIotaTypes.MATRIX
 import kotlin.math.*
+import ram.talia.moreiotas.api.matrices.MatrixExponentials.matrixExponential;
+import org.ejml.simple.SimpleMatrix
 
 object OperatorMatrixPow : OperatorBasic(2, either(pair(ofType(MATRIX), ofType(DOUBLE)), pair(ofType(DOUBLE), ofType(MATRIX)))) {
     override fun apply(iotas: Iterable<Iota>, env: CastingEnvironment): Iterable<Iota> {
@@ -29,15 +28,14 @@ object OperatorMatrixPow : OperatorBasic(2, either(pair(ofType(MATRIX), ofType(D
 
         arg0.a?.let {
             val mat = arg1.asMatrix
-            if (mat.rows != mat.columns)
-                throw MishapInvalidIota.matrixWrongSize(iotas.last(), 0, mat.rows, mat.rows)
-
-            return MatrixFunctions.expm(ln(it) * mat).asActionResult
+            if (mat.numRows != mat.numCols)
+                throw MishapInvalidIota.matrixWrongSize(iotas.last(), 0, mat.numRows, mat.numRows)
+            return matrixExponential(ln(it) * mat).asActionResult
         }
 
         val mat = arg0.asMatrix
-        if (mat.rows != mat.columns)
-            throw MishapInvalidIota.matrixWrongSize(iotas.last(), 0, mat.rows, mat.rows)
+        if (mat.numRows != mat.numCols)
+            throw MishapInvalidIota.matrixWrongSize(iotas.last(), 0, mat.numRows, mat.numRows)
         val power = arg1.a ?: throw MishapInvalidIota.of(iotas.last(), 0, "double")
 
         return fractionalPowerMatrix(mat, power).asActionResult
@@ -47,9 +45,9 @@ object OperatorMatrixPow : OperatorBasic(2, either(pair(ofType(MATRIX), ofType(D
      * Takes a matrix A and a power p and returns A^p.
      * https://github.com/scipy/scipy/blob/cfe80116aaa145061246b8aec0e98248fbefb835/scipy/linalg/_matfuncs_inv_ssq.py#L671
      */
-    internal fun fractionalPowerMatrix(matrix: DoubleMatrix, power: Double): DoubleMatrix {
+    internal fun fractionalPowerMatrix(matrix: SimpleMatrix, power: Double): SimpleMatrix {
         if (power < 0)
-            return fractionalPowerMatrix(Solve.pinv(matrix), power.absoluteValue)
+            return fractionalPowerMatrix(matrix.pseudoInverse(), power.absoluteValue)
 
         val rounded = power.roundToInt()
         if (abs(power - rounded) <= DoubleIota.TOLERANCE)
@@ -57,7 +55,7 @@ object OperatorMatrixPow : OperatorBasic(2, either(pair(ofType(MATRIX), ofType(D
 
         throw MishapInvalidIota.of(DoubleIota(power), 0, "int") // TODO, Figure out Shur decomposition.
 
-        val svdsMat = Singular.SVDValues(matrix)
+        /*val svdsMat = Singular.SVDValues(matrix)
         val svds = (0 until svdsMat.rows).map { svdsMat[it, it] }.sortedDescending()
 
         /*
@@ -79,35 +77,35 @@ object OperatorMatrixPow : OperatorBasic(2, either(pair(ofType(MATRIX), ofType(D
 //        val b = power - a
 //        val R = TODO()
 //        val Q = intMatrixPower(matrix, a)
-//        return Q.mmul(R)
+//        return Q.mmul(R)*/
     }
 
-    internal fun remainderMatrixPower(matrix: DoubleMatrix, power: Double): DoubleMatrix {
+    /*internal fun remainderMatrixPower(matrix: DoubleMatrix, power: Double): DoubleMatrix {
         TODO()
-    }
+    }*/
 
-    internal fun intMatrixPower(matrix: DoubleMatrix, power: Int): DoubleMatrix {
+    internal fun intMatrixPower(matrix: SimpleMatrix, power: Int): SimpleMatrix {
         if (power == 0)
-            return DoubleMatrix.eye(matrix.rows)
+            return SimpleMatrix.identity(matrix.numRows)
 
         if (power == 1)
             return matrix
         if (power == 2)
-            return matrix.mmul(matrix)
+            return matrix.mult(matrix)
         if (power == 3)
-            return matrix.mmul(matrix.mmul(matrix))
+            return matrix.mult(matrix.mult(matrix))
 
-        var z: DoubleMatrix? = null
-        var result: DoubleMatrix? = null
+        var z: SimpleMatrix? = null
+        var result: SimpleMatrix? = null
         var currPower = power
         var bit: Int
 
         while (currPower > 0) {
-            z = if (z == null) matrix else z.mmul(z)
+            z = if (z == null) matrix else z.mult(z)
             bit = currPower.mod(2)
-            currPower /= 2
+            currPower = currPower shr 1;
             if (bit != 0)
-                result = if (result == null) z else result.mmul(z)
+                result = if (result == null) z else result.mult(z)
         }
 
         return result!!

@@ -12,7 +12,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.phys.Vec3
-import org.jblas.DoubleMatrix
+import org.ejml.simple.SimpleMatrix
 import ram.talia.moreiotas.api.casting.iota.*
 import ram.talia.moreiotas.api.util.Anyone
 
@@ -27,16 +27,12 @@ operator fun Position.component1(): Double = this.x()
 operator fun Position.component2(): Double = this.y()
 operator fun Position.component3(): Double = this.z()
 
-
-operator fun Double.times(mat: DoubleMatrix): DoubleMatrix = mat.mul(this)
-operator fun DoubleMatrix.times(d: Double): DoubleMatrix = this.mul(d)
-
-operator fun Vec3.times(mat: DoubleMatrix): DoubleMatrix = (this.asMatrix).mmul(mat)
-operator fun DoubleMatrix.times(vec: Vec3): DoubleMatrix = this.mmul(vec.asMatrix)
-operator fun DoubleMatrix.times(mat: DoubleMatrix): DoubleMatrix = this.mmul(mat)
-operator fun DoubleMatrix.plus(mat: DoubleMatrix): DoubleMatrix = this.add(mat)
-operator fun DoubleMatrix.minus(mat: DoubleMatrix): DoubleMatrix = this.sub(mat)
-operator fun DoubleMatrix.unaryMinus(): DoubleMatrix = this.mul(-1.0)
+operator fun Double.times(mat: SimpleMatrix): SimpleMatrix = mat.elementOp { i, i1, d : Double ->  d*this};
+operator fun Vec3.times(mat: SimpleMatrix): SimpleMatrix = (this.asMatrix).mult(mat);
+operator fun SimpleMatrix.times(vec: Vec3): SimpleMatrix = this.mult(vec.asMatrix);
+operator fun SimpleMatrix.times(mat: SimpleMatrix): SimpleMatrix = this.mult(mat);
+operator fun SimpleMatrix.times(double : Double): SimpleMatrix = double*this;
+operator fun SimpleMatrix.unaryMinus(): SimpleMatrix = -1.0 * this;
 
 fun List<Iota>.getBoolOrNull(idx: Int, argc: Int = 0): Boolean? {
     val x = this.getOrElse(idx) { throw MishapNotEnoughArgs(idx + 1, this.size) }
@@ -84,7 +80,7 @@ fun List<Iota>.getStringOrList(idx: Int, argc: Int = 0): Either<String, List<Str
     }
 }
 
-fun List<Iota>.getMatrix(idx: Int, argc: Int = 0): DoubleMatrix {
+fun List<Iota>.getMatrix(idx: Int, argc: Int = 0): SimpleMatrix {
     val x = this.getOrElse(idx) { throw MishapNotEnoughArgs(idx + 1, this.size) }
     if (x is MatrixIota) {
         return x.matrix
@@ -93,7 +89,7 @@ fun List<Iota>.getMatrix(idx: Int, argc: Int = 0): DoubleMatrix {
     }
 }
 
-fun List<Iota>.getNumOrVecOrMatrix(idx: Int, argc: Int = 0): Anyone<Double, Vec3, DoubleMatrix> {
+fun List<Iota>.getNumOrVecOrMatrix(idx: Int, argc: Int = 0): Anyone<Double, Vec3, SimpleMatrix> {
     val datum = this.getOrElse(idx) { throw MishapNotEnoughArgs(idx + 1, this.size) }
     return when (datum) {
         is DoubleIota -> Anyone.first(datum.double)
@@ -131,7 +127,7 @@ fun List<Iota>.getItemStack(index: Int, argc: Int = 0): ItemStack {
 }
 
 inline val String.asActionResult get() = listOf(StringIota.make(this))
-inline val DoubleMatrix.asActionResult get() = listOf(MatrixIota(this))
+inline val SimpleMatrix.asActionResult get() = listOf(MatrixIota(this))
 inline val IotaType<*>.asActionResult get() = listOf(IotaTypeIota(this))
 inline val Block.asActionResult get() = listOf(ItemTypeIota(this))
 inline val EntityType<*>.asActionResult get() = listOf(EntityTypeIota(this))
@@ -139,24 +135,24 @@ inline val Item.asActionResult get() = listOf(ItemTypeIota(this))
 inline val List<Item>.asActionResult get() = this.map { ItemTypeIota(it) }.asActionResult
 inline val ItemStack.asActionResult get() = listOf(ItemStackIota.createFiltered(this))
 
-inline val Vec3.asMatrix get() = DoubleMatrix(3, 1, this.x, this.y, this.z)
-inline val BlockPos.asMatrix get() = DoubleMatrix(1, 3, this.x.toDouble(), this.y.toDouble(), this.z.toDouble())
-inline val List<Vec3>.asMatrix get(): DoubleMatrix {
-    val matrix = DoubleMatrix(this.size, 3)
+inline val Vec3.asMatrix get() = SimpleMatrix(3, 1, false, this.x, this.y, this.z)
+inline val BlockPos.asMatrix get() = SimpleMatrix(1, 3, false, this.x.toDouble(), this.y.toDouble(), this.z.toDouble())
+inline val List<Vec3>.asMatrix get(): SimpleMatrix {
+    val matrix = SimpleMatrix(this.size, 3)
     this.forEachIndexed { i, vec ->
-        matrix.put(i, 0, vec.x)
-        matrix.put(i, 1, vec.y)
-        matrix.put(i, 2, vec.z)
+        matrix.set(i, 0, vec.x)
+        matrix.set(i, 1, vec.y)
+        matrix.set(i, 2, vec.z)
     }
     return matrix
 }
 
-inline val Anyone<Double, Vec3, DoubleMatrix>.asMatrix get() = this.flatMap(
-        {d -> DoubleMatrix(1,1,d)},
+inline val Anyone<Double, Vec3, SimpleMatrix>.asMatrix get() = this.flatMap(
+        {d -> SimpleMatrix(1,1,false,d)},
         {v -> v.asMatrix},
         {mat -> mat})
 
-inline val DoubleMatrix.asVec3 get() = Vec3(this[0], this[1], this[2])
+inline val SimpleMatrix.asVec3 get() = Vec3(this[0], this[1], this[2])
 
 fun MishapInvalidIota.Companion.matrixWrongSize(perpetrator: Iota,
                                                 reverseIdx: Int,

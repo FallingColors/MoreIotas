@@ -13,8 +13,7 @@ import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.math.HexDir
 import at.petrak.hexcasting.api.casting.math.HexPattern
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
-import org.jblas.DoubleMatrix
-import org.jblas.MatrixFunctions
+import org.ejml.simple.SimpleMatrix
 import ram.talia.moreiotas.api.casting.iota.MatrixIota
 import ram.talia.moreiotas.api.matrixWrongSize
 import ram.talia.moreiotas.common.casting.arithmetic.operator.matrix.OperatorMatrixAdd
@@ -25,6 +24,8 @@ import ram.talia.moreiotas.common.lib.hex.MoreIotasIotaTypes.MATRIX
 import java.util.function.BinaryOperator
 import java.util.function.Function
 import java.util.function.UnaryOperator
+import kotlin.math.ceil
+import kotlin.math.floor
 
 object MatrixArithmetic : Arithmetic {
     @JvmField val ALTADD = HexPattern.fromAngles("waawawaeawwaea", HexDir.EAST)
@@ -63,14 +64,14 @@ object MatrixArithmetic : Arithmetic {
         ADD -> OperatorMatrixAdd(false)
         SUB -> OperatorMatrixAdd(true)
         MUL -> OperatorMatrixMul
-        ALTMUL -> make2SameSize { i, j -> i.mul(j) }
+        ALTMUL -> make2SameSize { i, j -> i.mult(j) }
         DIV -> OperatorMatrixDiv
-        ALTDIV -> make2SameSize { i, j -> i.div(j) }
-        ABS -> make1Double { it.norm2() }
+        ALTDIV -> make2SameSize { i, j -> i.mult(j.invert()) }
+        ABS -> make1Double { it.normF() }
         POW -> OperatorMatrixPow
-        ALTPOW -> make2SameSize { i, j -> MatrixFunctions.pow(i, j) }
-        FLOOR -> make1(MatrixFunctions::floor)
-        CEIL -> make1(MatrixFunctions::ceil)
+        ALTPOW -> make2SameSizeFunction { i, i1, d, d1 -> Math.pow(d,d1) }
+        FLOOR -> make1 {mat -> mat.elementOp { i, i1, d : Double -> floor(d) }}
+        CEIL -> make1 {mat -> mat.elementOp { i, i1, d : Double -> ceil(d) }}
 //        SIN -> make1(MatrixFunctions::floor) // TODO
 //        COS -> make1(MatrixFunctions::floor) // TODO
 //        TAN -> make1(MatrixFunctions::floor) // TODO
@@ -79,27 +80,49 @@ object MatrixArithmetic : Arithmetic {
 //        ARCTAN -> make1(MatrixFunctions::floor) // TODO
 //        ARCTAN2 -> OperatorMatrixMul // TODO
 //        LOG -> OperatorMatrixMul // TODO
-        REV -> make1(DoubleMatrix::transpose)
+        REV -> make1(SimpleMatrix::transpose)
         else -> throw InvalidOperatorException("$pattern is not a valid operator in Arithmetic $this.")
     }
 
-    private fun make1Double(op: Function<DoubleMatrix, Double>): OperatorUnary = OperatorUnary(IotaMultiPredicate.all(IotaPredicate.ofType(MATRIX)))
+
+    private fun make1Double(op: Function<SimpleMatrix, Double>): OperatorUnary = OperatorUnary(IotaMultiPredicate.all(IotaPredicate.ofType(MATRIX)))
     { i: Iota -> DoubleIota(
         op.apply(Operator.downcast(i, MATRIX).matrix)
     ) }
 
-    private fun make1(op: UnaryOperator<DoubleMatrix>): OperatorUnary = OperatorUnary(IotaMultiPredicate.all(IotaPredicate.ofType(MATRIX)))
+    private fun make1(op: UnaryOperator<SimpleMatrix>): OperatorUnary = OperatorUnary(IotaMultiPredicate.all(IotaPredicate.ofType(MATRIX)))
     { i: Iota -> MatrixIota(
         op.apply(Operator.downcast(i, MATRIX).matrix)
     ) }
 
-    private fun make2SameSize(op: BinaryOperator<DoubleMatrix>): OperatorBinary = OperatorBinary(IotaMultiPredicate.all(IotaPredicate.ofType(MATRIX)))
+    private fun interface ForEachOp {
+        fun op(row: Int, col: Int, value1: Double, value2: Double): Double
+    }
+
+    // I know DRY exists but putting it into a new function has to be worse
+    private fun make2SameSizeFunction(op: ForEachOp): OperatorBinary = OperatorBinary(IotaMultiPredicate.all(IotaPredicate.ofType(MATRIX)))
     { i, j ->
         val mat0 = Operator.downcast(i, MATRIX).matrix
         val mat1 = Operator.downcast(j, MATRIX).matrix
 
-        if (mat0.rows != mat1.rows || mat0.columns != mat1.columns)
-            throw MishapInvalidIota.matrixWrongSize(MatrixIota(mat1), 0, mat0.rows, mat1.columns)
+        if (mat0.numRows != mat1.numRows || mat0.numCols != mat1.numCols)
+            throw MishapInvalidIota.matrixWrongSize(MatrixIota(mat1), 0, mat0.numRows, mat1.numCols)
+
+        for (i in 1 .. mat0.numRows) {
+            for (j in 1..mat0.numCols) {
+                mat0.set(i,j, op.op(i, j, mat0.get(i,j), mat1.get(i,j)))
+            }
+        }
+        MatrixIota(mat0)
+    }
+
+    private fun make2SameSize(op: BinaryOperator<SimpleMatrix>): OperatorBinary = OperatorBinary(IotaMultiPredicate.all(IotaPredicate.ofType(MATRIX)))
+    { i, j ->
+        val mat0 = Operator.downcast(i, MATRIX).matrix
+        val mat1 = Operator.downcast(j, MATRIX).matrix
+
+        if (mat0.numRows != mat1.numRows || mat0.numCols != mat1.numCols)
+            throw MishapInvalidIota.matrixWrongSize(MatrixIota(mat1), 0, mat0.numRows, mat1.numCols)
 
         MatrixIota(
             op.apply(mat0, mat1)

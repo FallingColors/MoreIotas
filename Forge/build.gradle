@@ -179,6 +179,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraftVersion}-${forgeVersion}"
     compileOnly project(":Common")
     shade 'org.jblas:jblas:1.2.5'
+    shade "org.ejml:ejml-simple:${ejml_version}"
 
     implementation "thedarkcolour:kotlinforforge:$kotlinForForgeVersion"
 

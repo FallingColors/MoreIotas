@@ -12,6 +12,7 @@ import at.petrak.hexcasting.common.lib.hex.HexIotaTypes.VEC3
 import ram.talia.moreiotas.api.asActionResult
 import ram.talia.moreiotas.api.asMatrix
 import ram.talia.moreiotas.api.matrixWrongSize
+import ram.talia.moreiotas.api.times
 import ram.talia.moreiotas.common.casting.arithmetic.operator.nextNumOrVecOrMatrix
 import ram.talia.moreiotas.common.lib.hex.MoreIotasIotaTypes.MATRIX
 
@@ -21,14 +22,14 @@ object OperatorMatrixMul : OperatorBasic(2, any(ofType(MATRIX), or(ofType(DOUBLE
         val arg0 = it.nextNumOrVecOrMatrix(arity)
         val arg1 = it.nextNumOrVecOrMatrix(arity)
 
-        arg0.a?.let { return (arg1.asMatrix.mul(it)).asActionResult }
-        arg1.a?.let { return (arg0.asMatrix.mul(it)).asActionResult }
+        arg0.a?.let { return (arg1.asMatrix * it).asActionResult }
+        arg1.a?.let { return (arg0.asMatrix * it).asActionResult }
 
         val mat0 = arg0.asMatrix
         val mat1 = arg1.asMatrix
 
-        if (mat0.columns != mat1.rows)
-            throw MishapInvalidIota.matrixWrongSize(iotas.last(), 0, mat0.columns, null)
-        return (mat0.mmul(mat1)).asActionResult
+        if (mat0.numCols != mat1.numRows)
+            throw MishapInvalidIota.matrixWrongSize(iotas.last(), 0, mat0.numCols, null)
+        return (mat0.mult(mat1)).asActionResult
     }
 }

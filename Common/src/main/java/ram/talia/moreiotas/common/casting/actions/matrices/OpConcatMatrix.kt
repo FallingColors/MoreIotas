@@ -4,7 +4,6 @@ import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
-import org.jblas.DoubleMatrix
 import ram.talia.moreiotas.api.asActionResult
 import ram.talia.moreiotas.api.asMatrix
 import ram.talia.moreiotas.api.getNumOrVecOrMatrix
@@ -19,29 +18,29 @@ class OpConcatMatrix(private val concatVertically: Boolean) : ConstMediaAction {
         val mat1 = args.getNumOrVecOrMatrix(1, argc).asMatrix
 
         if (concatVertically) {
-            if (mat0.columns != mat1.columns)
-                throw MishapInvalidIota.matrixWrongSize(args[1], 0, null, mat0.columns)
-            if (mat0.rows + mat1.rows > MoreIotasConfig.server.maxMatrixSize)
+            if (mat0.numCols != mat1.numCols)
+                throw MishapInvalidIota.matrixWrongSize(args[1], 0, null, mat0.numCols)
+            if (mat0.numRows + mat1.numRows > MoreIotasConfig.server.maxMatrixSize)
                 throw MishapInvalidIota.of(args[1],
                         0,
                         "matrix.max_size",
                         MoreIotasConfig.server.maxMatrixSize,
-                        mat0.rows + mat1.rows,
-                        mat0.columns)
+                        mat0.numRows + mat1.numRows,
+                        mat0.numCols)
         } else {
-            if (mat0.rows != mat1.rows)
-                throw MishapInvalidIota.matrixWrongSize(args[1], 0, mat0.rows, null)
-            if (mat0.columns + mat1.columns > MoreIotasConfig.server.maxMatrixSize)
+            if (mat0.numRows != mat1.numRows)
+                throw MishapInvalidIota.matrixWrongSize(args[1], 0, mat0.numRows, null)
+            if (mat0.numCols + mat1.numCols > MoreIotasConfig.server.maxMatrixSize)
                 throw MishapInvalidIota.of(args[1],
                         0,
                         "matrix.max_size",
                         MoreIotasConfig.server.maxMatrixSize,
-                        mat0.rows,
-                        mat0.columns + mat1.columns)
+                        mat0.numRows,
+                        mat0.numCols + mat1.numCols)
         }
 
         return if (concatVertically)
-            DoubleMatrix.concatVertically(mat0, mat1).asActionResult
-        else DoubleMatrix.concatHorizontally(mat0, mat1).asActionResult
+            mat0.concatRows(mat1).asActionResult
+        else mat0.concatColumns(mat1).asActionResult
     }
 }
