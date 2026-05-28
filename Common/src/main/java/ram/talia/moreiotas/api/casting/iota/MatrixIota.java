@@ -10,7 +10,6 @@ import net.minecraft.nbt.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import org.ejml.simple.SimpleMatrix;
-import org.jblas.DoubleMatrix;
 import org.jetbrains.annotations.NotNull;
 import ram.talia.moreiotas.api.mod.MoreIotasConfig;
 import ram.talia.moreiotas.common.lib.hex.MoreIotasIotaTypes;
