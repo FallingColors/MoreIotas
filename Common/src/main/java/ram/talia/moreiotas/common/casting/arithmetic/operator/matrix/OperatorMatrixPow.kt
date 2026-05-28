@@ -11,6 +11,8 @@ import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
 import at.petrak.hexcasting.common.lib.hex.HexIotaTypes.DOUBLE
 import ram.talia.moreiotas.api.asActionResult
 import ram.talia.moreiotas.api.matrixWrongSize
+import ram.talia.moreiotas.api.times
+import ram.talia.moreiotas.api.asSimpleMatrix
 import ram.talia.moreiotas.common.casting.arithmetic.operator.nextNumOrVecOrSimpleMatrix
 import ram.talia.moreiotas.common.lib.hex.MoreIotasIotaTypes.MATRIX
 import kotlin.math.*
@@ -24,13 +26,13 @@ object OperatorMatrixPow : OperatorBasic(2, either(pair(ofType(MATRIX), ofType(D
         val arg1 = it.nextNumOrVecOrSimpleMatrix(arity)
 
         arg0.a?.let {
-            val mat = arg1.asMatrix
+            val mat = arg1.asSimpleMatrix
             if (mat.numRows != mat.numCols)
                 throw MishapInvalidIota.matrixWrongSize(iotas.last(), 0, mat.numRows, mat.numRows)
             return matrixExponential(ln(it) * mat).asActionResult
         }
 
-        val mat = arg0.asMatrix
+        val mat = arg0.asSimpleMatrix
         if (mat.numRows != mat.numCols)
             throw MishapInvalidIota.matrixWrongSize(iotas.last(), 0, mat.numRows, mat.numRows)
         val power = arg1.a ?: throw MishapInvalidIota.of(iotas.last(), 0, "double")

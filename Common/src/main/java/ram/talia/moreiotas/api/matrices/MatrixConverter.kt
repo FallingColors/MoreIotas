@@ -6,22 +6,17 @@ import org.jblas.DoubleMatrix
 object MatrixConverter {
     @JvmStatic
     fun jblasToEjml(jMatrix: DoubleMatrix): SimpleMatrix {
-        val eMatrix = SimpleMatrix(jMatrix.rows, jMatrix.columns)
-        for (i in 0 until jMatrix.rows) {
-            for (j in 0 until jMatrix.columns) {
-                eMatrix.set(i, j, jMatrix.get(i, j))
-            }
-        }
+        val eMatrix = SimpleMatrix.filled(jMatrix.rows, jMatrix.columns, 1.0) // elementOp only replaces nonzero values
+        eMatrix.elementOp { row, col, value: Double -> jMatrix.get(row, col) }
         return eMatrix
     }
 
     @JvmStatic
     fun ejmlToJblas(eMatrix: SimpleMatrix): DoubleMatrix {
         val jMatrix = DoubleMatrix(eMatrix.numRows, eMatrix.numCols)
-        for (i in 0 until eMatrix.numRows) {
-            for (j in 0 until eMatrix.numCols) {
-                jMatrix.put(i, j, eMatrix.get(i, j))
-            }
+        eMatrix.elementOp { row, col, value: Double ->
+            jMatrix.put(row, col, value)
+            value // the lambda needs to return a "new" value for each element
         }
         return jMatrix
     }
