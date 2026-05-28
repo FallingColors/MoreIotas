@@ -5,8 +5,8 @@ import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
 import ram.talia.moreiotas.api.asActionResult
-import ram.talia.moreiotas.api.asMatrix
-import ram.talia.moreiotas.api.getNumOrVecOrMatrix
+import ram.talia.moreiotas.api.asSimpleMatrix
+import ram.talia.moreiotas.api.getNumOrVecOrSimpleMatrix
 import ram.talia.moreiotas.api.matrixWrongSize
 import ram.talia.moreiotas.api.mod.MoreIotasConfig
 
@@ -14,8 +14,8 @@ class OpConcatMatrix(private val concatVertically: Boolean) : ConstMediaAction {
     override val argc = 2
 
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
-        val mat0 = args.getNumOrVecOrMatrix(0, argc).asMatrix
-        val mat1 = args.getNumOrVecOrMatrix(1, argc).asMatrix
+        val mat0 = args.getNumOrVecOrSimpleMatrix(0, argc).asSimpleMatrix
+        val mat1 = args.getNumOrVecOrSimpleMatrix(1, argc).asSimpleMatrix
 
         if (concatVertically) {
             if (mat0.numCols != mat1.numCols)

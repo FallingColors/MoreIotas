@@ -87,12 +87,12 @@ object MatrixArithmetic : Arithmetic {
 
     private fun make1Double(op: Function<SimpleMatrix, Double>): OperatorUnary = OperatorUnary(IotaMultiPredicate.all(IotaPredicate.ofType(MATRIX)))
     { i: Iota -> DoubleIota(
-        op.apply(Operator.downcast(i, MATRIX).matrix)
+        op.apply(Operator.downcast(i, MATRIX).simpleMatrix)
     ) }
 
     private fun make1(op: UnaryOperator<SimpleMatrix>): OperatorUnary = OperatorUnary(IotaMultiPredicate.all(IotaPredicate.ofType(MATRIX)))
     { i: Iota -> MatrixIota(
-        op.apply(Operator.downcast(i, MATRIX).matrix)
+        op.apply(Operator.downcast(i, MATRIX).simpleMatrix)
     ) }
 
     private fun interface ForEachOp {
@@ -102,8 +102,8 @@ object MatrixArithmetic : Arithmetic {
     // I know DRY exists but putting it into a new function has to be worse
     private fun make2SameSizeFunction(op: ForEachOp): OperatorBinary = OperatorBinary(IotaMultiPredicate.all(IotaPredicate.ofType(MATRIX)))
     { i, j ->
-        val mat0 = Operator.downcast(i, MATRIX).matrix
-        val mat1 = Operator.downcast(j, MATRIX).matrix
+        val mat0 = Operator.downcast(i, MATRIX).simpleMatrix
+        val mat1 = Operator.downcast(j, MATRIX).simpleMatrix
 
         if (mat0.numRows != mat1.numRows || mat0.numCols != mat1.numCols)
             throw MishapInvalidIota.matrixWrongSize(MatrixIota(mat1), 0, mat0.numRows, mat1.numCols)
@@ -118,8 +118,8 @@ object MatrixArithmetic : Arithmetic {
 
     private fun make2SameSize(op: BinaryOperator<SimpleMatrix>): OperatorBinary = OperatorBinary(IotaMultiPredicate.all(IotaPredicate.ofType(MATRIX)))
     { i, j ->
-        val mat0 = Operator.downcast(i, MATRIX).matrix
-        val mat1 = Operator.downcast(j, MATRIX).matrix
+        val mat0 = Operator.downcast(i, MATRIX).simpleMatrix
+        val mat1 = Operator.downcast(j, MATRIX).simpleMatrix
 
         if (mat0.numRows != mat1.numRows || mat0.numCols != mat1.numCols)
             throw MishapInvalidIota.matrixWrongSize(MatrixIota(mat1), 0, mat0.numRows, mat1.numCols)

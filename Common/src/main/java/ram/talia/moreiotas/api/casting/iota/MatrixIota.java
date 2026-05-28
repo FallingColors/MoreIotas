@@ -9,9 +9,11 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import org.jblas.DoubleMatrix;
 import org.ejml.simple.SimpleMatrix;
 import org.jetbrains.annotations.NotNull;
 import ram.talia.moreiotas.api.mod.MoreIotasConfig;
+import ram.talia.moreiotas.api.matrices.MatrixConverter;
 import ram.talia.moreiotas.common.lib.hex.MoreIotasIotaTypes;
 
 public class MatrixIota extends Iota {
@@ -26,29 +28,43 @@ public class MatrixIota extends Iota {
                     matrix.getNumCols());
     }
 
-    public SimpleMatrix getMatrix() {
+    /**
+     * @deprecated Use of {@link DoubleMatrix} (and JBLAS in general) is deprecated, change to {@link SimpleMatrix} instead
+     */
+    @Deprecated(since = "0.1.2")
+    public MatrixIota(@NotNull DoubleMatrix jblasMatrix) throws MishapInvalidIota {
+        this(MatrixConverter.jblasToEjml(jblasMatrix));
+    }
+
+    public SimpleMatrix getSimpleMatrix() {
         return (SimpleMatrix) this.payload;
     }
+
+    /**
+     * @deprecated Use of {@link DoubleMatrix} (and JBLAS in general) is deprecated, change to {@link SimpleMatrix} instead
+     */
+    @Deprecated(since = "0.1.2")
+    public DoubleMatrix getMatrix() { return MatrixConverter.ejmlToJblas((SimpleMatrix) this.payload); }
 
     @Override
     protected boolean toleratesOther(Iota that) {
         if (!(that instanceof MatrixIota matrix)) {
             return false;
         }
-        return matrix.getMatrix().isIdentical(this.getMatrix(), 0.001);
+        return matrix.getSimpleMatrix().isIdentical(this.getSimpleMatrix(), 0.001);
     }
 
     @Override
     public boolean isTruthy() {
         // is true if it has entries, and at least one has abs(entry)>0
-        return this.getMatrix().elementMaxAbs() > DoubleIota.TOLERANCE;
+        return this.getSimpleMatrix().elementMaxAbs() > DoubleIota.TOLERANCE;
     }
 
     @Override
     public @NotNull Tag serialize() {
         var tag = new CompoundTag();
 
-        var mat = this.getMatrix();
+        var mat = this.getSimpleMatrix();
 
         tag.putInt(TAG_ROWS, mat.getNumRows());
         tag.putInt(TAG_COLS, mat.getNumCols());

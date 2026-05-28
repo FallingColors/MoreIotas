@@ -4,14 +4,14 @@ import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.getPositiveIntUnderInclusive
 import at.petrak.hexcasting.api.casting.iota.Iota
-import ram.talia.moreiotas.api.asMatrix
 import ram.talia.moreiotas.api.casting.iota.MatrixIota
-import ram.talia.moreiotas.api.getNumOrVecOrMatrix
+import ram.talia.moreiotas.api.asSimpleMatrix
+import ram.talia.moreiotas.api.getNumOrVecOrSimpleMatrix
 
 class OpSplitMatrix(private val splitVertically: Boolean) : ConstMediaAction {
     override val argc = 2
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
-        val mat = args.getNumOrVecOrMatrix(0, argc).asMatrix
+        val mat = args.getNumOrVecOrSimpleMatrix(0, argc).asSimpleMatrix
         val split = args.getPositiveIntUnderInclusive(1, if (splitVertically) mat.numRows else mat.numCols, argc)
 
 

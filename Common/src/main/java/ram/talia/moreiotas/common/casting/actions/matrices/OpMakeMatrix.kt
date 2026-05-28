@@ -9,7 +9,7 @@ import at.petrak.hexcasting.api.casting.iota.Vec3Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
 import org.ejml.simple.SimpleMatrix
 import ram.talia.moreiotas.api.asActionResult
-import ram.talia.moreiotas.api.asMatrix
+import ram.talia.moreiotas.api.asSimpleMatrix
 import ram.talia.moreiotas.api.mod.MoreIotasConfig
 
 object OpMakeMatrix : ConstMediaAction {
@@ -18,7 +18,7 @@ object OpMakeMatrix : ConstMediaAction {
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
         when (val arg = args[0]) {
             is DoubleIota -> return SimpleMatrix(1,1,false,arg.double).asActionResult
-            is Vec3Iota -> return arg.vec3.asMatrix.asActionResult
+            is Vec3Iota -> return arg.vec3.asSimpleMatrix.asActionResult
             is ListIota -> {
                 val list = arg.list
                 if (!list.nonEmpty)

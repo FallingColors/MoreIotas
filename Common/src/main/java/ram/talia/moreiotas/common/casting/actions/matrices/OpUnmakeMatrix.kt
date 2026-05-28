@@ -9,13 +9,13 @@ import at.petrak.hexcasting.api.casting.iota.ListIota
 import at.petrak.hexcasting.api.casting.iota.Vec3Iota
 import net.minecraft.world.phys.Vec3
 import ram.talia.moreiotas.api.asVec3
-import ram.talia.moreiotas.api.getMatrix
+import ram.talia.moreiotas.api.getSimpleMatrix
 
 class OpUnmakeMatrix(val skipBackConversion: Boolean) : ConstMediaAction {
     override val argc = 1
 
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
-        val mat = args.getMatrix(0, argc)
+        val mat = args.getSimpleMatrix(0, argc)
 
         val list = mutableListOf<Iota>()
 
