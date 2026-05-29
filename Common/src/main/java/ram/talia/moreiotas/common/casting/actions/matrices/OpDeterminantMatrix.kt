@@ -16,9 +16,6 @@ object OpDeterminantMatrix : ConstMediaAction {
 
         if (mat.numCols != mat.numRows)
             throw MishapInvalidIota.ofType(args[0], 0, "matrix.square")
-        // I don't believe the ejml determinant requires that the matrix be below size four.
-        //if (mat.numCols > 4)
-            //throw MishapInvalidIota.of(args[0], 0, "matrix.max_size", 4, 4, mat.numCols, mat.numRows)
 
         return mat.determinant().asActionResult;
     }

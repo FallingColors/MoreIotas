@@ -14,9 +14,7 @@ object OpInverseMatrix : ConstMediaAction {
 
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
         val mat = args.getNumOrVecOrSimpleMatrix(0, argc).asSimpleMatrix
-        if (mat.numRows != mat.numCols)
-            throw MishapInvalidIota.matrixWrongSize(args[0], 0, mat.numRows, mat.numCols)
-        // pseudo-inverse, will see how it works.
+        // pseudo-inverse works even on rectangular matrices
         return mat.pseudoInverse().asActionResult;
     }
 }
