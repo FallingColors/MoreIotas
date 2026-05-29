@@ -6,8 +6,8 @@ import org.jblas.DoubleMatrix
 object MatrixConverter {
     @JvmStatic
     fun jblasToEjml(jMatrix: DoubleMatrix): SimpleMatrix {
-        val eMatrix = SimpleMatrix.filled(jMatrix.rows, jMatrix.columns, 1.0) // elementOp only replaces nonzero values
-        eMatrix.elementOp { row, col, value: Double -> jMatrix.get(row, col) }
+        var eMatrix = SimpleMatrix.filled(jMatrix.rows, jMatrix.columns, 1.0)
+        eMatrix = eMatrix.elementOp { row, col, value: Double -> jMatrix.get(row, col) }
         return eMatrix
     }
 

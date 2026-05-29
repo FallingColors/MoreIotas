@@ -66,7 +66,12 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:$fabricVersion"
     implementation group: "org.jblas", name: "jblas", version: "1.2.5"
     include group: "org.jblas", name: "jblas", version: "1.2.5"
-    implementation "org.ejml:ejml-simple:${ejml_version}"
+    implementation group: "org.ejml", name: "ejml-simple", version: "${ejml_version}"
+    include group: "org.ejml", name: "ejml-simple", version: "${ejml_version}"
+    implementation group: "org.ejml", name: "ejml-core", version: "${ejml_version}"
+    include group: "org.ejml", name: "ejml-core", version: "${ejml_version}"
+    implementation group: "org.ejml", name: "ejml-ddense", version: "${ejml_version}"
+    include group: "org.ejml", name: "ejml-ddense", version: "${ejml_version}"
 
     // Reqs
     compileOnly "com.demonwav.mcdev:annotations:1.0"
