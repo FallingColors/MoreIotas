@@ -64,12 +64,12 @@ object MatrixArithmetic : Arithmetic {
         ADD -> OperatorMatrixAdd(false)
         SUB -> OperatorMatrixAdd(true)
         MUL -> OperatorMatrixMul
-        ALTMUL -> make2SameSize { i, j -> i.mult(j) }
+        ALTMUL -> make2SameSize { i, j -> i.elementMult(j) }
         DIV -> OperatorMatrixDiv
-        ALTDIV -> make2SameSize { i, j -> i.mult(j.invert()) }
+        ALTDIV -> make2SameSize { i, j -> i.elementDiv(j) }
         ABS -> make1Double { it.normF() }
         POW -> OperatorMatrixPow
-        ALTPOW -> make2SameSizeFunction { i, i1, d, d1 -> Math.pow(d,d1) }
+        ALTPOW -> make2SameSize { i, j -> i.elementPower(j) }
         FLOOR -> make1 {mat -> mat.elementOp { i, i1, d : Double -> floor(d) }}
         CEIL -> make1 {mat -> mat.elementOp { i, i1, d : Double -> ceil(d) }}
 //        SIN -> make1(MatrixFunctions::floor) // TODO
@@ -94,27 +94,6 @@ object MatrixArithmetic : Arithmetic {
     { i: Iota -> MatrixIota(
         op.apply(Operator.downcast(i, MATRIX).simpleMatrix)
     ) }
-
-    private fun interface ForEachOp {
-        fun op(row: Int, col: Int, value1: Double, value2: Double): Double
-    }
-
-    // I know DRY exists but putting it into a new function has to be worse
-    private fun make2SameSizeFunction(op: ForEachOp): OperatorBinary = OperatorBinary(IotaMultiPredicate.all(IotaPredicate.ofType(MATRIX)))
-    { i, j ->
-        val mat0 = Operator.downcast(i, MATRIX).simpleMatrix
-        val mat1 = Operator.downcast(j, MATRIX).simpleMatrix
-
-        if (mat0.numRows != mat1.numRows || mat0.numCols != mat1.numCols)
-            throw MishapInvalidIota.matrixWrongSize(MatrixIota(mat1), 0, mat0.numRows, mat1.numCols)
-
-        for (i in 1 .. mat0.numRows) {
-            for (j in 1..mat0.numCols) {
-                mat0.set(i,j, op.op(i, j, mat0.get(i,j), mat1.get(i,j)))
-            }
-        }
-        MatrixIota(mat0)
-    }
 
     private fun make2SameSize(op: BinaryOperator<SimpleMatrix>): OperatorBinary = OperatorBinary(IotaMultiPredicate.all(IotaPredicate.ofType(MATRIX)))
     { i, j ->

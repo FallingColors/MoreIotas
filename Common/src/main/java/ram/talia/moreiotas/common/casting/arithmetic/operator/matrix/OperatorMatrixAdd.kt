@@ -19,7 +19,7 @@ class OperatorMatrixAdd(private val subtract: Boolean)
         val mat0 = it.nextNumOrVecOrSimpleMatrix(arity).asSimpleMatrix
         val mat1 = it.nextNumOrVecOrSimpleMatrix(arity).asSimpleMatrix
 
-        if (mat0.numCols != mat1.numRows || mat0.numCols != mat1.numCols)
+        if (mat0.numRows != mat1.numRows || mat0.numCols != mat1.numCols)
             throw MishapInvalidIota.matrixWrongSize(iotas.last(), 0, mat0.numRows, mat0.numCols)
 
         return if (subtract) { mat0 - mat1 } else { mat0 + mat1 }.asActionResult

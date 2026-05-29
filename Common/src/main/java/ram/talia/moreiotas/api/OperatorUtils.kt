@@ -125,7 +125,7 @@ fun List<Iota>.getNumOrVecOrSimpleMatrix(idx: Int, argc: Int = 0): Anyone<Double
         is DoubleIota -> Anyone.first(datum.double)
         is Vec3Iota -> Anyone.second(datum.vec3)
         is MatrixIota -> Anyone.third(datum.simpleMatrix)
-        else -> throw MishapInvalidIota.of(
+        else -> throw MishapInvalidIota.ofType(
                 datum,
                 if (argc == 0) idx else argc - (idx + 1),
                 "numvecmat"
