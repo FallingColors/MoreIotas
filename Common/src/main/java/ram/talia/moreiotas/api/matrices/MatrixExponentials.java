@@ -45,7 +45,7 @@ public class MatrixExponentials {
 
         // now square j times
         for (int k = 0; k < j; k++) {
-            F.mult(F);
+            F = F.mult(F);
         }
 
         return F;
