@@ -16,13 +16,7 @@ import java.util.ServiceLoader;
 import java.util.stream.Collectors;
 
 public interface IXplatAbstractions {
-//    Platform platform();
-//
-//    boolean isModPresent(String id);
-//
     boolean isPhysicalClient();
-//
-//    void initPlatformSpecific();
 
     void sendPacketToPlayer(ServerPlayer target, IMessage packet);
 
@@ -31,37 +25,6 @@ public interface IXplatAbstractions {
     // https://github.com/VazkiiMods/Botania/blob/13b7bcd9cbb6b1a418b0afe455662d29b46f1a7f/Xplat/src/main/java/vazkii/botania/xplat/IXplatAbstractions.java#L157
     Packet<?> toVanillaClientboundPacket(IMessage message);
 
-//    double getReachDistance(Player player);
-
-    // Things that used to be caps
-
-    // Blocks
-
-//    <T extends BlockEntity> BlockEntityType<T> createBlockEntityType(BiFunction<BlockPos, BlockState, T> func,
-//        Block... blocks);
-//
-//    boolean tryPlaceFluid(Level level, InteractionHand hand, BlockPos pos, ItemStack stack, Fluid fluid);
-
-
-    // misc
-
-
-//    boolean isCorrectTierForDrops(Tier tier, BlockState bs);
-//
-//    ResourceLocation getID(Block block);
-//
-//    ResourceLocation getID(Item item);
-//
-//    ResourceLocation getID(VillagerProfession profession);
-//
-//    Ingredient getUnsealedIngredient(ItemStack stack);
-//
-//    IXplatTags tags();
-//
-//    LootItemCondition.Builder isShearsCondition();
-//
-//    String getModName(String namespace);
-//
     boolean isBreakingAllowed(Level level, BlockPos pos, BlockState state, Player player);
 
     @Nullable String lastMessage(@Nullable Player player);
@@ -69,14 +32,6 @@ public interface IXplatAbstractions {
     void setChatPrefix(Player player, @Nullable String prefix);
 
     @Nullable String getChatPrefix(Player player);
-//
-//    boolean isPlacingAllowed(Level world, BlockPos pos, ItemStack blockStack, Player player);
-
-    // interop
-
-//    PehkuiInterop.ApiAbstraction getPehkuiApi();
-
-    ///
 
     IXplatAbstractions INSTANCE = find();
 
@@ -92,5 +47,4 @@ public interface IXplatAbstractions {
             return provider.get();
         }
     }
-
 }

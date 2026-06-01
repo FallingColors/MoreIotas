@@ -2,6 +2,7 @@ package ram.talia.moreiotas.api.matrices
 
 import org.jblas.ranges.Range
 
+@Deprecated("Use of JBLAS is deprecated")
 class HoleyIntervalRange(private val start: Int, private val end: Int, private val hole: Int) : Range {
     private var value: Int = start
 

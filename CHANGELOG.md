@@ -19,6 +19,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Fixed item stack iotas using an untranslated lang key when referenced in a mishap message.
 - Fixed Patternmaster's Purification throwing an exception when used on any non-static pattern, by beholderface in [#59](https://github.com/FallingColors/MoreIotas/pull/59).
+- Fixed a crash when trying to invert a non-invertible matrix, by c-Caelum in [#66](https://github.com/FallingColors/MoreIotas/pull/66).
+
+### Internal
+
+- Deprecated all uses of the JBLAS matrix library and replaced them with EJML equivalents, by c-Caelum in [#66](https://github.com/FallingColors/MoreIotas/pull/66).
 
 ## `0.1.1` - 2025-09-23
 

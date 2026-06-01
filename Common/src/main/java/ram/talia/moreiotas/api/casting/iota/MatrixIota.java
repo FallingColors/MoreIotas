@@ -10,51 +10,70 @@ import net.minecraft.nbt.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import org.jblas.DoubleMatrix;
+import org.ejml.simple.SimpleMatrix;
 import org.jetbrains.annotations.NotNull;
 import ram.talia.moreiotas.api.mod.MoreIotasConfig;
+import ram.talia.moreiotas.api.matrices.MatrixConverter;
 import ram.talia.moreiotas.common.lib.hex.MoreIotasIotaTypes;
 
 public class MatrixIota extends Iota {
-    public MatrixIota(@NotNull DoubleMatrix matrix) throws MishapInvalidIota {
+    public MatrixIota(@NotNull SimpleMatrix matrix) throws MishapInvalidIota {
         super(MoreIotasIotaTypes.MATRIX, matrix);
-        if (matrix.rows > MoreIotasConfig.getServer().getMaxMatrixSize() || matrix.columns > MoreIotasConfig.getServer().getMaxMatrixSize())
+        if (matrix.getNumRows() > MoreIotasConfig.getServer().getMaxMatrixSize() || matrix.getNumCols() > MoreIotasConfig.getServer().getMaxMatrixSize())
             throw MishapInvalidIota.of(this,
                     0,
                     "matrix.max_size",
                     MoreIotasConfig.getServer().getMaxMatrixSize(),
-                    matrix.rows,
-                    matrix.columns);
+                    matrix.getNumRows(),
+                    matrix.getNumCols());
     }
 
-    public DoubleMatrix getMatrix() {
-        return (DoubleMatrix) this.payload;
+    /**
+     * @deprecated Use of {@link DoubleMatrix} (and JBLAS in general) is deprecated, change to {@link SimpleMatrix} instead
+     */
+    @Deprecated(since = "0.1.2")
+    public MatrixIota(@NotNull DoubleMatrix jblasMatrix) throws MishapInvalidIota {
+        this(MatrixConverter.jblasToEjml(jblasMatrix));
     }
+
+    public SimpleMatrix getSimpleMatrix() {
+        return (SimpleMatrix) this.payload;
+    }
+
+    /**
+     * @deprecated Use of {@link DoubleMatrix} (and JBLAS in general) is deprecated, change to {@link SimpleMatrix} instead
+     */
+    @Deprecated(since = "0.1.2")
+    public DoubleMatrix getMatrix() { return MatrixConverter.ejmlToJblas((SimpleMatrix) this.payload); }
 
     @Override
     protected boolean toleratesOther(Iota that) {
-        return false;
+        if (!(that instanceof MatrixIota matrix)) {
+            return false;
+        }
+        return matrix.getSimpleMatrix().isIdentical(this.getSimpleMatrix(), 0.001);
     }
 
     @Override
     public boolean isTruthy() {
         // is true if it has entries, and at least one has abs(entry)>0
-        return !this.getMatrix().isEmpty() && this.getMatrix().norm1() > DoubleIota.TOLERANCE;
+        return this.getSimpleMatrix().elementMaxAbs() > DoubleIota.TOLERANCE;
     }
 
     @Override
     public @NotNull Tag serialize() {
         var tag = new CompoundTag();
 
-        var mat = this.getMatrix();
+        var mat = this.getSimpleMatrix();
 
-        tag.putInt(TAG_ROWS, mat.rows);
-        tag.putInt(TAG_COLS, mat.columns);
+        tag.putInt(TAG_ROWS, mat.getNumRows());
+        tag.putInt(TAG_COLS, mat.getNumCols());
 
         var list = new ListTag();
 
-        for (int i = 0; i < mat.rows; i++) {
+        for (int i = 0; i < mat.getNumRows(); i++) {
             var curList = new ListTag();
-            for (int j = 0; j < mat.columns; j++) {
+            for (int j = 0; j < mat.getNumCols(); j++) {
                 curList.add(DoubleTag.valueOf(mat.get(i, j)));
             }
             list.add(curList);
@@ -81,7 +100,7 @@ public class MatrixIota extends Iota {
                 return Component.translatable("hexcasting.spelldata.unknown");
             }
 
-            DoubleMatrix mat;
+            SimpleMatrix mat;
             try {
                 mat = deserialise(ctag);
             } catch (IllegalArgumentException e) {
@@ -90,18 +109,18 @@ public class MatrixIota extends Iota {
 
             var out = Component.empty();
 
-            out.append(String.format("(%d, %d)", mat.rows, mat.columns));
-            if (!mat.isEmpty())
+            out.append(String.format("(%d, %d)", mat.getNumRows(), mat.getNumCols()));
+            if (!(mat.getNumCols() == 0 && mat.getNumRows() == 0))
                 out.append(" | ");
 
-            for (int r = 0; r < mat.rows; r++) {
-                for (int c = 0; c < mat.columns; c++) {
+            for (int r = 0; r < mat.getNumRows(); r++) {
+                for (int c = 0; c < mat.getNumCols(); c++) {
                     out.append(Component.literal(String.format("%.2f", mat.get(r,c))).withStyle(ChatFormatting.GREEN));
-                    if (c < mat.columns - 1) {
+                    if (c < mat.getNumCols() - 1) {
                         out.append(", ");
                     }
                 }
-                if (r < mat.rows - 1) {
+                if (r < mat.getNumRows() - 1) {
                     out.append("; ");
                 }
             }
@@ -109,7 +128,7 @@ public class MatrixIota extends Iota {
             return Component.translatable("hexcasting.tooltip.list_contents", out).withStyle(ChatFormatting.AQUA);
         }
 
-        private DoubleMatrix deserialise(CompoundTag ctag) throws IllegalArgumentException {
+        private SimpleMatrix deserialise(CompoundTag ctag) throws IllegalArgumentException {
 
             if (!ctag.contains(TAG_ROWS) || !ctag.contains(TAG_COLS) || !ctag.contains(TAG_MAT))
                 throw new IllegalArgumentException("expected tags \"rows\": int, \"cols\": int, and \"mat\": list(list(double))");
@@ -117,14 +136,14 @@ public class MatrixIota extends Iota {
             int rows = ctag.getInt(TAG_ROWS);
             int cols = ctag.getInt(TAG_COLS);
 
-            var mat = new DoubleMatrix(rows, cols);
+            var mat = new SimpleMatrix(rows, cols);
 
             var list = ctag.getList(TAG_MAT, Tag.TAG_LIST);
 
             for (int i = 0; i < rows; i++) {
                 var curList = list.getList(i);
                 for (int j = 0; j < cols; j++) {
-                    mat.put(i, j, curList.getDouble(j));
+                    mat.set(i, j, curList.getDouble(j));
                 }
             }
 

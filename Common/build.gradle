@@ -35,6 +35,9 @@ dependencies {
     compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
     implementation group: "org.jblas", name: "jblas", version: "1.2.5"
+    implementation group: "org.ejml", name: "ejml-simple", version: "${ejml_version}"
+    implementation group: "org.ejml", name: "ejml-core", version: "${ejml_version}"
+    implementation group: "org.ejml", name: "ejml-ddense", version: "${ejml_version}"
 
     compileOnly "at.petra-k.paucal:paucal-common-$minecraftVersion:$paucalVersion"
     compileOnly "at.petra-k.hexcasting:hexcasting-common-$minecraftVersion:$hexcastingVersion"
