@@ -6,7 +6,7 @@ import org.jblas.DoubleMatrix
 object MatrixConverter {
     @JvmStatic
     fun jblasToEjml(jMatrix: DoubleMatrix): SimpleMatrix {
-        var eMatrix = SimpleMatrix.filled(jMatrix.rows, jMatrix.columns, 1.0)
+        var eMatrix = SimpleMatrix(jMatrix.rows, jMatrix.columns)
         eMatrix = eMatrix.elementOp { row, col, value: Double -> jMatrix.get(row, col) }
         return eMatrix
     }

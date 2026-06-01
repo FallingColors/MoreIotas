@@ -3,6 +3,13 @@ package ram.talia.moreiotas.api.matrices;
 import org.ejml.simple.SimpleMatrix;
 
 public class MatrixExponentials {
+    /**
+     * This is directly based on the matrix exponential method from JBLAS, since EJML
+     * does not provide any built-in way to calculate the exponential of a matrix.
+     * @see <a href="https://github.com/jblas-project/jblas/blob/d52d16aecc9608ca00a61bb651a930e7696b5afe/src/main/java/org/jblas/MatrixFunctions.java#L406">expm()</a> in the JBLAS repo
+     * @param A a square matrix
+     * @return the matrix exponential of A
+     */
     public static SimpleMatrix matrixExponential(SimpleMatrix A) {
         // constants for pade approximation
         final double c0 = 1.0;

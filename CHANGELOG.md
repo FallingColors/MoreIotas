@@ -23,7 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Internal
 
-- Deprecated all uses of the JBLAS linear algebra library and replaced them with EJML equivalents, by c-Caelum in [#66](https://github.com/FallingColors/MoreIotas/pull/66).
+- Deprecated all uses of the JBLAS matrix library and replaced them with EJML equivalents, by c-Caelum in [#66](https://github.com/FallingColors/MoreIotas/pull/66).
 
 ## `0.1.1` - 2025-09-23
 

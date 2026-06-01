@@ -64,14 +64,14 @@ object MatrixArithmetic : Arithmetic {
         ADD -> OperatorMatrixAdd(false)
         SUB -> OperatorMatrixAdd(true)
         MUL -> OperatorMatrixMul
-        ALTMUL -> make2SameSize { i, j -> i.elementMult(j) }
+        ALTMUL -> make2SameSize { mat1, mat2 -> mat1.elementMult(mat2) }
         DIV -> OperatorMatrixDiv
-        ALTDIV -> make2SameSize { i, j -> i.elementDiv(j) }
+        ALTDIV -> make2SameSize { mat1, mat2 -> mat1.elementDiv(mat2) }
         ABS -> make1Double { it.normF() }
         POW -> OperatorMatrixPow
-        ALTPOW -> make2SameSize { i, j -> i.elementPower(j) }
-        FLOOR -> make1 {mat -> mat.elementOp { i, i1, d : Double -> floor(d) }}
-        CEIL -> make1 {mat -> mat.elementOp { i, i1, d : Double -> ceil(d) }}
+        ALTPOW -> make2SameSize { mat1, mat2 -> mat1.elementPower(mat2) }
+        FLOOR -> make1 {mat -> mat.elementOp { i, j, d: Double -> floor(d) }}
+        CEIL -> make1 {mat -> mat.elementOp { i, j, d: Double -> ceil(d) }}
 //        SIN -> make1(MatrixFunctions::floor) // TODO
 //        COS -> make1(MatrixFunctions::floor) // TODO
 //        TAN -> make1(MatrixFunctions::floor) // TODO

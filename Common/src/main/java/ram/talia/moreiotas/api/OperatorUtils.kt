@@ -29,12 +29,12 @@ operator fun Position.component1(): Double = this.x()
 operator fun Position.component2(): Double = this.y()
 operator fun Position.component3(): Double = this.z()
 
-operator fun Double.times(mat: SimpleMatrix): SimpleMatrix = mat.elementOp { i, i1, d : Double ->  d*this};
-operator fun Vec3.times(mat: SimpleMatrix): SimpleMatrix = (this.asSimpleMatrix).mult(mat);
-operator fun SimpleMatrix.times(vec: Vec3): SimpleMatrix = this.mult(vec.asSimpleMatrix);
-operator fun SimpleMatrix.times(mat: SimpleMatrix): SimpleMatrix = this.mult(mat);
-operator fun SimpleMatrix.times(double : Double): SimpleMatrix = double*this;
-operator fun SimpleMatrix.unaryMinus(): SimpleMatrix = -1.0 * this;
+operator fun Double.times(mat: SimpleMatrix): SimpleMatrix = mat.elementOp { i, i1, d : Double ->  d*this}
+operator fun Vec3.times(mat: SimpleMatrix): SimpleMatrix = (this.asSimpleMatrix).mult(mat)
+operator fun SimpleMatrix.times(double : Double): SimpleMatrix = double*this
+operator fun SimpleMatrix.times(vec: Vec3): SimpleMatrix = this.mult(vec.asSimpleMatrix)
+operator fun SimpleMatrix.times(mat: SimpleMatrix): SimpleMatrix = this.mult(mat)
+operator fun SimpleMatrix.unaryMinus(): SimpleMatrix = -1.0 * this
 
 @Deprecated("Use of DoubleMatrix (and JBLAS in general) is deprecated, change to SimpleMatrix instead")
 operator fun Double.times(mat: DoubleMatrix): DoubleMatrix = mat.mul(this)
@@ -140,7 +140,7 @@ fun List<Iota>.getNumOrVecOrMatrix(idx: Int, argc: Int = 0): Anyone<Double, Vec3
         is DoubleIota -> Anyone.first(datum.double)
         is Vec3Iota -> Anyone.second(datum.vec3)
         is MatrixIota -> Anyone.third(datum.matrix)
-        else -> throw MishapInvalidIota.of(
+        else -> throw MishapInvalidIota.ofType(
             datum,
             if (argc == 0) idx else argc - (idx + 1),
             "numvecmat"
