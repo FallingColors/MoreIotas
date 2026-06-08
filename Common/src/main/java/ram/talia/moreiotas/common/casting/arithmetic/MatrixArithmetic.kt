@@ -10,12 +10,17 @@ import at.petrak.hexcasting.api.casting.arithmetic.predicates.IotaMultiPredicate
 import at.petrak.hexcasting.api.casting.arithmetic.predicates.IotaPredicate
 import at.petrak.hexcasting.api.casting.iota.DoubleIota
 import at.petrak.hexcasting.api.casting.iota.Iota
+import at.petrak.hexcasting.api.casting.iota.Vec3Iota
 import at.petrak.hexcasting.api.casting.math.HexDir
 import at.petrak.hexcasting.api.casting.math.HexPattern
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
+import at.petrak.hexcasting.common.lib.hex.HexIotaTypes.DOUBLE
+import at.petrak.hexcasting.common.lib.hex.HexIotaTypes.VEC3
 import org.ejml.simple.SimpleMatrix
+import ram.talia.moreiotas.api.asSimpleMatrix
 import ram.talia.moreiotas.api.casting.iota.MatrixIota
 import ram.talia.moreiotas.api.matrixWrongSize
+import ram.talia.moreiotas.api.util.Anyone
 import ram.talia.moreiotas.common.casting.arithmetic.operator.matrix.OperatorMatrixAdd
 import ram.talia.moreiotas.common.casting.arithmetic.operator.matrix.OperatorMatrixDiv
 import ram.talia.moreiotas.common.casting.arithmetic.operator.matrix.OperatorMatrixMul
@@ -95,10 +100,25 @@ object MatrixArithmetic : Arithmetic {
         op.apply(Operator.downcast(i, MATRIX).simpleMatrix)
     ) }
 
-    private fun make2SameSize(op: BinaryOperator<SimpleMatrix>): OperatorBinary = OperatorBinary(IotaMultiPredicate.all(IotaPredicate.ofType(MATRIX)))
+    val numVecMatPred = IotaPredicate.any(IotaPredicate.ofType(DOUBLE), IotaPredicate.ofType(VEC3), IotaPredicate.ofType(MATRIX))
+
+    fun parseNumVecMat(iota: Iota, argc: Int, idx: Int): SimpleMatrix {
+        return when (iota) {
+            is DoubleIota -> SimpleMatrix(1, 1, false, iota.double)
+            is Vec3Iota -> iota.vec3.asSimpleMatrix
+            is MatrixIota -> iota.simpleMatrix
+            else -> throw MishapInvalidIota.of(
+                iota,
+                argc - (idx + 1),
+                "numvecmat"
+            )
+        }
+    }
+
+    private fun make2SameSize(op: BinaryOperator<SimpleMatrix>): OperatorBinary = OperatorBinary(IotaMultiPredicate.all(numVecMatPred))
     { i, j ->
-        val mat0 = Operator.downcast(i, MATRIX).simpleMatrix
-        val mat1 = Operator.downcast(j, MATRIX).simpleMatrix
+        val mat0 = parseNumVecMat(i, 2, 0)
+        val mat1 = parseNumVecMat(j, 2, 1)
 
         if (mat0.numRows != mat1.numRows || mat0.numCols != mat1.numCols)
             throw MishapInvalidIota.matrixWrongSize(MatrixIota(mat1), 0, mat0.numRows, mat1.numCols)
