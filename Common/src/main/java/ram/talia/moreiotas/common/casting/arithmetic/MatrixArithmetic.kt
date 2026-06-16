@@ -117,8 +117,8 @@ object MatrixArithmetic : Arithmetic {
 
     private fun make2SameSize(op: BinaryOperator<SimpleMatrix>): OperatorBinary = OperatorBinary(IotaMultiPredicate.all(numVecMatPred))
     { i, j ->
-        val mat0 = parseNumVecMat(i, 2, 0)
-        val mat1 = parseNumVecMat(j, 2, 1)
+        val mat0 = parseNumVecMat(i, argc = 2, idx = 0)
+        val mat1 = parseNumVecMat(j, argc = 2, idx = 1)
 
         if (mat0.numRows != mat1.numRows || mat0.numCols != mat1.numCols)
             throw MishapInvalidIota.matrixWrongSize(MatrixIota(mat1), 0, mat0.numRows, mat1.numCols)
