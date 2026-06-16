@@ -11,7 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Published MoreIotas to https://maven.hexxy.media.
 - Converted Treasurer's Purification into an operator - the item argument can now take either a stack iota or a type iota.
 - Made Cave Air and Void Air block types falsy to match normal Air.
-- Updated zh_cn translations, by ChuijkYahus in [#55](https://github.com/FallingColors/MoreIotas/pull/55), [#58](https://github.com/FallingColors/MoreIotas/pull/58), and [#62](https://github.com/FallingColors/MoreIotas/pull/62).
+- Updated zh_cn translations ([#55](https://github.com/FallingColors/MoreIotas/pull/55), [#58](https://github.com/FallingColors/MoreIotas/pull/58), [#62](https://github.com/FallingColors/MoreIotas/pull/62)) @ChuijkYahus
 - Moved certain lang keys for type iotas from Hexal into MoreIotas, since MoreIotas is what actually implements type iotas.
 - Development: Removed `moreiotas.serialization-hooks` dependency on Fabric.
 
@@ -19,19 +19,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Fixed item stack iotas using an untranslated lang key when referenced in a mishap message.
 - Fixed the element-wise matrix operations not coercing numbers or vectors to matrices like the other matrix patterns do.
-- Fixed Patternmaster's Purification throwing an exception when used on any non-static pattern, by beholderface in [#59](https://github.com/FallingColors/MoreIotas/pull/59).
-- Fixed Listener's Reflection ignoring all messages from anyone with a Sifter's Gambit prefix set, by pythonmcpi in [#64](https://github.com/FallingColors/MoreIotas/pull/64).
-- Fixed a crash when trying to invert a non-invertible matrix, by c-Caelum in [#66](https://github.com/FallingColors/MoreIotas/pull/66).
+- Fixed Patternmaster's Purification throwing an exception when used on any non-static pattern ([#59](https://github.com/FallingColors/MoreIotas/pull/59)) @beholderface
+- Fixed Listener's Reflection ignoring all messages from anyone with a Sifter's Gambit prefix set ([#64](https://github.com/FallingColors/MoreIotas/pull/64)) @pythonmcpi
+- Fixed a crash when trying to invert a non-invertible matrix ([#66](https://github.com/FallingColors/MoreIotas/pull/66)) @c-Caelum
 
 ### Internal
 
-- Deprecated all uses of the JBLAS matrix library and replaced them with EJML equivalents, by c-Caelum in [#66](https://github.com/FallingColors/MoreIotas/pull/66).
+- Deprecated all uses of the JBLAS matrix library and replaced them with EJML equivalents ([#66](https://github.com/FallingColors/MoreIotas/pull/66)) @c-Caelum
 
 ## `0.1.1` - 2025-09-23
 
 ### Changed
 
-- Updated zh_cn translations, by ChuijkYahus in [#43](https://github.com/FallingColors/MoreIotas/pull/43).
+- Updated zh_cn translations ([#43](https://github.com/FallingColors/MoreIotas/pull/43)) @ChuijkYahus
 
 ### Fixed
 
@@ -50,7 +50,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Changed
 
 - Updated to Minecraft 1.20.1! 
-- Updated zh_cn translations, by ChuijkYahus in [#7](https://github.com/FallingColors/MoreIotas/pull/7) and [#14](https://github.com/FallingColors/MoreIotas/pull/14).
+- Updated zh_cn translations ([#7](https://github.com/FallingColors/MoreIotas/pull/7), [#14](https://github.com/FallingColors/MoreIotas/pull/14)) @ChuijkYahus
 - Moved MoreIotas into the Falling Colors organization.
 
 ### Fixed
