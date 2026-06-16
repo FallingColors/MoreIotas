@@ -179,6 +179,15 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraftVersion}-${forgeVersion}"
     compileOnly project(":Common")
     shade 'org.jblas:jblas:1.2.5'
+    shade "org.ejml:ejml-simple:${ejml_version}"
+    shade "org.ejml:ejml-core:${ejml_version}"
+    shade "org.ejml:ejml-ddense:${ejml_version}"
+
+    // non-mod dependencies need this to make them available in the dev environment (e.g. when running datagen)
+    minecraftLibrary 'org.jblas:jblas:1.2.5'
+    minecraftLibrary "org.ejml:ejml-simple:${ejml_version}"
+    minecraftLibrary "org.ejml:ejml-core:${ejml_version}"
+    minecraftLibrary "org.ejml:ejml-ddense:${ejml_version}"
 
     implementation "thedarkcolour:kotlinforforge:$kotlinForForgeVersion"
 
@@ -310,6 +319,9 @@ shadowJar {
     archiveClassifier = ''
     configurations = [project.configurations.shade]
     relocate "org.jblas.jblas", "${project.group}.relocated.jblas"
+    relocate "org.ejml.ejml-simple", "${project.group}.relocated.ejml-simple"
+    relocate "org.ejml.ejml-core", "${project.group}.relocated.ejml-core"
+    relocate "org.ejml.ejml-ddense", "${project.group}.relocated.ejml-ddense"
     dependsOn "reobfJar"
     finalizedBy 'reobfShadowJar'
 }

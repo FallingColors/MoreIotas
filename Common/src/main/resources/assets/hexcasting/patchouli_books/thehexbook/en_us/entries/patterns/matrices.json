@@ -9,7 +9,8 @@
     {
       "type": "patchouli:text",
       "text": "moreiotas.page.matrices.0"
-    },    {
+    },
+    {
       "type": "patchouli:link",
       "text": "moreiotas.page.matrices.1",
       "link_text": "moreiotas.page.matrices.1.link_text",
@@ -142,7 +143,13 @@
       "anchor": "moreiotas:matrix/inverse",
       "input": "mat",
       "output": "mat",
-      "text": "moreiotas.page.matrices.matrix/inverse"
+      "text": "moreiotas.page.matrices.matrix/inverse.0"
+    },
+    {
+      "type": "patchouli:link",
+      "text": "moreiotas.page.matrices.matrix/inverse.1",
+      "link_text": "moreiotas.page.matrices.matrix/inverse.1.link_text",
+      "url": "https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse"
     },
     {
       "type": "hexcasting:pattern",
