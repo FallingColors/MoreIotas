@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Fixed
 
 - Fixed item stack iotas using an untranslated lang key when referenced in a mishap message.
+- Fixed the element-wise matrix operations not coercing numbers or vectors to matrices like the other matrix patterns do.
 - Fixed Patternmaster's Purification throwing an exception when used on any non-static pattern, by beholderface in [#59](https://github.com/FallingColors/MoreIotas/pull/59).
 - Fixed a crash when trying to invert a non-invertible matrix, by c-Caelum in [#66](https://github.com/FallingColors/MoreIotas/pull/66).
 
