@@ -8,6 +8,7 @@ import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.eval.SpecialPatterns.*
 import at.petrak.hexcasting.api.casting.getPattern
 import at.petrak.hexcasting.api.casting.iota.Iota
+import at.petrak.hexcasting.api.casting.math.HexPattern
 import at.petrak.hexcasting.api.mod.HexTags
 import at.petrak.hexcasting.api.utils.isOfTag
 import at.petrak.hexcasting.common.casting.PatternRegistryManifest
@@ -23,16 +24,6 @@ object OpActionString : ConstMediaAction {
 
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
         val pattern = args.getPattern(0, argc)
-
-        if (pattern.sigsEqual(INTROSPECTION))
-            return Component.translatable("hexcasting.action.rawhook.hexcasting:open_paren").string.asActionResult
-        if (pattern.sigsEqual(RETROSPECTION))
-            return Component.translatable("hexcasting.action.rawhook.hexcasting:close_paren").string.asActionResult
-        if (pattern.sigsEqual(CONSIDERATION))
-            return Component.translatable("hexcasting.action.rawhook.hexcasting:escape").string.asActionResult
-        if (pattern.sigsEqual(EVANITION))
-            return Component.translatable("hexcasting.action.rawhook.hexcasting:undo").string.asActionResult
-
         val action = PatternRegistryManifest.matchPattern(pattern, env, false) ?: return null.asActionResult
 
         return when (action) {
@@ -42,7 +33,21 @@ object OpActionString : ConstMediaAction {
                 HexAPI.instance().getActionI18n(action.key, isOfTag(IXplatAbstractions.INSTANCE.actionRegistry, action.key, HexTags.Actions.REQUIRES_ENLIGHTENMENT)).string.asActionResult*/
             is PatternShapeMatch.Special ->
                 action.handler.name.string.asActionResult
-            else -> null.asActionResult
+            else -> lookupRawhook(pattern)
         }
+    }
+
+    // back-compatibility with the hexcasting.rawhook keys that were removed in 0.11.4
+    // these keys will only be used if the pattern hasn't already been matched the normal way
+    fun lookupRawhook(pattern: HexPattern): List<Iota> {
+        if (pattern.sigsEqual(INTROSPECTION))
+            return Component.translatable("hexcasting.rawhook.hexcasting:open_paren").string.asActionResult
+        if (pattern.sigsEqual(RETROSPECTION))
+            return Component.translatable("hexcasting.rawhook.hexcasting:close_paren").string.asActionResult
+        if (pattern.sigsEqual(CONSIDERATION))
+            return Component.translatable("hexcasting.rawhook.hexcasting:escape").string.asActionResult
+        if (pattern.sigsEqual(EVANITION))
+            return Component.translatable("hexcasting.rawhook.hexcasting:undo").string.asActionResult
+        return null.asActionResult
     }
 }
